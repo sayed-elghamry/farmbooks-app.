@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!-- © مركز د. السيد الغمري لأمراض الدواجن — جميع الحقوق محفوظة — النسخة الأصلية على plain-haze-ffa1.poultrylabcenter.workers.dev — Ghamry Farm App v1.0 -->
+
+<html lang="ar" dir="rtl">
+<head>
+<script src="./domain-guard.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>لوحة المتابعة — مركز د. السيد الغمري</title>
+<link rel="manifest" href="./manifest-dashboard.json">
+<meta name="theme-color" content="#1e4d3b">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="لوحة المتابعة">
+<meta name="mobile-web-app-capable" content="yes">
+<link rel="icon" href="./favicon-32.png">
+<style>
+:root{
+  --pine:#1e4d3b;--pine-deep:#143528;--moss:#3f7d5a;--amber:#c07f16;--clay:#a83a2a;
+  --gold:#c9a24b;--paper:#f7f4ec;--card:#fffdf8;--ink:#2a2620;--ink-soft:#6b6559;
+  --rule:#e2dccd;--rule-strong:#c9c1ad;--shadow:0 1px 2px rgba(30,45,40,.06),0 8px 24px rgba(30,45,40,.06);--r:14px;
+  font-family:"Tajawal","Cairo","Segoe UI",Tahoma,system-ui,sans-serif;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);line-height:1.55}
+.wrap{max-width:900px;margin:0 auto;padding:16px}
+.masthead{background:linear-gradient(180deg,var(--pine),var(--pine-deep));color:#f3efe4;
+  border-radius:16px;padding:20px;box-shadow:var(--shadow);margin-bottom:16px;text-align:center}
+.masthead h1{margin:0;font-size:18px;font-weight:800}
+.masthead .sub{color:#d7e6dd;font-size:12.5px;margin-top:4px}
+
+#gate{max-width:340px;margin:60px auto;text-align:center}
+#gate input{width:100%;padding:12px;border:1px solid var(--rule-strong);border-radius:10px;
+  font-size:15px;text-align:center;margin-bottom:10px}
+#gate button{width:100%;background:var(--pine);color:#fff;border:none;border-radius:10px;
+  padding:12px;font-size:14.5px;font-weight:800}
+#gate .err{color:var(--clay);font-size:13px;margin-top:8px;min-height:18px}
+
+#app{display:none}
+.toolbar{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;gap:8px}
+.toolbar .count{font-size:13px;color:var(--ink-soft)}
+.toolbar button{background:var(--card);border:1px solid var(--rule);border-radius:9px;
+  padding:8px 12px;font-size:12.5px;font-weight:700;color:var(--pine-deep)}
+
+.farm-card{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);
+  padding:14px;box-shadow:var(--shadow);margin-bottom:12px}
+.farm-head{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;flex-wrap:wrap}
+.farm-head h3{margin:0;font-size:15.5px;color:var(--pine-deep)}
+.farm-head .phone{font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+.badge{font-size:11px;font-weight:800;padding:4px 9px;border-radius:99px;flex:0 0 auto}
+.badge.house{background:#e7f1ea;color:var(--pine-deep)}
+.badge.layers{background:#fbf0dc;color:#7a5518}
+.badge.duck_breeders{background:#e0f2f2;color:#0f6b6b}
+.badge.duck_fattening{background:#e6e7f5;color:#3a3f7a}
+.badge.turkey_breeders{background:#f5e0e9;color:#6b1f3d}
+.badge.turkey_fattening{background:#f2ecd9;color:#5c4a15}
+.badge.chicken_breeders{background:#e3edf5;color:#1c3d54}
+.updated{font-size:11.5px;color:var(--ink-soft);margin-top:6px}
+.cycles{margin-top:10px;border-top:1px dashed var(--rule);padding-top:8px}
+.cycle-row{display:flex;justify-content:space-between;font-size:13px;padding:4px 0;color:var(--ink)}
+.cycle-row b{color:var(--pine-deep)}
+.actions{margin-top:10px;display:flex;gap:6px;flex-wrap:wrap}
+.actions button{flex:1 1 auto;min-width:90px;background:var(--paper);border:1px solid var(--rule-strong);border-radius:9px;
+  padding:8px;font-size:12.5px;font-weight:700;color:var(--pine-deep)}
+.empty{text-align:center;color:var(--ink-soft);padding:40px 10px;font-size:14px}
+.loading{text-align:center;color:var(--ink-soft);padding:30px;font-size:13px}
+
+.attn-section{margin-bottom:18px}
+.attn-title{font-size:14px;font-weight:800;color:var(--clay);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.attn-card{background:#fdf1ee;border:1px solid #f0c9bd;border-radius:12px;padding:12px 14px;margin-bottom:8px;
+  display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.attn-card .info b{color:var(--pine-deep);font-size:13.5px}
+.attn-card .info div{font-size:12px;color:#6b5248;margin-top:2px}
+.attn-card button{background:var(--clay);color:#fff;border:none;border-radius:8px;padding:7px 12px;
+  font-size:12px;font-weight:700;flex:0 0 auto}
+.perf-badge{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:700;
+  padding:2px 8px;border-radius:99px;margin-inline-start:6px}
+.perf-badge.ok{background:#e7f1ea;color:#1e4d3b}
+.perf-badge.warn{background:#fbf0dc;color:#7a5518}
+.perf-badge.bad{background:#fdeae6;color:#a83a2a}
+.perf-badge.neu{background:#eee;color:#666}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="masthead">
+    <h1>لوحة متابعة المزارع</h1>
+    <div class="sub">مركز د. السيد الغمري — بيانات مُزامَنة من تطبيقات المربين</div>
+  </div>
+
+  <div id="gate">
+    <input type="password" id="pwInput" placeholder="كود الدخول" inputmode="numeric">
+    <button onclick="tryLogin()">دخول</button>
+    <div class="err" id="gateErr"></div>
+  </div>
+
+  <div id="app">
+    <div id="attnSection" class="attn-section" style="display:none">
+      <div class="attn-title">🚩 مزارع/عنابر تحتاج انتباه</div>
+      <div id="attnList"></div>
+    </div>
+    <div class="toolbar">
+      <span class="count" id="countTxt">—</span>
+      <button onclick="loadFarms()">🔄 تحديث</button>
+    </div>
+    <div id="list" class="loading">جاري التحميل...</div>
+  </div>
+</div>
+
+<script src="./config.js"></script>
+<script>
+const API = window.GHAMRY_API_URL || "";
+let ADMIN_CODE = sessionStorage.getItem("ghamry_admin_code") || "";
+
+function tryLogin(){
+  const v = document.getElementById('pwInput').value.trim();
+  if(!v){ return; }
+  ADMIN_CODE = v;
+  sessionStorage.setItem("ghamry_admin_code", v);
+  loadFarms();
+}
+
+async function apiGet(path){
+  if(!API){ throw new Error("لسه ما تمش ضبط رابط الـ API في config.js"); }
+  const res = await fetch(API + path, { headers: { "X-Admin-Code": ADMIN_CODE } });
+  if(res.status === 401){ throw new Error("__UNAUTH__"); }
+  const data = await res.json();
+  if(!res.ok) throw new Error(data.error || "خطأ");
+  return data;
+}
+
+const DUCK_BREED_LABELS={pure:'بيور (Star 53)',muscovy:'مسكوفي',sudani:'سوداني/بلدي',domyati:'دمياطي',pekin:'بيكين',star53m:'Star 53 Medium',star53h:'Star 53 Heavy',muscovym:'مسكوفي — ذكور',muscovyf:'مسكوفي — إناث',mulard:'مولار (هجين)',baladi:'بلدي/دمياطي محلي',standard:'قطيع أمهات رومي ثقيل (Aviagen)',bb_white_tom:'BB White — ذكور',bb_white_hen:'BB White — إناث',bb_bronze_tom:'BB Bronze — ذكور',bb_bronze_hen:'BB Bronze — إناث',ross308ps:'Ross 308 (أمهات تسمين)'};
+function typeLabel(t){
+  if(t==='house')return 'التسمين (العنبر اليومي)';
+  if(t==='layers')return 'البياض';
+  if(t==='duck_breeders')return 'بط الأمهات';
+  if(t==='duck_fattening')return 'بط التسمين';
+  if(t==='turkey_breeders')return 'رومي الأمهات';
+  if(t==='turkey_fattening')return 'رومي التسمين';
+  if(t==='chicken_breeders')return 'أمهات دواجن التسمين';
+  return t;
+}
+
+function fmtDate(iso){
+  try{
+    const d = new Date(iso);
+    return d.toLocaleString('ar-EG', {day:'2-digit',month:'2-digit',year:'numeric',hour:'2-digit',minute:'2-digit'});
+  }catch(e){ return iso; }
+}
+
+async function loadFarms(){
+  attnEntries.length = 0;
+  document.getElementById('attnSection').style.display = 'none';
+  const list = document.getElementById('list');
+  list.className = 'loading';
+  list.textContent = 'جاري التحميل...';
+  try{
+    const { farms } = await apiGet('/api/farms');
+    document.getElementById('gate').style.display = 'none';
+    document.getElementById('app').style.display = 'block';
+    document.getElementById('countTxt').textContent = farms.length + ' مزرعة متصلة';
+
+    if(!farms.length){
+      list.className = 'empty';
+      list.textContent = 'لسه مفيش مزارع عملت مزامنة.';
+      return;
+    }
+
+    list.className = '';
+    list.innerHTML = '';
+    farms.forEach(f => {
+      const card = document.createElement('div');
+      card.className = 'farm-card';
+      card.innerHTML = `
+        <div class="farm-head">
+          <div>
+            <h3>${esc(f.farm_name)}</h3>
+            <div class="phone">${esc(f.phone)}</div>
+          </div>
+          <span class="badge ${f.sheet_type}">${typeLabel(f.sheet_type)}</span>
+        </div>
+        <div class="updated">آخر تحديث: ${fmtDate(f.updated_at)}</div>
+        <div class="cycles" id="cyc-${cardId(f)}"><span style="font-size:12px;color:var(--ink-soft)">جاري التحميل...</span></div>
+        <div class="actions">
+          <button onclick="openReport('${esc(f.farm_name)}','${esc(f.phone)}','${f.sheet_type}')">📄 عرض التقرير</button>
+          <button onclick="openFarmData('${esc(f.farm_name)}','${esc(f.phone)}','${f.sheet_type}')">📂 بيانات المزرعة</button>
+          <button onclick="downloadJson('${esc(f.farm_name)}','${esc(f.phone)}','${f.sheet_type}')">⬇️ JSON</button>
+        </div>
+      `;
+      list.appendChild(card);
+      autoLoadSummary(f.farm_name, f.phone, f.sheet_type, cardId(f));
+    });
+  }catch(e){
+    if(e.message === "__UNAUTH__"){
+      document.getElementById('gate').style.display = 'block';
+      document.getElementById('app').style.display = 'none';
+      document.getElementById('gateErr').textContent = 'كود الدخول غير صحيح';
+      sessionStorage.removeItem("ghamry_admin_code");
+    } else {
+      list.className = 'empty';
+      list.textContent = 'خطأ: ' + e.message;
+    }
+  }
+}
+
+function cardId(f){ return btoa(unescape(encodeURIComponent(f.farm_name+f.phone+f.sheet_type))).replace(/[^a-zA-Z0-9]/g,''); }
+
+function esc(s){ return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+async function fetchFarmData(farm_name, phone, sheet_type){
+  const q = `?farm_name=${encodeURIComponent(farm_name)}&phone=${encodeURIComponent(phone)}&sheet_type=${sheet_type}`;
+  return apiGet('/api/farm-data' + q);
+}
+
+function gradeRank(g){
+  const map={'ممتاز':4,'جيد جدًا':3,'جيد':2,'مقبول':1,'ضعيف':0};
+  return map.hasOwnProperty(g)?map[g]:null;
+}
+function trendIcon(t){ return t==='تحسّن'?'📈':(t==='تراجع'?'📉':(t==='ثابت'?'➖':'🆕')); }
+
+function extractHousePerf(houseCycles){
+  const closed=houseCycles.filter(c=>c.finalReport).sort((a,b)=>new Date(a.finalReport.closedAt)-new Date(b.finalReport.closedAt));
+  if(!closed.length)return null;
+  const last=closed[closed.length-1].finalReport;
+  const prev=closed.length>=2?closed[closed.length-2].finalReport:null;
+  const lastRank=gradeRank(last.grade);
+  const prevRank=prev?gradeRank(prev.grade):null;
+  let trend='دورة أولى';
+  if(prevRank!=null&&lastRank!=null){
+    if(lastRank>prevRank)trend='تحسّن';
+    else if(lastRank<prevRank)trend='تراجع';
+    else trend='ثابت';
+  }
+  const needsAttention=(lastRank!=null&&lastRank<=1)||trend==='تراجع';
+  return {houseName:closed[closed.length-1].houseName,grade:last.grade,gradeCls:last.gradeCls,
+    closedAt:last.closedAt,trend,needsAttention,closedCount:closed.length};
+}
+
+function extractFarmPerf(data){
+  const byHouse={};
+  (data.cycles||[]).forEach(c=>{(byHouse[c.houseName]=byHouse[c.houseName]||[]).push(c);});
+  return Object.keys(byHouse).map(hn=>extractHousePerf(byHouse[hn])).filter(Boolean);
+}
+
+const attnEntries=[];
+
+async function autoLoadSummary(farm_name, phone, sheet_type, elId){
+  const el = document.getElementById('cyc-' + elId);
+  try{
+    const { data } = await fetchFarmData(farm_name, phone, sheet_type);
+    let cycles;
+    if(sheet_type === 'duck_fattening' || sheet_type === 'turkey_fattening'){
+      // كراسة بط/رومي التسمين بتزامن دورة واحدة نشطة (fields/weeksState) مش مصفوفة cycles
+      const weeks = Array.isArray(data.weeksState) ? data.weeksState : [];
+      const daysCount = weeks.reduce((s,w)=>s+((w.days||[]).filter(d=>d.date).length),0);
+      const f = data.fields || {};
+      cycles = data.profileName ? [{
+        houseName: data.profileName, breed: f.f_breed || '',
+        initialF: +f.p_initialCount || 0, initialM: 0,
+        rearRows: [], prodDays: [], _daysOverride: daysCount
+      }] : [];
+    } else {
+      cycles = data.cycles || [];
+    }
+    if(!cycles.length){
+      el.innerHTML = '<span style="font-size:12px;color:var(--ink-soft)">لا توجد دورات مسجلة بعد</span>';
+      return;
+    }
+    const perf = extractFarmPerf(data);
+    const perfByHouse = {};
+    perf.forEach(p=>{ perfByHouse[p.houseName]=p; });
+
+    el.innerHTML = cycles.map(c => {
+      const isDuck = (sheet_type==='duck_breeders'||sheet_type==='duck_fattening'||sheet_type==='turkey_breeders'||sheet_type==='turkey_fattening'||sheet_type==='chicken_breeders');
+      const breed = isDuck ? (DUCK_BREED_LABELS[c.breed]||c.breed||'') : (c.breed || '').toString();
+      const initialCount = isDuck ? ((c.initialF||0)+(c.initialM||0)) : (c.initialCount||0);
+      const days = c._daysOverride!=null ? c._daysOverride : (isDuck
+        ? ((c.rearRows?c.rearRows.length:0)+(c.prodDays?c.prodDays.length:0))
+        : (c.days ? Object.keys(c.days).length : 0));
+      const p = perfByHouse[c.houseName];
+      const badge = p ? `<span class="perf-badge ${p.gradeCls}">${trendIcon(p.trend)} ${esc(p.grade)}</span>` : '';
+      return `<div class="cycle-row"><b>${esc(c.houseName||'—')}${badge}</b><span>${esc(breed)} • ${initialCount} طائر • ${days} يوم مسجل</span></div>`;
+    }).join('');
+
+    perf.filter(p=>p.needsAttention).forEach(p=>{
+      attnEntries.push({farm_name, phone, sheet_type, houseName:p.houseName, grade:p.grade, trend:p.trend});
+    });
+    renderAttentionSection();
+  }catch(e){
+    el.innerHTML = '<span style="font-size:12px;color:var(--clay)">تعذر التحميل: ' + esc(e.message) + '</span>';
+  }
+}
+
+function renderAttentionSection(){
+  const sec = document.getElementById('attnSection');
+  const list = document.getElementById('attnList');
+  if(!attnEntries.length){ sec.style.display='none'; return; }
+  sec.style.display='block';
+  list.innerHTML = attnEntries.map(a => `
+    <div class="attn-card">
+      <div class="info">
+        <b>${esc(a.farm_name)}</b> — ${esc(a.houseName)}
+        <div>${trendIcon(a.trend)} ${esc(a.trend)} • آخر تقييم: <b>${esc(a.grade)}</b></div>
+      </div>
+      <button onclick="openFarmData('${esc(a.farm_name)}','${esc(a.phone)}','${a.sheet_type}')">فتح المزرعة</button>
+    </div>
+  `).join('');
+}
+
+function openReport(farm_name, phone, sheet_type){
+  openAppView(farm_name, phone, sheet_type, 'summary');
+}
+
+function openFarmData(farm_name, phone, sheet_type){
+  openAppView(farm_name, phone, sheet_type, 'farm');
+}
+
+function openAppView(farm_name, phone, sheet_type, tab){
+  try{
+    sessionStorage.setItem('ghamry_admin_view', JSON.stringify({
+      farm_name, phone, sheetType: sheet_type, tab,
+      api: API, adminCode: ADMIN_CODE
+    }));
+  }catch(e){
+    alert('تعذر فتح البيانات: ' + e.message);
+    return;
+  }
+  const page = sheet_type === 'house' ? 'daily-house.html'
+    : sheet_type === 'duck_breeders' ? 'duck-breeders.html'
+    : sheet_type === 'duck_fattening' ? 'duck-fattening.html'
+    : sheet_type === 'turkey_breeders' ? 'turkey-breeders.html'
+    : sheet_type === 'turkey_fattening' ? 'turkey-fattening.html'
+    : sheet_type === 'chicken_breeders' ? 'chicken-breeders.html'
+    : 'layers.html';
+  window.open(page, '_blank');
+}
+
+async function downloadJson(farm_name, phone, sheet_type){
+  try{
+    const { data, updated_at } = await fetchFarmData(farm_name, phone, sheet_type);
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${farm_name}-${sheet_type}-${(updated_at||'').slice(0,10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+  }catch(e){
+    alert('تعذر التحميل: ' + e.message);
+  }
+}
+
+// دخول تلقائي لو الكود محفوظ من قبل في نفس الجلسة
+if(ADMIN_CODE){ loadFarms(); }
+</script>
+</body>
+</html>

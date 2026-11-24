@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!-- © مركز د. السيد الغمري لأمراض الدواجن — جميع الحقوق محفوظة — النسخة الأصلية على plain-haze-ffa1.poultrylabcenter.workers.dev — Ghamry Farm App v1.0 -->
+
+<html lang="ar" dir="rtl">
+<head>
+<script src="./domain-guard.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>مركز د. السيد الغمري — كراسات المزرعة</title>
+
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#1e4d3b">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="icon" href="./favicon-32.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="كراسات الغمري">
+<meta name="mobile-web-app-capable" content="yes">
+
+<style>
+:root{
+  --pine:#1e4d3b;--pine-deep:#143528;--moss:#3f7d5a;--amber:#c07f16;--clay:#a83a2a;
+  --gold:#c9a24b;--paper:#f7f4ec;--card:#fffdf8;--ink:#2a2620;--ink-soft:#6b6559;
+  --rule:#e2dccd;--rule-strong:#c9c1ad;
+  --shadow:0 1px 2px rgba(30,45,40,.06),0 8px 24px rgba(30,45,40,.06);--r:16px;
+  font-family:"Tajawal","Cairo","Segoe UI",Tahoma,system-ui,sans-serif;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);line-height:1.55;-webkit-text-size-adjust:100%;
+  min-height:100dvh;display:flex;flex-direction:column}
+h1,h2,h3{margin:0;font-weight:800;color:var(--pine-deep)}
+
+.wrap{max-width:640px;margin:0 auto;padding:0 16px 40px;width:100%;flex:1}
+
+.masthead{background:linear-gradient(180deg,var(--pine),var(--pine-deep));color:#f3efe4;
+  border-radius:0 0 22px 22px;padding:34px 20px 26px;box-shadow:var(--shadow);
+  position:relative;overflow:hidden;text-align:center}
+.masthead::after{content:"";position:absolute;inset:auto 0 0 0;height:4px;
+  background:linear-gradient(90deg,var(--gold),transparent);opacity:.7}
+.logo-box{width:88px;height:88px;border-radius:50%;margin:0 auto 14px;background:#fff;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;
+  border:3px solid var(--gold);box-shadow:0 6px 18px rgba(0,0,0,.18)}
+.logo-box img{width:100%;height:100%;object-fit:cover}
+.masthead h1{font-size:20px;letter-spacing:-.2px;color:#f3efe4}
+.masthead .sub{color:#d7e6dd;font-size:13px;margin-top:6px}
+.masthead .tagline{color:#f3efe4;font-size:14px;font-weight:800;margin-top:12px}
+.masthead .tagline2{color:#bcd3c4;font-size:12px;margin-top:4px}
+.feat-row{display:flex;justify-content:center;gap:10px;margin-top:16px;flex-wrap:wrap}
+.feat{background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);border-radius:10px;
+  padding:8px 10px;display:flex;flex-direction:column;align-items:center;gap:3px;min-width:76px}
+.feat-ic{font-size:17px}
+.feat span:last-child{font-size:10px;color:#d7e6dd;font-weight:700}
+
+.menu{margin-top:22px;display:flex;flex-direction:column;gap:14px}
+
+.tip-card{margin-top:16px;background:linear-gradient(135deg,#fbf3df,#f5ead0);border:1px solid #edd9a8;
+  border-radius:var(--r);padding:16px 18px;box-shadow:var(--shadow)}
+.tip-head{font-size:13px;font-weight:800;color:#7a5518;margin-bottom:6px}
+.tip-body{font-size:13.5px;line-height:1.7;color:#5c4517}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);
+  padding:18px;box-shadow:var(--shadow);display:flex;align-items:center;gap:14px;
+  text-decoration:none;color:inherit;transition:.15s;position:relative}
+.card:active{transform:scale(.98);background:#fbf8f0}
+.card .ic{width:46px;height:46px;border-radius:12px;flex:0 0 auto;
+  display:flex;align-items:center;justify-content:center;color:#fff}
+.card .ic svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:2;
+  stroke-linecap:round;stroke-linejoin:round}
+.card.house .ic{background:linear-gradient(135deg,var(--pine),var(--moss))}
+.card.layers .ic{background:linear-gradient(135deg,var(--amber),#e0a23e)}
+.card.duckbreed .ic{background:linear-gradient(135deg,#0f6b6b,#1f9c9c)}
+.card.duckfat .ic{background:linear-gradient(135deg,#3a3f7a,#5a5fb0)}
+.card.turkeybreed .ic{background:linear-gradient(135deg,#6b1f3d,#a5355f)}
+.card.turkeyfat .ic{background:linear-gradient(135deg,#8a6d1f,#c9a94f)}
+.card.chickenbreed .ic{background:linear-gradient(135deg,#2c5a7a,#4a86ab)}
+.card .txt{flex:1;min-width:0}
+.card .txt strong{display:block;font-size:15.5px;font-weight:800;color:var(--pine-deep)}
+.card .txt span{display:block;font-size:12.5px;color:var(--ink-soft);margin-top:2px}
+.card .arrow{color:var(--rule-strong);flex:0 0 auto}
+
+.install-tip{margin-top:20px;background:#fbf3df;border:1px solid #edd9a8;border-radius:12px;
+  padding:12px 14px;font-size:12.5px;color:#6b5324;display:none;gap:8px;align-items:flex-start}
+.install-tip.show{display:flex}
+.install-tip b{color:#5c4517}
+#installBtn{margin-top:20px;width:100%;background:var(--pine);color:#fff;border:none;
+  border-radius:12px;padding:14px;font-size:14.5px;font-weight:800;display:none;
+  align-items:center;justify-content:center;gap:8px;box-shadow:var(--shadow)}
+#installBtn.show{display:flex}
+
+#shareBtn{margin-top:12px;width:100%;background:var(--card);color:var(--pine-deep);
+  border:1px solid var(--rule-strong);border-radius:12px;padding:13px;font-size:14px;
+  font-weight:800;display:flex;align-items:center;justify-content:center;gap:8px}
+
+footer{text-align:center;font-size:11.5px;color:var(--ink-soft);padding:18px 0 6px}
+</style>
+</head>
+<body>
+
+<div class="masthead">
+  <div class="logo-box"><img src="./icon-512.png" alt="شعار المركز"></div>
+  <h1>🐔 كراسات المزرعة الذكية</h1>
+  <div class="sub">من مركز د. السيد الغمري لأمراض الدواجن والأرانب</div>
+  <div class="tagline">كراسات متابعة المزارع المجانية</div>
+  <div class="tagline2">سجّل بيانات قطيعك يوميًا — حتى بدون إنترنت.</div>
+  <div class="feat-row">
+    <div class="feat"><span class="feat-ic">📱</span><span>تعمل على الموبايل</span></div>
+    <div class="feat"><span class="feat-ic">📶</span><span>بدون إنترنت</span></div>
+    <div class="feat"><span class="feat-ic">📊</span><span>حسابات تلقائية</span></div>
+  </div>
+</div>
+
+<div class="wrap">
+  <div class="menu">
+    <a class="card house" href="./daily-house.html">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
+      <div class="txt">
+        <strong>الكراسة اليومية للعنبر</strong>
+        <span>متابعة الدورة اليومية — علف، نفوق، أوزان، تحصينات</span>
+      </div>
+      <div class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+    </a>
+
+    <a class="card layers" href="./layers.html">
+      <div class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <div class="txt">
+        <strong>كراسة البياض — تربية وإنتاج</strong>
+        <span>متابعة قطعان البياض من التربية حتى ذروة الإنتاج</span>
+      </div>
+      <div class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+    </a>
+
+    <a class="card chickenbreed" href="./chicken-breeders.html">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3c3.6 0 6.2 5.1 6.2 9.2A6.2 6.2 0 0112 18.5 6.2 6.2 0 015.8 12.2C5.8 8.1 8.4 3 12 3z"/></svg></div>
+      <div class="txt">
+        <strong>كراسة أمهات دواجن التسمين</strong>
+        <span>تغذية مقيّدة، خصوبة وتفريخ، تزاوج طبيعي — معيار Ross308 الرسمي</span>
+      </div>
+      <div class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+    </a>
+
+
+    <a class="card duckbreed" href="./duck-breeders.html">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3c3.6 0 6.2 5.1 6.2 9.2A6.2 6.2 0 0112 18.5 6.2 6.2 0 015.8 12.2C5.8 8.1 8.4 3 12 3z"/></svg></div>
+      <div class="txt">
+        <strong>كراسة بط الأمهات</strong>
+        <span>إنتاج يومي، تفريخ بالدفعة، وصحة قطيع الأمهات</span>
+      </div>
+      <div class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+    </a>
+
+    <a class="card duckfat" href="./duck-fattening.html">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7l-3 7a3 3 0 006 0zM19 7l-3 7a3 3 0 006 0zM3 7h18M8 3h8"/></svg></div>
+      <div class="txt">
+        <strong>كراسة بط التسمين</strong>
+        <span>متابعة النمو اليومي والأسبوعي حتى التسويق</span>
+      </div>
+      <div class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+    </a>
+
+    <a class="card turkeybreed" href="./turkey-breeders.html">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3c3.6 0 6.2 5.1 6.2 9.2A6.2 6.2 0 0112 18.5 6.2 6.2 0 015.8 12.2C5.8 8.1 8.4 3 12 3z"/></svg></div>
+      <div class="txt">
+        <strong>كراسة رومي الأمهات</strong>
+        <span>تربية منفصلة للذكور والإناث، تلقيح صناعي، وتفريخ</span>
+      </div>
+      <div class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+    </a>
+
+    <a class="card turkeyfat" href="./turkey-fattening.html">
+      <div class="ic"><svg viewBox="0 0 24 24"><path d="M12 3v18M5 7l-3 7a3 3 0 006 0zM19 7l-3 7a3 3 0 006 0zM3 7h18M8 3h8"/></svg></div>
+      <div class="txt">
+        <strong>كراسة رومي التسمين</strong>
+        <span>ذكور وإناث منفصلين، سجل يومي وأسبوعي حتى التسويق</span>
+      </div>
+      <div class="arrow"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg></div>
+    </a>
+  </div>
+
+  <div class="tip-card" id="tipCard">
+    <div class="tip-head">💡 نصيحة اليوم</div>
+    <div class="tip-body" id="tipBody">—</div>
+  </div>
+
+  <button id="installBtn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+    تثبيت التطبيق على الشاشة الرئيسية
+  </button>
+
+  <div class="install-tip" id="iosTip">
+    <span>ℹ️</span>
+    <span><b>على آيفون:</b> اضغط زر المشاركة <b>⬆️</b> بالأسفل، ثم اختر <b>"إضافة إلى الشاشة الرئيسية"</b>.</span>
+  </div>
+
+  <button id="shareBtn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.6" y1="10.6" x2="15.4" y2="6.4"/><line x1="8.6" y1="13.4" x2="15.4" y2="17.6"/></svg>
+    شارك التطبيق مع مربي تاني
+  </button>
+</div>
+
+<footer>© مركز د. السيد الغمري لأمراض الدواجن</footer>
+
+<script>
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./service-worker.js').catch(()=>{});
+  });
+}
+
+let deferredPrompt;
+const installBtn = document.getElementById('installBtn');
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  installBtn.classList.add('show');
+});
+installBtn.addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  await deferredPrompt.userChoice;
+  deferredPrompt = null;
+  installBtn.classList.remove('show');
+});
+window.addEventListener('appinstalled', () => installBtn.classList.remove('show'));
+
+// iOS Safari لا يدعم beforeinstallprompt — نظهر تلميح يدوي
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+if (isIOS && !isStandalone) {
+  document.getElementById('iosTip').classList.add('show');
+}
+
+document.getElementById('shareBtn').addEventListener('click', async () => {
+  const shareUrl = location.origin + location.pathname.replace(/index\.html$/, '');
+  const shareText = 'كراسات متابعة مجانية للمزارع (تسمين وبياض) من مركز د. السيد الغمري لأمراض الدواجن — سهلة الاستخدام وبتشتغل من غير نت:';
+  if (navigator.share) {
+    try { await navigator.share({ title: 'كراسات الغمري', text: shareText, url: shareUrl }); }
+    catch(e){}
+  } else {
+    window.open('https://wa.me/?text=' + encodeURIComponent(shareText + ' ' + shareUrl), '_blank');
+  }
+});
+
+const GHAMRY_TIPS = [
+  "احرص على معدل تهوية ثابت من اليوم الأول — نقص الأكسجين في الأسبوع الأول يؤثر على النمو طول الدورة.",
+  "زِن عينة عشوائية من الكتاكيت أسبوعيًا في نفس الميعاد لضمان دقة مقارنة الأوزان بمعيار السلالة.",
+  "تأكد من برودة مياه الشرب صيفًا (أقل من 25°م) لتقليل الإجهاد الحراري وزيادة معدل الاستهلاك.",
+  "افحص جودة الفرشة يوميًا — الرطوبة الزائدة فيها بيئة مثالية لنمو الكوكسيديا والأمونيا.",
+  "لا تؤجل تسجيل النافق اليومي — الاكتشاف المبكر لأي ارتفاع غير طبيعي يوفر وقتًا ثمينًا للتدخل.",
+  "التحصين الناجح يبدأ بحفظ اللقاح في درجة الحرارة الصحيحة من لحظة الاستلام حتى الاستخدام.",
+  "معامل التحويل الغذائي (FCR) مؤشر أدق من الوزن وحده — تابعهما معًا لتقييم الأداء الحقيقي.",
+  "في قطعان البياض، ثبات برنامج الإضاءة أهم من شدتها — أي تذبذب يؤثر مباشرة على معدل الإنتاج.",
+  "نظّف ماسورة السقايات أسبوعيًا — التلوث البيولوجي فيها من أكثر أسباب انخفاض الأداء الصامتة.",
+  "سجّل أي تغيير في نوع أو مصدر العلف — يساعدك على تفسير أي تغيّر مفاجئ في الأداء لاحقًا.",
+];
+const tipIdx = Math.floor((Date.now() / 86400000)) % GHAMRY_TIPS.length;
+document.getElementById('tipBody').textContent = GHAMRY_TIPS[tipIdx];
+</script>
+
+</body>
+</html>

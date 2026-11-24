@@ -1,0 +1,1330 @@
+<!DOCTYPE html>
+<!-- © مركز د. السيد الغمري لأمراض الدواجن — جميع الحقوق محفوظة — النسخة الأصلية على plain-haze-ffa1.poultrylabcenter.workers.dev — Ghamry Farm App v1.0 -->
+
+<html lang="ar" dir="rtl">
+<head>
+<script src="./domain-guard.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الكراسة اليومية للعنبر — مركز د. السيد الغمري</title>
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#1e4d3b">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="icon" href="./favicon-32.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="كراسات الغمري">
+<meta name="mobile-web-app-capable" content="yes">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./service-worker.js').catch(()=>{});});}</script>
+
+<style>
+:root{
+  --pine:#1e4d3b;--pine-deep:#143528;--moss:#3f7d5a;--amber:#c07f16;--clay:#a83a2a;
+  --gold:#c9a24b;--paper:#f7f4ec;--card:#fffdf8;--ink:#2a2620;--ink-soft:#6b6559;
+  --rule:#e2dccd;--rule-strong:#c9c1ad;
+  --shadow:0 1px 2px rgba(30,45,40,.06),0 8px 24px rgba(30,45,40,.06);--r:14px;
+  font-family:"Tajawal","Cairo","Segoe UI",Tahoma,system-ui,sans-serif;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);line-height:1.55;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{margin:0;font-weight:800;color:var(--pine-deep)}
+a{color:var(--pine)}button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:15px}
+.hidden{display:none !important}
+
+/* SVG icons */
+.ic{display:inline-flex;align-items:center;justify-content:center;vertical-align:-.15em}
+.ic svg{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.ic svg.fill{fill:currentColor;stroke:none}
+
+.wrap{max-width:1080px;margin:0 auto;padding:0 14px 90px}
+.masthead{background:linear-gradient(180deg,var(--pine),var(--pine-deep));color:#f3efe4;
+  border-radius:0 0 var(--r) var(--r);padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.masthead::after{content:"";position:absolute;inset:auto 0 0 0;height:4px;
+  background:linear-gradient(90deg,var(--gold),transparent);opacity:.7}
+.mast-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;border-radius:12px;flex:0 0 auto;background:#fff;
+  display:flex;align-items:center;justify-content:center;overflow:hidden;border:2px solid var(--gold);cursor:pointer}
+.logo-box img{width:100%;height:100%;object-fit:contain}
+.mast-titles{flex:1;min-width:180px}
+.mast-titles h1{color:#fff;font-size:19px;letter-spacing:-.2px}
+.mast-titles .sub{color:#d7e6dd;font-size:13px;margin-top:2px}
+.mast-titles .contact{color:#bcd3c4;font-size:12px;margin-top:4px}
+.app-brand{color:var(--gold);font-size:11.5px;font-weight:800;margin-bottom:3px;letter-spacing:.2px}
+.contact-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.contact-btn{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;
+  padding:6px 12px;border-radius:99px;text-decoration:none;color:#143528;background:#c9a24b}
+.contact-btn.wa{background:#25D366;color:#0b3b1e}
+.mast-actions{display:flex;gap:8px;flex-wrap:wrap}
+.mini-btn{background:rgba(255,255,255,.12);color:#f3efe4;border:1px solid rgba(255,255,255,.22);
+  border-radius:9px;padding:7px 11px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+.mini-btn:hover{background:rgba(255,255,255,.22)}
+
+.cyclebar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--card);
+  border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;margin-top:14px;box-shadow:var(--shadow)}
+.cyclebar label{font-size:13px;color:var(--ink-soft);font-weight:700}
+.cyclebar select{flex:1;min-width:150px;padding:9px 10px;border:1px solid var(--rule-strong);
+  border-radius:9px;background:#fff;font-weight:700;color:var(--pine-deep)}
+.btn{border:none;border-radius:9px;padding:9px 13px;font-size:13px;font-weight:800;
+  display:inline-flex;align-items:center;gap:6px;transition:.15s;white-space:nowrap}
+.btn-primary{background:var(--pine);color:#fff}.btn-primary:hover{background:var(--pine-deep)}
+.btn-ghost{background:#fff;color:var(--pine);border:1px solid var(--rule-strong)}.btn-ghost:hover{background:#f0ede4}
+.btn-danger{background:#fff;color:var(--clay);border:1px solid #e6c4bd}.btn-danger:hover{background:#fbeeeb}
+.btn-wa{background:#25943a;color:#fff}.btn-wa:hover{background:#1e7d31}
+
+.tabs{display:flex;gap:6px;margin:16px 0 4px;background:var(--card);padding:6px;border-radius:12px;
+  border:1px solid var(--rule);box-shadow:var(--shadow);position:sticky;top:0;z-index:20;overflow-x:auto}
+.tab{flex:1;min-width:120px;text-align:center;padding:10px 6px;border-radius:9px;border:none;background:transparent;
+  color:var(--ink-soft);font-weight:800;font-size:14px;transition:.15s;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+.tab.active{background:var(--pine);color:#fff}
+
+.card{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:16px;margin-top:14px;box-shadow:var(--shadow)}
+.section-eyebrow{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--gold);text-transform:uppercase;
+  display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.section-eyebrow::before{content:"";width:22px;height:2px;background:var(--gold);display:inline-block}
+.card h2{font-size:18px;margin-bottom:12px}.card h3{font-size:15px;color:var(--pine)}
+.card h3.blk{display:flex;align-items:center;gap:8px;margin:20px 0 10px;padding-top:14px;border-top:1px solid var(--rule)}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.field label{display:block;font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;padding:10px 11px;border:1px solid var(--rule-strong);
+  border-radius:9px;background:#fff;color:var(--ink)}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--pine);box-shadow:0 0 0 3px rgba(30,77,59,.12)}
+.hint{font-size:12px;color:var(--ink-soft);margin-top:4px}
+
+.weekblock{margin-top:18px;border:1px solid var(--rule);border-radius:12px;overflow:hidden}
+.weekhead{background:var(--pine);color:#fff;padding:9px 13px;font-weight:800;font-size:15px;
+  display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
+.weekhead .wk-sub{font-size:12px;color:#cfe1d6;font-weight:600}
+.tbl-scroll{overflow-x:auto}
+table.log{width:100%;border-collapse:collapse;min-width:900px;font-size:14px}
+table.log th{background:#eef2ea;color:var(--pine-deep);font-weight:800;font-size:12px;padding:8px 6px;
+  border-bottom:1px solid var(--rule-strong);white-space:nowrap;text-align:center}
+table.log td{padding:4px 5px;border-bottom:1px solid var(--rule);text-align:center}
+table.log tr:nth-child(even) td{background:#fbf9f3}
+table.log input{width:100%;min-width:54px;padding:7px 5px;border:1px solid var(--rule);border-radius:7px;
+  background:#fff;text-align:center;font-size:14px}
+table.log input.notes{min-width:150px;text-align:right}
+table.log input:focus{border-color:var(--pine)}
+table.log td.calc{background:#f2f6f1 !important;color:var(--pine-deep);font-weight:800;font-size:13px}
+.daycol{font-weight:800;color:var(--pine-deep);white-space:nowrap}
+.datecol{font-size:12px;color:var(--ink-soft);white-space:nowrap}
+
+.wk-summary{background:#f4f1e8;padding:11px 13px;border-top:2px solid var(--gold)}
+.wk-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px}
+.wk-metric{background:#fff;border:1px solid var(--rule);border-radius:9px;padding:8px 10px}
+.wk-metric .k{font-size:11px;color:var(--ink-soft);font-weight:700}
+.wk-metric .v{font-size:15px;font-weight:800;color:var(--pine-deep);margin-top:1px}
+.wk-metric .cmp{font-size:11px;margin-top:2px;font-weight:700}
+
+.pill{display:inline-flex;align-items:center;gap:4px;padding:2px 9px;border-radius:20px;font-size:11px;font-weight:800}
+.pill.ok{background:#e5f0e8;color:var(--moss)}.pill.warn{background:#f8efd9;color:var(--amber)}
+.pill.bad{background:#f6e2dd;color:var(--clay)}.pill.neu{background:#eceae2;color:var(--ink-soft)}
+
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}
+.kpi{background:linear-gradient(180deg,#fff,#fbf9f2);border:1px solid var(--rule);border-radius:12px;padding:14px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;inset-inline-start:0;width:4px;height:100%;background:var(--gold)}
+.kpi .k{font-size:12px;color:var(--ink-soft);font-weight:700}
+.kpi .v{font-size:26px;font-weight:800;color:var(--pine-deep);margin-top:3px;letter-spacing:-.5px}
+.kpi .u{font-size:13px;color:var(--ink-soft);font-weight:600}
+.kpi.good::before{background:var(--moss)}.kpi.warnb::before{background:var(--amber)}.kpi.badb::before{background:var(--clay)}
+.kpi.great::before{background:var(--gold)}.kpi.great .v{color:var(--gold)}
+
+.alerts{margin-top:14px}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:10px;margin-bottom:8px;font-size:14px;font-weight:600;border:1px solid}
+.alert.bad{background:#faece8;border-color:#e6c4bd;color:#7d2a1e}
+.alert.warn{background:#fbf4e1;border-color:#ecd9a6;color:#8a6212}
+.alert.ok{background:#e9f2ec;border-color:#c3ddca;color:#245239}
+.alert .ic svg{width:20px;height:20px}
+
+/* editable tables */
+table.edt{width:100%;border-collapse:collapse;min-width:760px;font-size:14px}
+table.edt th{background:#eef2ea;color:var(--pine-deep);font-weight:800;font-size:12px;padding:8px 6px;border-bottom:1px solid var(--rule-strong);white-space:nowrap}
+table.edt td{padding:4px 5px;border-bottom:1px solid var(--rule)}
+table.edt input,table.edt select{width:100%;min-width:80px;padding:7px 6px;border:1px solid var(--rule);border-radius:7px;background:#fff}
+table.edt .rm{background:#fff;color:var(--clay);border:1px solid #e6c4bd;border-radius:7px;padding:6px 8px;font-weight:800}
+.addrow{margin-top:10px}
+
+/* attachments */
+.att-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px;margin-top:12px}
+.att{border:1px solid var(--rule);border-radius:10px;padding:8px;background:#fff;text-align:center;position:relative}
+.att .thumb{width:100%;height:88px;border-radius:7px;object-fit:cover;background:#f0ede4;display:flex;align-items:center;justify-content:center;color:var(--pine)}
+.att .thumb .ic svg{width:34px;height:34px}
+.att .nm{font-size:11px;color:var(--ink);margin-top:6px;word-break:break-word;font-weight:700;max-height:32px;overflow:hidden}
+.att .dt{font-size:10px;color:var(--ink-soft)}
+.att .acts{display:flex;gap:5px;justify-content:center;margin-top:6px}
+.att .acts button,.att .acts a{border:1px solid var(--rule-strong);background:#fff;border-radius:7px;padding:4px 7px;font-size:11px;color:var(--pine);text-decoration:none;font-weight:700;display:inline-flex;align-items:center;gap:3px}
+
+.modal-bg{position:fixed;inset:0;background:rgba(20,30,25,.55);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px}
+.modal{background:var(--card);border-radius:16px;max-width:560px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:90vh;overflow:auto}
+.modal h3{font-size:17px;margin-bottom:14px}
+.modal img.preview{width:100%;border-radius:10px}
+.modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+
+.empty{text-align:center;padding:40px 16px;color:var(--ink-soft)}
+.empty .big .ic svg{width:44px;height:44px;color:var(--gold)}
+.toast{position:fixed;bottom:18px;inset-inline-start:50%;transform:translateX(50%);background:var(--pine-deep);color:#fff;
+  padding:11px 18px;border-radius:10px;font-weight:700;font-size:14px;z-index:200;box-shadow:var(--shadow);opacity:0;transition:.25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(50%) translateY(-4px)}
+.footnote{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:22px;line-height:1.7}
+
+@media print{
+  @page{size:A4;margin:12mm}
+  body{background:#fff}
+  .no-print,.tabs,.cyclebar,.mast-actions,.mini-btn,.btn,.addrow,.att .acts,table.edt .rm{display:none !important}
+  .wrap{max-width:none;padding:0}
+  .card,.weekblock{box-shadow:none;break-inside:avoid;border-color:#bbb}
+  .masthead{background:#fff !important;color:#000 !important;border-bottom:3px solid var(--pine);border-radius:0;padding:0 0 10px}
+  .masthead::after{display:none}
+  .mast-titles h1{color:var(--pine-deep) !important}
+  .mast-titles .sub,.mast-titles .contact{color:#333 !important}
+  .app-brand{color:#7a5518 !important}
+  .print-footer{display:block !important}
+  .weekhead{background:#eef2ea !important;color:var(--pine-deep) !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  table.log th,table.edt th{background:#f0f0f0 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pill,.kpi::before,.wk-summary{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .print-break{break-before:page}
+}
+.print-footer{text-align:center;font-size:11px;color:#333;border-top:1px solid #ccc;
+  margin-top:16px;padding-top:8px}
+@media (max-width:560px){.mast-titles h1{font-size:16px}.kpi .v{font-size:22px}}
+</style>
+<style>
+#ghInstallBtn{margin:12px 16px 0;max-width:calc(100% - 32px);background:var(--pine);color:#fff;border:none;
+  border-radius:12px;padding:13px 14px;font-size:14px;font-weight:800;display:none;
+  align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(0,0,0,.15);cursor:pointer}
+#ghInstallBtn.show{display:flex}
+#ghIosTip{margin:10px 16px 0;max-width:calc(100% - 32px);background:#fbf3df;border:1px solid #edd9a8;border-radius:12px;
+  padding:11px 13px;font-size:12.5px;color:#6b5324;display:none;gap:8px;align-items:flex-start}
+#ghIosTip.show{display:flex}
+#ghIosTip b{color:#5c4517}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="mast-row">
+      <div class="logo-box" id="logoBox" title="اضغط لتغيير اللوجو"><img id="logoImg" alt="logo"></div>
+      <div class="mast-titles">
+        <div class="app-brand">🐔 كراسات المزرعة الذكية</div>
+        <h1 id="centerName">مركز الدكتور السيد الغمري</h1>
+        <div class="sub" id="centerSub">استشاري أمراض الدواجن والأرانب</div>
+        <div class="contact" id="centerContact"></div>
+        <div class="contact-actions no-print" id="centerActions"></div>
+      </div>
+      <div class="mast-actions no-print">
+        <button class="mini-btn" style="display:none" onclick="openCenterModal()"><span class="ic" id="i_gear"></span> بيانات المركز</button>
+        <button class="mini-btn" onclick="printAll()"><span class="ic" id="i_print"></span> طباعة</button>
+        <button class="mini-btn" onclick="exportData()"><span class="ic" id="i_save"></span> نسخة احتياطية</button>
+        <button class="mini-btn" onclick="document.getElementById('importFile').click()"><span class="ic" id="i_import"></span> استيراد</button>
+        <input type="file" id="importFile" accept="application/json" class="hidden" onchange="importData(event)">
+        <input type="file" id="logoFile" accept="image/*" class="hidden" onchange="uploadLogo(event)">
+      </div>
+    </div>
+  </header>
+  <button id="ghInstallBtn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+    تثبيت التطبيق على الشاشة الرئيسية
+  </button>
+  <div id="ghIosTip">
+    <span>ℹ️</span>
+    <span><b>على آيفون:</b> اضغط زر المشاركة <b>⬆️</b> بالأسفل، ثم اختر <b>"إضافة إلى الشاشة الرئيسية"</b>.</span>
+  </div>
+
+
+  <div class="cyclebar no-print" style="flex-direction:column;align-items:stretch;gap:10px">
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <label>المزرعة:</label>
+      <select id="farmSelect" onchange="switchFarm(this.value)"></select>
+      <button class="btn btn-primary" onclick="newFarm()"><span class="ic" id="i_plus"></span> مزرعة</button>
+      <button class="btn btn-ghost" onclick="editFarm()">تعديل</button>
+      <button class="btn btn-danger" onclick="deleteFarm()"><span class="ic" id="i_trash"></span> حذف المزرعة</button>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <label>العنبر:</label>
+      <select id="cycleSelect" onchange="switchCycle(this.value)"></select>
+      <button class="btn btn-primary" onclick="newCycle()"><span class="ic" id="i_plus2"></span> عنبر</button>
+      <button class="btn btn-danger" onclick="deleteCycle()"><span class="ic" id="i_trash2"></span> حذف العنبر</button>
+    </div>
+  </div>
+
+  <nav class="tabs no-print" id="tabbar"></nav>
+  <div id="app"></div>
+
+  <div class="footnote no-print">
+    الكراسة اليومية للعنبر — مركز الدكتور السيد الغمري لاستشارات أمراض الدواجن والأرانب<br>
+    البيانات محفوظة على هذا الجهاز فقط. خُد نسخة احتياطية بشكل دوري.
+  </div>
+  <div class="print-footer" style="display:none">
+    د. السيد الغمري — استشاري أمراض الدواجن والأرانب
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div id="modalHost"></div>
+
+<script>
+/* ===== SVG icon set ===== */
+const IC={
+ home:'<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V10"/></svg>',
+ gear:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>',
+ print:'<svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>',
+ save:'<svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+ import:'<svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>',
+ plus:'<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+ trash:'<svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>',
+ wa:'<svg viewBox="0 0 24 24"><path class="fill" d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 2.1.55 4.05 1.6 5.78L2 22l4.44-1.7a9.9 9.9 0 004.6 1.17c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm5.8 14.14c-.24.68-1.42 1.32-1.95 1.36-.5.05-.5.42-3.16-.66-2.66-1.09-4.32-3.8-4.45-3.98-.13-.18-1.06-1.41-1.06-2.69 0-1.28.67-1.9.9-2.17.24-.26.52-.33.7-.33.17 0 .35 0 .5.01.16.01.38-.06.59.45.24.58.8 2 .87 2.14.07.14.12.3.02.48-.09.18-.14.29-.28.45-.14.16-.29.35-.42.47-.14.14-.28.29-.12.57.16.28.71 1.17 1.53 1.9 1.05.94 1.94 1.23 2.22 1.37.28.14.44.12.6-.07.18-.21.71-.83.9-1.11.19-.28.37-.23.62-.14.25.09 1.61.76 1.89.9.28.14.46.21.53.32.07.12.07.68-.17 1.36z"/></svg>',
+ clip:'<svg viewBox="0 0 24 24"><path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/></svg>',
+ syringe:'<svg viewBox="0 0 24 24"><line x1="18.5" y1="2.5" x2="21.5" y2="5.5"/><line x1="15" y1="6" x2="18" y2="9"/><path d="M17 8l-9 9-4.5 1.5L5 14l9-9z"/><line x1="11.5" y1="8.5" x2="15.5" y2="12.5"/></svg>',
+ pill:'<svg viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="8" rx="4"/><line x1="12" y1="8" x2="12" y2="16"/></svg>',
+ file:'<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+ clipboard:'<svg viewBox="0 0 24 24"><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>',
+ calendar:'<svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+ chart:'<svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+ check:'<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
+ warn:'<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+ chick:'<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="6"/><path d="M12 7V4"/><path d="M10.5 4.5L12 3l1.5 1.5"/><circle cx="10" cy="12" r=".6" class="fill"/><path d="M6.5 13l-2 .5"/></svg>',
+ down:'<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><polyline points="19 12 12 19 5 12"/></svg>'
+};
+function ico(el,n){document.getElementById(el)&&(document.getElementById(el).innerHTML=IC[n]);}
+function I(n){return '<span class="ic">'+(IC[n]||'')+'</span>';}
+
+/* ===== Reference standards ===== */
+const BREEDS={
+ "ross308":{name:"Ross 308",w:{7:213,14:533,21:1012,28:1616,35:2296,42:2998,45:3295},fcr:{7:0.780,14:1.005,21:1.142,28:1.269,35:1.399,42:1.531,45:1.587},ci:{7:166,14:535,21:1155,28:2051,35:3211,42:4586,45:5226},source:"Aviagen — Ross 308/308 FF Broiler Performance Objectives 2022 (As-Hatched)"},
+ "cobb500":{name:"Cobb 500",w:{7:177,14:459,21:891,28:1436,35:2067,42:2732,45:3011},fcr:{7:0.847,14:1.013,21:1.182,28:1.367,35:1.556,42:1.705,45:1.761},ci:{7:150,14:465,21:1053,28:1963,35:3216,42:4659,45:5301},source:"Cobb-Vantress — Cobb500 Broiler Performance & Nutrition Supplement (As-Hatched)"},
+ "aa":{name:"Arbor Acres Plus (AA)",w:{7:185,14:470,21:965,28:1560,35:2260,42:2960,45:3230},fcr:{7:0.90,14:1.11,21:1.29,28:1.45,35:1.59,42:1.73,45:1.81},lowConfidence:true},
+ "hubbard":{name:"Hubbard",w:{7:175,14:450,21:930,28:1520,35:2210,42:2900,45:3180},fcr:{7:0.91,14:1.12,21:1.30,28:1.46,35:1.60,42:1.74,45:1.82},lowConfidence:true},
+ "other":{name:"سلالة أخرى",w:{7:195,14:496,21:952,28:1526,35:2182,42:2865,45:3153},fcr:{7:0.81,14:1.01,21:1.16,28:1.32,35:1.48,42:1.62,45:1.67},lowConfidence:true}
+};
+const MORT_TARGET={1:1.0,2:1.6,3:2.2,4:2.9,5:3.7,6:4.5,7:5.2};
+const TEMP_TARGET={1:33,2:30,3:27,4:25,5:23,6:21,7:20};
+const ROUTES=["حقن تحت الجلد","حقن عضل","عين/أنف قطارة","رذاذ (سبراي)","مياه الشرب","وخز الجناح","في العضل"];
+
+const EMBED_LOGO="data:image/jpeg;base64,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";
+const LS_KEY="elghamry_ledger_v1";
+const GHAMRY_CENTER = {
+  name: "مركز الدكتور السيد الغمري",
+  sub: "استشاري أمراض الدواجن والأرانب",
+  address: "أبو حماد – الشرقية – مصر",
+  phone1: "01282262403",
+  phone2: "01003464485",
+  logo: ""
+};
+let DB=migrate(load());
+let currentTab="setup";
+
+function load(){try{const r=JSON.parse(localStorage.getItem(LS_KEY));if(r&&r.cycles)return r;}catch(e){}
+  return {center:{},cycles:[],active:null};}
+
+function migrate(db){
+  if(!db.center)db.center={};const c=db.center;
+  // بيانات المركز ثابتة ومحمية — تُفرض دائمًا ولا تُقرأ من أي ملف مستورد
+  c.name=GHAMRY_CENTER.name;
+  c.sub=GHAMRY_CENTER.sub;
+  c.address=GHAMRY_CENTER.address;
+  c.phone1=GHAMRY_CENTER.phone1;
+  c.phone2=GHAMRY_CENTER.phone2;
+  c.logo=GHAMRY_CENTER.logo;
+  (db.cycles||[]).forEach(cy=>{cy.vaccines=cy.vaccines||[];cy.meds=cy.meds||[];cy.attachments=cy.attachments||[];cy.bagWeight=cy.bagWeight||50;Object.keys(cy.days||{}).forEach(k=>{const dd=cy.days[k];if(dd&&dd.floose==null&&dd.feed!=null&&dd.feed!==""){dd.floose=dd.feed;if(dd.bags==null)dd.bags="";}});});
+  if(!db.farms||!db.farms.length){const fid='farm'+Date.now().toString(36);db.farms=[{id:fid,name:'المزرعة 1',owner:'',location:''}];(db.cycles||[]).forEach(c=>{if(!c.farmId)c.farmId=fid;});db.activeFarm=fid;}
+  else{(db.cycles||[]).forEach(c=>{if(!c.farmId)c.farmId=db.farms[0].id;});if(!db.activeFarm)db.activeFarm=db.farms[0].id;}
+  if(!db.active&&db.cycles&&db.cycles.length){const h=(db.cycles||[]).filter(c=>c.farmId===db.activeFarm);db.active=h.length?h[0].id:null;}
+  return db;
+}
+function save(){try{localStorage.setItem(LS_KEY,JSON.stringify(DB));}catch(e){toast("تعذّر الحفظ — المساحة ممتلئة (قلّل المرفقات)");}}
+function uid(){return 'c'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+function newCycleObj(){return {id:uid(),farmId:null,houseName:"عنبر 1",breed:"ross308",initialCount:10000,bagWeight:50,
+  placementDate:new Date().toISOString().slice(0,10),cycleLength:49,priceKg:"",feedPriceKg:"",chickCost:"",otherCost:"",
+  days:{},vaccines:[],meds:[],attachments:[]};}
+function activeCycle(){return DB.cycles.find(c=>c.id===DB.active)||null;}
+function cycleById(id){return DB.cycles.find(c=>c.id===id)||null;}
+
+function newCycle(){if(!DB.activeFarm){newFarm();}const c=newCycleObj();c.farmId=DB.activeFarm;DB.cycles.push(c);DB.active=c.id;save();currentTab="setup";render();toast("تم إنشاء عنبر جديد");}
+function switchCycle(id){DB.active=id;save();render();}
+function activeFarm(){return (DB.farms||[]).find(x=>x.id===DB.activeFarm)||null;}
+function housesOfFarm(){return DB.cycles.filter(c=>c.farmId===DB.activeFarm);}
+function renderFarmSelect(){const sel=document.getElementById('farmSelect');if(!sel)return;if(!DB.farms.length){sel.innerHTML='<option>— لا توجد مزارع —</option>';return;}sel.innerHTML=DB.farms.map(x=>'<option value="'+x.id+'" '+(x.id===DB.activeFarm?'selected':'')+'>'+esc(x.name)+'</option>').join('');}
+function newFarm(){const fid='farm'+Date.now().toString(36)+Math.random().toString(36).slice(2,5);DB.farms.push({id:fid,name:'مزرعة '+(DB.farms.length+1),owner:'',location:''});DB.activeFarm=fid;DB.active=null;save();render();openFarmModal();}
+function switchFarm(id){DB.activeFarm=id;const h=housesOfFarm();DB.active=h.length?h[0].id:null;save();render();}
+function deleteFarm(){const fm=activeFarm();if(!fm)return;confirmModal('حذف مزرعة «'+esc(fm.name)+'» بكل عنابرها؟ لا يمكن التراجع.',()=>{DB.cycles=DB.cycles.filter(c=>c.farmId!==fm.id);DB.farms=DB.farms.filter(x=>x.id!==fm.id);DB.activeFarm=DB.farms.length?DB.farms[0].id:null;const h=housesOfFarm();DB.active=h.length?h[0].id:null;save();render();toast('تم حذف المزرعة');});}
+function openFarmModal(){const fm=activeFarm();if(!fm)return;modal('<h3>بيانات المزرعة</h3><div class="grid" style="grid-template-columns:1fr"><div class="field"><label>اسم المزرعة</label><input id="fm_name" value="'+esc(fm.name)+'"></div><div class="field"><label>المالك</label><input id="fm_owner" value="'+esc(fm.owner||'')+'"></div><div class="field"><label>الموقع</label><input id="fm_loc" value="'+esc(fm.location||'')+'"></div></div><div class="modal-actions"><button class="btn btn-primary" onclick="saveFarm()">حفظ</button><button class="btn btn-ghost" onclick="closeModal()">إلغاء</button></div>');}
+function editFarm(){openFarmModal();}
+function saveFarm(){const fm=activeFarm();if(!fm)return;fm.name=v('fm_name');fm.owner=v('fm_owner');fm.location=v('fm_loc');save();render();closeModal();toast('تم الحفظ');}
+/* ===== الذاكرة التراكمية: مقارنة الدورة الحالية بدورات سابقة لنفس العنبر ===== */
+function getPastCyclesForHouse(c){
+  return DB.cycles.filter(x=>x.id!==c.id&&x.farmId===c.farmId&&x.houseName===c.houseName&&x.finalReport);
+}
+function clusterRecurring(items,windowSize){
+  const pts=items.map(p=>({mid:(p.from+p.to)/2,...p})).sort((a,b)=>a.mid-b.mid);
+  const clusters=[];let cur=[];
+  pts.forEach(p=>{
+    if(!cur.length){cur=[p];}
+    else if(p.mid-cur[cur.length-1].mid<=windowSize){cur.push(p);}
+    else{clusters.push(cur);cur=[p];}
+  });
+  if(cur.length)clusters.push(cur);
+  return clusters.filter(cl=>new Set(cl.map(x=>x.cycleId)).size>=2);
+}
+function getRecurringWarnings(c){
+  const past=getPastCyclesForHouse(c);
+  if(past.length<2)return [];
+  const mortItems=[],weightItems=[];
+  past.forEach(p=>(p.finalReport.problems||[]).forEach(pr=>{
+    if(pr.type==='mort')mortItems.push({...pr,cycleId:p.id});
+    else if(pr.type==='weight')weightItems.push({...pr,cycleId:p.id});
+  }));
+  const warnings=[];
+  clusterRecurring(mortItems,4).forEach(cl=>{
+    const from=Math.min(...cl.map(x=>x.from)),to=Math.max(...cl.map(x=>x.to));
+    const nCycles=new Set(cl.map(x=>x.cycleId)).size;
+    warnings.push({type:'mort',text:'في '+nCycles+' من الدورات السابقة لهذا العنبر، حصل ارتفاع نافق في فترة قريبة من اليوم '+from+'–'+to+' — راجع التهوية وجودة الكتكوت بدري هذه المرة.'});
+  });
+  clusterRecurring(weightItems,4).forEach(cl=>{
+    const from=Math.min(...cl.map(x=>x.from)),to=Math.max(...cl.map(x=>x.to));
+    const nCycles=new Set(cl.map(x=>x.cycleId)).size;
+    warnings.push({type:'weight',text:'في '+nCycles+' من الدورات السابقة لهذا العنبر، تكرر تباطؤ النمو في فترة قريبة من اليوم '+from+'–'+to+' — راجع برنامج التغذية والحرارة مبكرًا.'});
+  });
+  return warnings;
+}
+function showRecurringWarningsModal(c,warnings){
+  modal('<h3>🔁 أنماط من دورات سابقة — '+esc(c.houseName)+'</h3>'
+    +'<p class="hint" style="margin-top:2px">بناءً على تحليل الدورات السابقة المُقيَّمة لهذا العنبر:</p>'
+    +'<ul style="margin:10px 0 0;padding-inline-start:18px;font-size:12.5px;line-height:1.9;color:#5a5245">'
+    +warnings.map(w=>'<li>'+esc(w.text)+'</li>').join('')+'</ul>'
+    +'<div class="modal-actions"><button class="btn btn-primary" onclick="closeModal()">تمام، هراعي ده</button></div>');
+}
+function checkRecurringWarnings(){
+  const c=activeCycle();if(!c)return;
+  const st=computeStats(c);
+  if(st.age>5)return;
+  if(c._recurWarnShown)return;
+  const warnings=getRecurringWarnings(c);
+  if(!warnings.length)return;
+  c._recurWarnShown=true;save();
+  showRecurringWarningsModal(c,warnings);
+}
+
+function openHouse(id){DB.active=id;currentTab='summary';render();checkRecurringWarnings();}
+function deleteCycle(){const c=activeCycle();if(!c)return;
+  confirmModal("حذف عنبر «"+esc(c.houseName)+"»؟ لا يمكن التراجع.",()=>{
+    DB.cycles=DB.cycles.filter(x=>x.id!==c.id);const h=housesOfFarm();DB.active=h.length?h[0].id:null;save();render();toast("تم حذف العنبر");});}
+function renderCycleSelect(){const sel=document.getElementById('cycleSelect');const list=housesOfFarm();
+  if(!list.length){sel.innerHTML='<option>— لا توجد عنابر —</option>';return;}
+  sel.innerHTML=list.map(c=>'<option value="'+c.id+'" '+(c.id===DB.active?'selected':'')+'>'+esc(c.houseName)+' — '+(BREEDS[c.breed]?BREEDS[c.breed].name:'')+' — '+c.placementDate+'</option>').join('');}
+
+function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+function num(v){const n=parseFloat(v);return isFinite(n)?n:0;}
+function fmt(n,d){d=d||0;if(!isFinite(n))return '—';return n.toLocaleString('en-US',{minimumFractionDigits:d,maximumFractionDigits:d});}
+function addDays(dateStr,n){const dt=new Date(dateStr+'T00:00:00');dt.setDate(dt.getDate()+n);
+  return dt.toLocaleDateString('ar-EG',{day:'2-digit',month:'2-digit'});}
+function targetAt(map,day){const keys=Object.keys(map).map(Number).sort((a,b)=>a-b);let best=keys[0];
+  for(const k of keys){if(Math.abs(k-day)<=Math.abs(best-day))best=k;}return map[best];}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');
+  clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2400);}
+
+function computeStats(c){
+  let feed=0,mort=0,cull=0,water=0,lastWeightDay=0,lastWeight=0,lastDataDay=0;
+  for(let d=1;d<=c.cycleLength;d++){const r=c.days[d]||{};
+    const f=num(r.feed),m=num(r.mort),cu=num(r.cull),wa=num(r.water),w=num(r.weight);
+    if(r.feed||r.mort||r.cull||r.water||r.weight||r.notes||r.temp||r.hum)lastDataDay=d;
+    if(w>0){lastWeight=w;lastWeightDay=d;}feed+=f;mort+=m;cull+=cu;water+=wa;}
+  const removed=mort+cull;const liveCount=Math.max(0,c.initialCount-removed);
+  const mortPct=c.initialCount?(mort/c.initialCount*100):0;
+  const removedPct=c.initialCount?(removed/c.initialCount*100):0;
+  const age=lastWeightDay||lastDataDay||0;const avgW=lastWeight;
+  const liveWkg=liveCount*avgW/1000;const fcr=liveWkg>0?feed/liveWkg:0;
+  const livability=c.initialCount?(liveCount/c.initialCount*100):0;
+  const epef=(age>0&&fcr>0)?(livability*(avgW/1000))/(age*fcr)*100:0;
+  const revenue=liveWkg*num(c.priceKg);const feedCost=feed*num(c.feedPriceKg);
+  const chickCost=num(c.chickCost)*c.initialCount;const otherCost=num(c.otherCost);
+  const profit=revenue-feedCost-chickCost-otherCost;
+  return {feed,mort,cull,removed,water,liveCount,mortPct,removedPct,age,avgW,liveWkg,fcr,livability,epef,revenue,feedCost,chickCost,otherCost,profit,lastWeightDay,lastDataDay};
+}
+
+/* ===== Statistical analysis (shared by report + whatsapp) ===== */
+function analyze(c){
+  const st=computeStats(c);const b=BREEDS[c.breed];
+  const refDay=st.age||c.cycleLength;
+  const wT=targetAt(b.w,refDay),fT=targetAt(b.fcr,refDay);
+  const mortTarget=MORT_TARGET[Math.min(7,Math.ceil(refDay/7))]||5.2;
+  const weightPct=(st.avgW&&wT)?st.avgW/wT*100:0;
+  const fcrDev=(st.fcr&&fT)?(st.fcr-fT)/fT*100:0;
+  const adg=st.age?st.avgW/st.age:0;                 /* جم/يوم */
+  const feedPerBird=st.liveCount?st.feed/st.liveCount:0; /* كجم/طائر */
+  let gradeTxt='—',gradeCls='neu';
+  if(st.epef>=400){gradeTxt='ممتاز';gradeCls='ok';}
+  else if(st.epef>=350){gradeTxt='جيد جدًا';gradeCls='ok';}
+  else if(st.epef>=300){gradeTxt='جيد';gradeCls='warn';}
+  else if(st.epef>=250){gradeTxt='مقبول';gradeCls='warn';}
+  else if(st.epef>0){gradeTxt='ضعيف';gradeCls='bad';}
+  const vMort=st.mortPct>mortTarget?['bad','مرتفع فوق الطبيعي']:(st.mortPct>mortTarget*0.85?['warn','قريب من الحد']:['ok','ضمن الطبيعي']);
+  const vW=!st.avgW?['neu','لم يُسجَّل']:(weightPct>=97?['ok','مطابق للسلالة']:(weightPct>=90?['warn','أقل قليلًا']:['bad','أقل من المستهدف']));
+  const vF=!st.fcr?['neu','—']:(fcrDev<=3?['ok','ممتاز']:(fcrDev<=10?['warn','أعلى قليلًا']:['bad','مرتفع']));
+  const vE=!st.epef?['neu','—']:(st.epef>=350?['ok',gradeTxt]:(st.epef>=300?['warn',gradeTxt]:['bad',gradeTxt]));
+  return {st,b,wT,fT,mortTarget,weightPct,fcrDev,adg,feedPerBird,gradeTxt,gradeCls,vMort,vW,vF,vE,refDay};
+}
+function recommendations(a){
+  const st=a.st,R=[];
+  if(st.mortPct>a.mortTarget)R.push('النافق التراكمي ('+fmt(st.mortPct,2)+'%) تجاوز الحد الطبيعي (≤'+a.mortTarget+'%) — مراجعة التهوية وجودة الكتكوت واحتمال عدوى.');
+  if(st.avgW>0&&a.weightPct<90)R.push('الوزن أقل من القياسي بـ '+fmt(100-a.weightPct,0)+'% — مراجعة كثافة الطاقة/البروتين في العلف والتجانس والصحة المعوية.');
+  else if(st.avgW>0&&a.weightPct<97)R.push('الوزن أقل قليلًا من القياسي — ضبط برنامج التغذية ودرجات الحرارة.');
+  if(st.fcr>0&&a.fcrDev>10)R.push('معامل التحويل أعلى من الهدف بـ '+fmt(a.fcrDev,0)+'% — تقليل الفاقد في العلف ومراجعة جودته وصحة القطيع.');
+  if(st.epef>0&&st.epef<300)R.push('المؤشر الأوروبي أقل من 300 — الأداء دون المتوسط ويحتاج خطة تحسين شاملة.');
+  if(st.avgW===0)R.push('لم يُسجَّل وزن — يلزم تسجيل الأوزان الأسبوعية لاكتمال التحليل.');
+  if(!R.length)R.push('الأداء ضمن المعدلات الطبيعية للسلالة — الاستمرار على نفس البرنامج مع المتابعة الدورية.');
+  return R;
+}
+
+/* ===== Statistical PDF report ===== */
+function viewReport(c){
+  const a=analyze(c),st=a.st,b=a.b;
+  const today=new Date().toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'});
+  const weeks=Math.ceil(c.cycleLength/7);let cur=1,trend='';
+  for(let wk=1;wk<=weeks;wk++){
+    const start=cur,end=Math.min(cur+6,c.cycleLength);
+    let wFeed=0,wLastW=0,cumRem=0;
+    for(let d=start;d<=end;d++){const r=c.days[d]||{};wFeed+=num(r.feed);if(num(r.weight)>0)wLastW=num(r.weight);}
+    for(let k=1;k<=end;k++){const rr=c.days[k]||{};cumRem+=num(rr.mort)+num(rr.cull);}
+    const cumPct=c.initialCount?cumRem/c.initialCount*100:0;
+    const wtT=targetAt(b.w,end);const pct=wLastW?wLastW/wtT*100:0;
+    if(wFeed>0||cumRem>0||wLastW>0)
+      trend+='<tr><td>الأسبوع '+wk+'</td><td>'+fmt(wFeed,1)+'</td><td>'+fmt(cumPct,2)+'%</td><td>'+(wLastW?fmt(wLastW):'—')+'</td><td>'+(wLastW?fmt(pct,0)+'%':'—')+'</td></tr>';
+    cur=end+1;
+  }
+  if(!trend)trend='<tr><td colspan="5" style="text-align:center;color:var(--ink-soft)">لا توجد بيانات كافية</td></tr>';
+
+  const row=(k,val,tgt,dev,verd)=>'<tr><td style="font-weight:700">'+k+'</td><td>'+val+'</td><td>'+tgt+'</td><td>'+dev+'</td><td><span class="pill '+verd[0]+'">'+verd[1]+'</span></td></tr>';
+  const kpiTable=
+    row('نسبة الحياة (Livability)',fmt(st.livability,1)+'%','≥ '+fmt(100-a.mortTarget,1)+'%',(st.livability?fmt(st.livability-(100-a.mortTarget),1)+' نقطة':'—'),a.vMort[0]==='ok'?['ok','جيدة']:(a.vMort[0]==='warn'?['warn','متابعة']:['bad','منخفضة']))
+   +row('النافق التراكمي',fmt(st.mortPct,2)+'%','≤ '+a.mortTarget+'%',(st.mortPct-a.mortTarget>0?'+':'')+fmt(st.mortPct-a.mortTarget,2)+'%',a.vMort)
+   +row('متوسط الوزن الحي',(st.avgW?fmt(st.avgW)+' جم':'—'),fmt(a.wT)+' جم',(st.avgW?fmt(a.weightPct,0)+'% من القياسي':'—'),a.vW)
+   +row('معدل النمو اليومي',(a.adg?fmt(a.adg,1)+' جم/يوم':'—'),'—','—',['neu','—'])
+   +row('معامل التحويل FCR',(st.fcr?fmt(st.fcr,3):'—'),'~ '+fmt(a.fT,2),(st.fcr?((a.fcrDev>=0?'+':'')+fmt(a.fcrDev,0)+'%'):'—'),a.vF)
+   +row('العلف لكل طائر',(a.feedPerBird?fmt(a.feedPerBird,2)+' كجم':'—'),'—','—',['neu','—'])
+   +row('المؤشر الأوروبي EPEF',(st.epef?fmt(st.epef,0):'—'),'≥ 300','—',a.vE);
+
+  const narrative='بلغ متوسط وزن القطيع '+(st.avgW?fmt(st.avgW)+' جم عند عمر '+st.age+' يوم، أي ما يعادل '+fmt(a.weightPct,0)+'% من الوزن القياسي لسلالة '+b.name:'— (لم يُسجَّل وزن بعد)')
+   +'. بلغت نسبة النافق التراكمي '+fmt(st.mortPct,2)+'% مقابل حد طبيعي '+a.mortTarget+'%، ونسبة الحياة '+fmt(st.livability,1)+'%'
+   +(st.fcr?('، ومعامل تحويل غذائي '+fmt(st.fcr,3)+' بانحراف '+(a.fcrDev>=0?'+':'')+fmt(a.fcrDev,0)+'% عن المستهدف'):'')
+   +(st.epef?('. المؤشر الأوروبي للأداء (EPEF) = '+fmt(st.epef,0)+' وهو تقدير «'+a.gradeTxt+'»'):'')+'.';
+
+  const recs=recommendations(a).map(r=>'<li style="margin-bottom:5px">'+esc(r)+'</li>').join('');
+  const econ=num(c.priceKg)>0?'<h3 class="blk">الملخص المالي</h3><table class="edt" style="min-width:0"><tbody>'
+    +'<tr><td>إجمالي الوزن الحي</td><td style="font-weight:800">'+fmt(st.liveWkg,0)+' كجم</td></tr>'
+    +'<tr><td>إيراد البيع التقديري</td><td style="font-weight:800">'+fmt(st.revenue,0)+' ج</td></tr>'
+    +'<tr><td>تكلفة العلف</td><td>'+fmt(st.feedCost,0)+' ج</td></tr>'
+    +(st.chickCost>0?'<tr><td>تكلفة الكتاكيت</td><td>'+fmt(st.chickCost,0)+' ج</td></tr>':'')
+    +'<tr><td>صافي الربح التقديري</td><td style="font-weight:800;color:'+(st.profit>=0?'var(--moss)':'var(--clay)')+'">'+fmt(st.profit,0)+' ج</td></tr>'
+    +'</tbody></table>':'';
+
+  return '<div class="card">'
+   +'<div class="section-eyebrow">تقرير أداء إحصائي</div>'
+   +'<h2>تقرير أداء القطيع — '+esc(c.houseName)+'</h2>'
+   +'<p class="hint">'+((DB.farms||[]).find(x=>x.id===c.farmId)?('المزرعة: '+esc((DB.farms.find(x=>x.id===c.farmId)).name)+' • '):'')+'تاريخ التقرير: '+today+' • السلالة: '+b.name+' • تاريخ التنزيل: '+c.placementDate+' • العمر المرجعي: '+st.age+' يوم</p>'
+   +'<div class="kpis" style="margin-top:10px">'
+   +kpi('','العدد المُنزَّل',fmt(c.initialCount),'طائر')
+   +kpi('','الموجود الحالي',fmt(st.liveCount),'طائر')
+   +kpi(a.gradeCls==='ok'?'good':(a.gradeCls==='warn'?'warnb':(a.gradeCls==='bad'?'badb':'')),'التقييم العام',a.gradeTxt,(st.epef?'EPEF '+fmt(st.epef,0):'—'))
+   +'</div>'
+   +'<h3 class="blk">قراءة المؤشرات مقارنة بالقياسي</h3>'
+   +'<div class="tbl-scroll"><table class="edt"><thead><tr><th>المؤشر</th><th>القيمة</th><th>المستهدف</th><th>الانحراف</th><th>التقييم</th></tr></thead><tbody>'+kpiTable+'</tbody></table></div>'
+   +'<h3 class="blk">الأداء الأسبوعي (اتجاه)</h3>'
+   +'<div class="tbl-scroll"><table class="edt"><thead><tr><th>الأسبوع</th><th>علف (كجم)</th><th>نافق تراكمي</th><th>الوزن (جم)</th><th>% من القياسي</th></tr></thead><tbody>'+trend+'</tbody></table></div>'
+   +'<h3 class="blk">القراءة الإحصائية</h3><p style="line-height:1.9">'+narrative+'</p>'
+   +'<h3 class="blk">التوصيات</h3><ul style="padding-inline-start:20px;margin:0">'+recs+'</ul>'
+   +econ
+   +'<p class="hint" style="margin-top:18px;border-top:1px solid var(--rule);padding-top:12px">'
+   +'صادر عن '+esc(DB.center.name)+' — '+esc(DB.center.sub)+(DB.center.phone1?' • '+esc(DB.center.phone1)+(DB.center.phone2?' / '+esc(DB.center.phone2):''):'')+'</p>'
+   +'</div>';
+}
+function reportPDF(){const c=activeCycle();if(!c){toast("لا توجد دورة");return;}
+  const app=document.getElementById('app');const saved=currentTab;
+  app.innerHTML=viewReport(c);window.print();
+  setTimeout(()=>{currentTab=saved;render();},400);}
+
+/* ===== Render ===== */
+const TABS=[["farm","المزرعة","home"],["setup","بيانات العنبر","clipboard"],["daily","السجل اليومي","calendar"],["vacmed","التحصينات والأدوية","syringe"],["summary","الملخص والمؤشرات","chart"]];
+function renderTabs(){document.getElementById('tabbar').innerHTML=TABS.map(t=>
+  '<button class="tab '+(currentTab===t[0]?'active':'')+'" onclick="showTab(\''+t[0]+'\')">'+I(t[2])+' '+t[1]+'</button>').join('');}
+function showTab(t){currentTab=t;render();}
+
+function render(){
+  renderFarmSelect();renderCycleSelect();renderTabs();applyCenter();
+  ['i_gear|gear','i_print|print','i_save|save','i_import|import','i_plus|plus','i_trash|trash','i_plus2|plus','i_trash2|trash'].forEach(p=>{const [e,n]=p.split('|');ico(e,n);});
+  const app=document.getElementById('app');
+  if(!DB.farms.length){app.innerHTML='<div class="card"><div class="empty"><div class="big">'+I('home')+'</div><h2>ابدأ بإضافة مزرعة</h2><p>اضغط «+ مزرعة» بالأعلى.</p></div></div>';return;}
+  if(currentTab==='farm'){app.innerHTML=viewFarm();return;}
+  const c=activeCycle();
+  if(!c){app.innerHTML='<div class="card"><div class="empty"><div class="big">'+I('chick')+'</div><h2>لا توجد عنابر في هذه المزرعة</h2><p>اضغط «+ عنبر» بالأعلى لإضافة عنبر.</p></div></div>';return;}
+  if(currentTab==='setup')app.innerHTML=viewSetup(c);
+  else if(currentTab==='daily')app.innerHTML=viewDaily(c);
+  else if(currentTab==='vacmed')app.innerHTML=viewVacMed(c);
+  else app.innerHTML=viewSummary(c);
+}
+
+/* ---- Setup ---- */
+function viewSetup(c){
+  const breedOpts=Object.entries(BREEDS).map(([k,v])=>'<option value="'+k+'" '+(c.breed===k?'selected':'')+'>'+v.name+'</option>').join('');
+  return '<div class="card"><div class="section-eyebrow">الصفحة الأولى</div><h2>بيانات العنبر والدورة</h2><div class="grid">'
+   +fieldTxt('اسم العنبر',c.houseName,"houseName")
+   +fieldNum('العدد المُنزَّل (عدد الكتاكيت)',c.initialCount,"initialCount")
+   +'<div class="field"><label>نوع القطيع / السلالة</label><select onchange="setF(\'breed\',this.value)">'+breedOpts+'</select></div>'
+   +'<div class="field"><label>تاريخ التنزيل</label><input type="date" value="'+c.placementDate+'" oninput="setF(\'placementDate\',this.value)"></div>'
+   +'<div class="field"><label>طول الدورة (يوم)</label><input type="number" min="1" max="90" value="'+c.cycleLength+'" oninput="setF(\'cycleLength\',Math.min(90,Math.max(1,+this.value||49)))"></div>'
+   +'<div class="field"><label>وزن شكارة العلف (كجم)</label><input type="number" value="'+(c.bagWeight==null?50:c.bagWeight)+'" oninput="setF(\'bagWeight\',this.value)"></div>'
+   +'</div><h3 class="blk">'+I('chart')+' بيانات اقتصادية (اختياري)</h3><div class="grid">'
+   +fieldNum('سعر بيع الكيلو حي (جنيه)',c.priceKg,"priceKg","مثال 75")
+   +fieldNum('سعر كيلو العلف (جنيه)',c.feedPriceKg,"feedPriceKg","مثال 22")
+   +fieldNum('تكلفة الكتكوت الواحد (جنيه)',c.chickCost,"chickCost","مثال 18")
+   +fieldNum('تكاليف أخرى إجمالية (جنيه)',c.otherCost,"otherCost","أدوية/عمالة")
+   +'</div><p class="hint">السلالة بتحدد الأوزان القياسية ومعامل التحويل المستهدف في صفحة المؤشرات.</p></div>';
+}
+function fieldTxt(l,v,k){return '<div class="field"><label>'+l+'</label><input value="'+esc(v)+'" oninput="setF(\''+k+'\',this.value)"></div>';}
+function fieldNum(l,v,k,ph){return '<div class="field"><label>'+l+'</label><input type="number" value="'+(v==null?'':v)+'" placeholder="'+(ph||'')+'" oninput="setF(\''+k+'\',this.value)"></div>';}
+function setF(k,v){const c=activeCycle();if(!c)return;
+  if(k==='initialCount'||k==='cycleLength')v=+v;
+  c[k]=v;save();
+  if(k==='cycleLength'||k==='breed'||k==='houseName'||k==='placementDate'){renderCycleSelect();}
+}
+
+/* ---- Daily ---- */
+function viewDaily(c){
+  const st=computeStats(c);const weeks=Math.ceil(c.cycleLength/7);const b=BREEDS[c.breed];const bw=num(c.bagWeight)||50;
+  let html='<div class="card"><div class="section-eyebrow">الصفحة الثانية</div><h2>السجل اليومي — '+esc(c.houseName)+'</h2>'
+   +'<div class="wk-metrics" style="margin-top:6px">'
+   +wkm('العدد المُنزَّل',fmt(c.initialCount))
+   +wkm('الموجود الحالي','<span style="color:var(--pine)">'+fmt(st.liveCount)+'</span>')
+   +wkm('إجمالي العلف',fmt(st.feed,1)+' <span style="font-size:12px">كجم</span>')
+   +wkm('إجمالي النافق','<span style="color:var(--clay)">'+fmt(st.mort)+'</span> <span class="pill '+(st.mortPct>=(MORT_TARGET[Math.min(7,Math.ceil((st.age||1)/7))]||5)?'bad':'ok')+'">'+fmt(st.mortPct,2)+'%</span>')
+   +'</div><p class="hint">العلف بالكيلو، النافق والإعدام بالعدد، الوزن يوم الوزن فقط (جرام)، والحرارة/الرطوبة/المياه اختيارية. الأعمدة الخضراء تُحسب تلقائيًا.</p></div>';
+  let cur=1;
+  for(let wk=1;wk<=weeks;wk++){
+    const start=cur,end=Math.min(cur+6,c.cycleLength);
+    let wFeed=0,wMort=0,wCull=0,wWater=0,wLastW=0,tSum=0,tN=0,hSum=0,hN=0,rows='',cumFeedAtEnd=0;
+    for(let d=start;d<=end;d++){
+      const r=c.days[d]||{};const f=num(r.feed),m=num(r.mort),cu=num(r.cull),wa=num(r.water),w=num(r.weight),tp=num(r.temp),hm=num(r.hum);
+      wFeed+=f;wMort+=m;wCull+=cu;wWater+=wa;if(w>0)wLastW=w;if(r.temp){tSum+=tp;tN++;}if(r.hum){hSum+=hm;hN++;}
+      let runFeed=0,runRem=0;for(let k=1;k<=d;k++){const rr=c.days[k]||{};runFeed+=num(rr.feed);runRem+=num(rr.mort)+num(rr.cull);}
+      const live=Math.max(0,c.initialCount-runRem);
+      cumFeedAtEnd=runFeed;
+      rows+='<tr><td class="daycol">'+d+'</td><td class="datecol">'+addDays(c.placementDate,d-1)+'</td>'
+        +feedCells(d,r,bw)+'<td class="calc">'+fmt(runFeed,1)+'</td>'
+        +inp(d,'mort',r.mort)+inp(d,'cull',r.cull)+'<td class="calc">'+fmt(live)+'</td>'
+        +inp(d,'weight',r.weight)+inp(d,'temp',r.temp,'0.1')+inp(d,'hum',r.hum)+inp(d,'water',r.water)
+        +'<td><input class="notes" id="dcell-'+d+'-notes" value="'+esc(r.notes||'')+'" placeholder="تحصين / دواء / ملاحظة" oninput="setDay('+d+',\'notes\',this.value)"></td></tr>';
+    }
+    const wkRemoved=wMort+wCull;
+    let cumRemoved=0;for(let k=1;k<=end;k++){const rr=c.days[k]||{};cumRemoved+=num(rr.mort)+num(rr.cull);}
+    const cumMortPct=c.initialCount?(cumRemoved/c.initialCount*100):0;
+    const mortTarget=MORT_TARGET[Math.min(7,wk)]||5.2;
+    const mortStatus=cumMortPct>mortTarget?'bad':(cumMortPct>mortTarget*0.85?'warn':'ok');
+    const wTarget=b?targetAt(b.w,end):0;let weightCmp='',wStatus='neu';
+    if(wLastW>0){const ratio=wLastW/wTarget;
+      wStatus=(ratio>=0.95&&ratio<=1.08)?'ok':((ratio>=0.88&&ratio<=1.15)?'warn':'bad');
+      weightCmp='الهدف ~'+fmt(wTarget)+' جم — الفرق '+(wLastW-wTarget>=0?'+':'')+fmt(wLastW-wTarget)+' جم';}
+    const tTarget=TEMP_TARGET[Math.min(7,wk)]||20;const avgT=tN?tSum/tN:0;const avgH=hN?hSum/hN:0;
+    const wfRatio=wFeed>0&&wWater>0?wWater/wFeed:0;
+    let feedCmp='',feedStatus='neu',feedTargetKg=0,feedDirLabel='';
+    if(b){
+      let feedPerBirdG;
+      if(b.ci){feedPerBirdG=targetAt(b.ci,end);}
+      else{const fcrT=targetAt(b.fcr,end),wTend=targetAt(b.w,end);feedPerBirdG=fcrT*wTend;}
+      feedTargetKg=feedPerBirdG/1000*c.initialCount;
+      if(feedTargetKg>0){const fRatio=cumFeedAtEnd/feedTargetKg;
+        feedStatus=(fRatio>=0.95&&fRatio<=1.05)?'ok':((fRatio>=0.88&&fRatio<=1.12)?'warn':'bad');
+        feedDirLabel=fRatio<1?'نقص':'زيادة';
+        feedCmp='المعيار ~'+fmt(feedTargetKg,0)+' كجم — الفرق '+(cumFeedAtEnd-feedTargetKg>=0?'+':'')+fmt(cumFeedAtEnd-feedTargetKg,0)+' كجم'+(b.lowConfidence?' (⚠ بيانات هذه السلالة تقديرية غير مُوثَّقة رسميًا)':'');}}
+    html+='<div class="weekblock"><div class="weekhead">الأسبوع '+wk+' <span class="wk-sub">أيام '+start+'–'+end+' • الحرارة المثالية ~'+tTarget+'°م • رطوبة 60–70%</span></div>'
+      +'<div class="tbl-scroll"><table class="log"><thead><tr>'
+      +'<th>اليوم</th><th>التاريخ</th><th>شكاير (×'+bw+')</th><th>كجم فرط</th><th>إجمالي العلف</th><th>نافق</th><th>إعدام</th><th>الموجود</th><th>الوزن (جم)</th><th>حرارة °م</th><th>رطوبة %</th><th>مياه (لتر)</th><th>ملاحظات (تحصين/دواء)</th>'
+      +'</tr></thead><tbody>'+rows+'</tbody></table></div>'
+      +'<div class="wk-summary"><div class="wk-metrics">'
+      +wkm('علف الأسبوع',fmt(wFeed,1)+' كجم')
+      +(feedTargetKg>0?wkm('علف تراكمي (فعلي/معيار)',fmt(cumFeedAtEnd,0)+' كجم','<span class="pill '+feedStatus+'">'+(feedStatus==='bad'?('⚠ '+feedDirLabel+' كبير عن المعيار'):(feedStatus==='warn'?(feedDirLabel+' طفيف عن المعيار'):'ضمن المعيار'))+'</span> '+feedCmp):'')
+      +wkm('نافق الأسبوع (نافق+إعدام)',fmt(wkRemoved))
+      +wkm('النافق التراكمي',fmt(cumMortPct,2)+'%','<span class="pill '+mortStatus+'">'+(mortStatus==='bad'?'⚠ تجاوز الطبيعي':(mortStatus==='warn'?'قريب من الحد':'ضمن الطبيعي'))+' • هدف ≤'+mortTarget+'%</span>')
+      +wkm('متوسط وزن الأسبوع',(wLastW>0?fmt(wLastW)+' جم':'— لم يُسجَّل'),(wLastW>0?'<span class="pill '+wStatus+'">'+(wStatus==='bad'?(wLastW<wTarget?'أقل بوضوح من السلالة':'أعلى بوضوح من السلالة'):(wStatus==='warn'?(wLastW<wTarget?'أقل قليلًا':'أعلى قليلًا'):'مطابق للسلالة'))+'</span> '+weightCmp:'<span class="pill neu">سجّل الوزن يوم الوزن</span>'))
+      +(avgT?wkm('متوسط الحرارة',fmt(avgT,1)+'°م','<span class="pill '+(Math.abs(avgT-tTarget)<=2?'ok':'warn')+'">الهدف ~'+tTarget+'°م</span>'):'')
+      +(avgH?wkm('متوسط الرطوبة',fmt(avgH,0)+'%','<span class="pill '+(avgH>=55&&avgH<=70?'ok':'warn')+'">الطبيعي 60–70%</span>'):'')
+      +(wfRatio?wkm('نسبة الماء:العلف',fmt(wfRatio,2),'<span class="pill '+(wfRatio>=1.6&&wfRatio<=2.1?'ok':'warn')+'">الطبيعي 1.7–2.0</span>'):'')
+      +'</div></div></div>';
+    cur=end+1;
+  }
+  return html;
+}
+function wkm(k,v,cmp){return '<div class="wk-metric"><div class="k">'+k+'</div><div class="v">'+v+'</div>'+(cmp?'<div class="cmp">'+cmp+'</div>':'')+'</div>';}
+function inp(d,k,val,step){return '<td><input type="number"'+(step?' step="'+step+'"':'')+' id="dcell-'+d+'-'+k+'" value="'+(val==null?'':val)+'" oninput="setDay('+d+',\''+k+'\',this.value)"></td>';}
+function setDay(d,k,v){const c=activeCycle();if(!c)return;if(!c.days[d])c.days[d]={};c.days[d][k]=v;save();scheduleDailyRefresh();checkMortalityAlert(c);}
+
+let _mortRt=null;
+function checkMortalityAlert(c){
+  clearTimeout(_mortRt);
+  _mortRt=setTimeout(()=>{
+    if(!c||!c.breed||!BREEDS[c.breed])return;
+    const st=computeStats(c);
+    if(!st.age||st.age<3)return;
+    const a=analyze(c);
+    if(a.vMort[0]==='bad'){
+      if(!c._mortAlerted){ c._mortAlerted=true; showMortalityAlert(c,a); }
+    }else{
+      c._mortAlerted=false;
+    }
+  },900);
+}
+function showMortalityAlert(c,a){
+  const p1=(GHAMRY_CENTER.phone1||'').trim();
+  let waLink='';
+  if(p1){
+    let wa=p1.replace(/\D/g,'');if(wa.charAt(0)==='0')wa='20'+wa.slice(1);else if(wa.slice(0,2)!=='20')wa='20'+wa;
+    const msg='السلام عليكم، النافق التراكمي في '+(c.houseName||'العنبر')+' وصل '+fmt(a.st.mortPct,2)+'% (اليوم '+a.st.age+') وتجاوز الحد الطبيعي، محتاج استشارة سريعة.';
+    waLink='<a class="btn btn-primary" style="text-decoration:none;background:#25D366;border-color:#25D366" href="https://wa.me/'+wa+'?text='+encodeURIComponent(msg)+'" target="_blank" rel="noopener">💬 تواصل مع المركز الآن</a>';
+  }
+  modal('<h3>⚠️ تنبيه: ارتفاع النافق</h3>'
+    +'<p style="font-size:13.5px;line-height:1.8;color:#5a5245">'
+    +'النافق التراكمي في <b>'+esc(c.houseName||'العنبر')+'</b> وصل <b>'+fmt(a.st.mortPct,2)+'%</b> (اليوم '+a.st.age+')، '
+    +'وده فوق الحد الطبيعي المتوقع (≤'+a.mortTarget+'%). يُفضّل مراجعة التهوية وجودة الكتكوت واحتمال وجود عدوى.'
+    +'</p>'
+    +'<div class="modal-actions">'+waLink+'<button class="btn btn-ghost" onclick="closeModal()">تجاهل الآن</button></div>');
+}
+function feedCells(d,r,bw){return '<td><input type="number" step="1" id="dcell-'+d+'-bags" value="'+(r.bags==null?'':r.bags)+'" oninput="setFeed('+d+',\'bags\',this.value)" placeholder="شكاير"></td><td><input type="number" step="0.1" id="dcell-'+d+'-floose" value="'+(r.floose==null?'':r.floose)+'" oninput="setFeed('+d+',\'floose\',this.value)" placeholder="كجم"></td>';}
+function setFeed(d,k,v){const c=activeCycle();if(!c)return;if(!c.days[d])c.days[d]={};c.days[d][k]=v;const bw=num(c.bagWeight)||50;c.days[d].feed=num(c.days[d].bags)*bw+num(c.days[d].floose);save();scheduleDailyRefresh();}
+let _rt=null;function scheduleDailyRefresh(){clearTimeout(_rt);_rt=setTimeout(()=>{if(currentTab==='daily')renderPreservingFocus();},700);}
+function renderPreservingFocus(){
+  const active=document.activeElement;
+  const id=(active&&active.id)?active.id:null;
+  const selStart=(active&&typeof active.selectionStart==='number')?active.selectionStart:null;
+  const selEnd=(active&&typeof active.selectionEnd==='number')?active.selectionEnd:null;
+  render();
+  if(id){
+    const el=document.getElementById(id);
+    if(el){
+      el.focus();
+      if(selStart!=null&&el.setSelectionRange){try{el.setSelectionRange(selStart,selEnd);}catch(e){}}
+    }
+  }
+}
+
+/* ---- Vaccines & Meds & Attachments ---- */
+function viewVacMed(c){
+  const routeOpts=r=>ROUTES.map(o=>'<option '+(r===o?'selected':'')+'>'+o+'</option>').join('');
+  let vac=c.vaccines.map((v,i)=>'<tr>'
+    +'<td><input type="number" value="'+(v.age==null?'':v.age)+'" oninput="setList(\'vaccines\','+i+',\'age\',this.value)" placeholder="اليوم"></td>'
+    +'<td><input value="'+esc(v.name||'')+'" oninput="setList(\'vaccines\','+i+',\'name\',this.value)" placeholder="مثال: كلون 30 / جامبورو"></td>'
+    +'<td><input value="'+esc(v.type||'')+'" oninput="setList(\'vaccines\','+i+',\'type\',this.value)" placeholder="حي/ميت/عترة"></td>'
+    +'<td><select onchange="setList(\'vaccines\','+i+',\'route\',this.value)"><option value="">— الطريقة —</option>'+routeOpts(v.route)+'</select></td>'
+    +'<td><input value="'+esc(v.batch||'')+'" oninput="setList(\'vaccines\','+i+',\'batch\',this.value)" placeholder="التشغيلة"></td>'
+    +'<td><input value="'+esc(v.notes||'')+'" oninput="setList(\'vaccines\','+i+',\'notes\',this.value)" placeholder="ملاحظات"></td>'
+    +'<td><button class="rm" onclick="delList(\'vaccines\','+i+')">'+I('trash')+'</button></td></tr>').join('');
+  if(!vac)vac='<tr><td colspan="7" style="text-align:center;color:var(--ink-soft);padding:14px">لا توجد تحصينات مسجّلة بعد</td></tr>';
+
+  let med=c.meds.map((m,i)=>'<tr>'
+    +'<td><input type="number" value="'+(m.age==null?'':m.age)+'" oninput="setList(\'meds\','+i+',\'age\',this.value)" placeholder="اليوم"></td>'
+    +'<td><input value="'+esc(m.drug||'')+'" oninput="setList(\'meds\','+i+',\'drug\',this.value)" placeholder="اسم الدواء"></td>'
+    +'<td><input value="'+esc(m.dose||'')+'" oninput="setList(\'meds\','+i+',\'dose\',this.value)" placeholder="الجرعة"></td>'
+    +'<td><input value="'+esc(m.days||'')+'" oninput="setList(\'meds\','+i+',\'days\',this.value)" placeholder="المدة (يوم)"></td>'
+    +'<td><input value="'+esc(m.reason||'')+'" oninput="setList(\'meds\','+i+',\'reason\',this.value)" placeholder="دواعي الاستعمال"></td>'
+    +'<td><input value="'+esc(m.notes||'')+'" oninput="setList(\'meds\','+i+',\'notes\',this.value)" placeholder="ملاحظات"></td>'
+    +'<td><button class="rm" onclick="delList(\'meds\','+i+')">'+I('trash')+'</button></td></tr>').join('');
+  if(!med)med='<tr><td colspan="7" style="text-align:center;color:var(--ink-soft);padding:14px">لا توجد أدوية مسجّلة بعد</td></tr>';
+
+  const atts=c.attachments.map((a,i)=>{
+    const thumb=a.type==='image'?'<img class="thumb" src="'+a.data+'" onclick="previewAtt('+i+')">':'<div class="thumb">'+I(a.type==='pdf'?'file':'file')+'</div>';
+    return '<div class="att">'+thumb+'<div class="nm">'+esc(a.name||'ملف')+'</div><div class="dt">'+(a.date||'')+'</div>'
+      +'<div class="acts"><a href="'+a.data+'" download="'+esc(a.name||'file')+'">'+I('save')+'</a>'
+      +'<button onclick="delAtt('+i+')">'+I('trash')+'</button></div></div>';
+  }).join('');
+
+  return '<div class="card"><div class="section-eyebrow">'+esc(c.houseName)+'</div>'
+   +'<h2>'+I('syringe')+' جدول تحصينات العنبر</h2>'
+   +'<div class="tbl-scroll"><table class="edt"><thead><tr><th>اليوم/العمر</th><th>التحصين</th><th>النوع/العترة</th><th>طريقة الإعطاء</th><th>التشغيلة</th><th>ملاحظات</th><th></th></tr></thead><tbody>'+vac+'</tbody></table></div>'
+   +'<div class="addrow"><button class="btn btn-ghost" onclick="addList(\'vaccines\')">'+I('plus')+' إضافة تحصين</button></div>'
+
+   +'<h3 class="blk">'+I('pill')+' الأدوية والروشتات</h3>'
+   +'<div class="tbl-scroll"><table class="edt"><thead><tr><th>اليوم</th><th>الدواء</th><th>الجرعة</th><th>المدة</th><th>دواعي الاستعمال</th><th>ملاحظات</th><th></th></tr></thead><tbody>'+med+'</tbody></table></div>'
+   +'<div class="addrow"><button class="btn btn-ghost" onclick="addList(\'meds\')">'+I('plus')+' إضافة دواء / روشتة</button></div>'
+
+   +'<h3 class="blk">'+I('clip')+' المرفقات (روشتات / فواتير شراء الدوا)</h3>'
+   +'<p class="hint">ارفع صورة الروشتة أو فاتورة الدوا. الصور بتتضغط تلقائيًا لتوفير المساحة، وبتتحفظ داخل الملف وتخرج مع النسخة الاحتياطية.</p>'
+   +'<div class="addrow"><button class="btn btn-primary" onclick="document.getElementById(\'attFile\').click()">'+I('clip')+' رفع ملف / صورة</button>'
+   +'<input type="file" id="attFile" class="hidden" accept="image/*,application/pdf" multiple onchange="addAttachment(event)"></div>'
+   +(atts?'<div class="att-grid">'+atts+'</div>':'<p class="hint">لا توجد مرفقات بعد.</p>')
+   +'</div>';
+}
+function addList(key){const c=activeCycle();c[key].push({});save();render();}
+function setList(key,i,k,v){const c=activeCycle();if(!c[key][i])c[key][i]={};c[key][i][k]=v;save();}
+function delList(key,i){const c=activeCycle();c[key].splice(i,1);save();render();}
+
+function addAttachment(e){
+  const files=[...e.target.files];const c=activeCycle();const today=new Date().toISOString().slice(0,10);
+  let pending=files.length;
+  files.forEach(f=>{
+    if(f.type.indexOf('image/')===0){
+      const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{
+        const max=1100;let w=img.width,h=img.height;
+        if(w>max||h>max){const r=Math.min(max/w,max/h);w=Math.round(w*r);h=Math.round(h*r);}
+        const cv=document.createElement('canvas');cv.width=w;cv.height=h;cv.getContext('2d').drawImage(img,0,0,w,h);
+        c.attachments.push({id:uid(),name:f.name,type:'image',date:today,data:cv.toDataURL('image/jpeg',0.6)});
+        if(--pending===0){save();render();toast("تم رفع المرفق");}};img.src=rd.result;};rd.readAsDataURL(f);
+    } else {
+      const rd=new FileReader();rd.onload=()=>{c.attachments.push({id:uid(),name:f.name,type:f.type.indexOf('pdf')>=0?'pdf':'file',date:today,data:rd.result});
+        if(--pending===0){save();render();toast("تم رفع المرفق");}};rd.readAsDataURL(f);
+    }
+  });
+  e.target.value='';
+}
+function delAtt(i){confirmModal("حذف هذا المرفق؟",()=>{const c=activeCycle();c.attachments.splice(i,1);save();render();});}
+function previewAtt(i){const c=activeCycle();const a=c.attachments[i];modal('<h3>'+esc(a.name||'صورة')+'</h3><img class="preview" src="'+a.data+'"><div class="modal-actions"><a class="btn btn-ghost" href="'+a.data+'" download="'+esc(a.name||'img')+'">'+I('save')+' تنزيل</a><button class="btn btn-ghost" onclick="closeModal()">إغلاق</button></div>');}
+
+/* ---- Summary ---- */
+function viewSummary(c){
+  const st=computeStats(c);const b=BREEDS[c.breed];
+  const wTarget=b?targetAt(b.w,st.age||c.cycleLength):0;
+  const fcrTarget=b?targetAt(b.fcr,st.age||c.cycleLength):0;
+  const mortTargetFinal=MORT_TARGET[Math.min(7,Math.ceil((st.age||c.cycleLength)/7))]||5.2;
+  const mortClass=st.mortPct>mortTargetFinal?'badb':(st.mortPct>mortTargetFinal*0.85?'warnb':'good');
+  const fcrClass=(st.fcr>0)?(st.fcr<=fcrTarget*0.95?'great':(st.fcr<=fcrTarget*1.03?'good':(st.fcr<=fcrTarget*1.10?'warnb':'badb'))):'';
+  const wClass=(st.avgW>0)?(st.avgW>=wTarget*0.97?'good':(st.avgW>=wTarget*0.90?'warnb':'badb')):'';
+  const epefClass=st.epef>=380?'good':(st.epef>=300?'warnb':(st.epef>0?'badb':''));
+  const A=[];
+  if(st.mortPct>mortTargetFinal)A.push(['bad','warn','النافق التراكمي '+fmt(st.mortPct,2)+'% تجاوز الحد الطبيعي (≤'+mortTargetFinal+'%) لعمر '+st.age+' يوم — راجع التهوية/العدوى/جودة الكتكوت.']);
+  else if(st.mortPct>mortTargetFinal*0.85)A.push(['warn','warn','النافق '+fmt(st.mortPct,2)+'% اقترب من الحد الطبيعي ('+mortTargetFinal+'%) — انتبه.']);
+  if(st.avgW>0&&st.avgW<wTarget*0.90)A.push(['bad','warn','متوسط الوزن '+fmt(st.avgW)+' جم أقل من هدف '+b.name+' ('+fmt(wTarget)+' جم) بفارق '+fmt(wTarget-st.avgW)+' جم — راجع العلف/الصحة/التجانس.']);
+  else if(st.avgW>0&&st.avgW<wTarget*0.97)A.push(['warn','warn','الوزن '+fmt(st.avgW)+' جم أقل قليلًا من هدف السلالة ('+fmt(wTarget)+' جم).']);
+  if(st.fcr>0&&st.fcr<=fcrTarget*0.95)A.push(['ok','check','🌟 معامل التحويل FCR='+fmt(st.fcr,3)+' أفضل من معيار '+b.name+' ('+fmt(fcrTarget,2)+') — كفاءة تحويل ممتازة، أداء متفوّق على المرجع القياسي.']);
+  else if(st.fcr>0&&st.fcr>fcrTarget*1.10)A.push(['bad','warn','معامل التحويل FCR='+fmt(st.fcr,3)+' أعلى من الهدف ('+fmt(fcrTarget,2)+') — استهلاك علف زائد على النمو.']);
+  if(st.epef>0&&st.epef<300)A.push(['warn','warn','المؤشر الأوروبي EPEF='+fmt(st.epef,0)+' أقل من 300 — أداء دون المتوسط.']);
+  if(st.avgW===0)A.push(['warn','warn','لم يُسجَّل وزن بعد — سجّل وزن الطيور في السجل اليومي عشان تظهر مؤشرات FCR و EPEF.']);
+  if(!A.length)A.push(['ok','check','كل المؤشرات ضمن المعدلات الطبيعية للسلالة حتى الآن.']);
+  const showEcon=num(c.priceKg)>0||num(c.feedPriceKg)>0;
+  let h='<div class="card"><div class="section-eyebrow">الملخص النهائي</div><h2>مؤشرات الأداء — '+esc(c.houseName)+'</h2>'
+   +'<p class="hint">العمر المرجعي للحساب: يوم '+(st.age||'—')+' (آخر يوم مُسجَّل به وزن). السلالة: '+b.name+'.</p>'
+   +'<div class="kpis" style="margin-top:12px">'
+   +kpi('','إجمالي العلف المستهلك',fmt(st.feed,1),'كجم')
+   +kpi(mortClass,'إجمالي النافق (نافق+إعدام)',fmt(st.removed),fmt(st.removedPct,2)+'% — الطبيعي ≤'+mortTargetFinal+'%')
+   +kpi('','الموجود الحالي',fmt(st.liveCount),'طائر (نسبة حياة '+fmt(st.livability,1)+'%)')
+   +kpi(wClass,'متوسط الوزن الحي',(st.avgW?fmt(st.avgW):'—'),'جم — هدف السلالة '+fmt(wTarget)+' جم')
+   +kpi('','إجمالي الوزن الحي',fmt(st.liveWkg,0),'كجم')
+   +kpi(fcrClass,'معامل التحويل FCR',(st.fcr?fmt(st.fcr,3):'—'),'أرضية مرجعية ~'+fmt(fcrTarget,2)+' (الأقل = أفضل وأكفأ)')
+   +kpi(epefClass,'المؤشر الأوروبي EPEF',(st.epef?fmt(st.epef,0):'—'),'ممتاز ≥380 • جيد ≥300')
+   +'</div><div class="alerts">'+A.map(a=>'<div class="alert '+a[0]+'"><span class="ic">'+IC[a[1]]+'</span><span>'+esc(a[2])+'</span></div>').join('')+'</div></div>';
+  if(showEcon){h+='<div class="card"><div class="section-eyebrow">الحساب المالي</div><h2>الاقتصاديات ومتوسط السعر</h2><div class="kpis">'
+   +kpi('','سعر بيع الكيلو (متوسط)',fmt(num(c.priceKg),2),'جنيه/كجم حي')
+   +kpi('good','إجمالي إيراد البيع',fmt(st.revenue,0),'جنيه ('+fmt(st.liveWkg,0)+' كجم)')
+   +kpi('','تكلفة العلف',fmt(st.feedCost,0),'جنيه')
+   +(st.chickCost>0?kpi('','تكلفة الكتاكيت',fmt(st.chickCost,0),'جنيه'):'')
+   +(st.otherCost>0?kpi('','تكاليف أخرى',fmt(st.otherCost,0),'جنيه'):'')
+   +kpi(st.profit>=0?'good':'badb','صافي الربح التقديري',fmt(st.profit,0),'جنيه (بعد كل التكاليف)')
+   +kpi('','تكلفة إنتاج الكيلو',(st.liveWkg>0?fmt((st.feedCost+st.chickCost+st.otherCost)/st.liveWkg,2):'—'),'جنيه/كجم')
+   +'</div></div>';}
+  else h+='<div class="card"><p class="hint">لعرض المؤشرات المالية ومتوسط السعر، أدخل سعر البيع وسعر العلف في «بيانات العنبر».</p></div>';
+  h+='<div class="card no-print"><h3>مشاركة وطباعة</h3><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:10px">'
+   +'<button class="btn btn-primary" onclick="reportPDF()">'+I('file')+' تقرير PDF إحصائي</button>'
+   +'<button class="btn btn-wa" onclick="waReport(true)">'+I('wa')+' إرسال التقرير للمركز</button>'
+   +'<button class="btn btn-ghost" onclick="waReport(false)">'+I('wa')+' مشاركة التقرير</button>'
+   +'<button class="btn btn-ghost" onclick="printAll()">'+I('print')+' طباعة الكراسة كاملة</button>'
+   +'</div><p class="hint">«تقرير PDF إحصائي» بيفتح صفحة تقرير منسّقة — اختر «حفظ كـ PDF» من شاشة الطباعة. و«إرسال التقرير للمركز» بيبعت الأرقام مع قراءة إحصائية وتقييم عام على واتساب رقم المركز.</p></div>';
+  return h;
+}
+/* ===== كشف فترات المشاكل خلال الدورة ===== */
+function detectProblems(c){
+  const b=BREEDS[c.breed];const problems=[];
+  // 1) فترات ارتفاع النافق اليومي
+  let liveEst=c.initialCount;const flagged=[];
+  for(let d=1;d<=c.cycleLength;d++){
+    const r=c.days[d];if(!r){continue;}
+    const m=num(r.mort);
+    if(liveEst>0&&m>0){
+      const dailyPct=m/liveEst*100;
+      const target=MORT_TARGET[Math.min(7,Math.ceil(d/7))]||5.2;
+      const avgDaily=target/c.cycleLength;
+      if(dailyPct>avgDaily*3&&m>=2)flagged.push(d);
+    }
+    liveEst-=(m+num(r.cull));
+  }
+  if(flagged.length){
+    let start=flagged[0],prev=flagged[0];const periods=[];
+    for(let i=1;i<flagged.length;i++){const d=flagged[i];if(d-prev<=2){prev=d;}else{periods.push([start,prev]);start=d;prev=d;}}
+    periods.push([start,prev]);
+    periods.forEach(p=>problems.push({type:'mort',from:p[0],to:p[1],
+      text:(p[0]===p[1]?('اليوم '+p[0]):('من اليوم '+p[0]+' حتى اليوم '+p[1]))+': ارتفاع ملحوظ في النافق اليومي عن المعدل الطبيعي.'}));
+  }
+  // 2) فترات تباطؤ نمو الوزن بين قياسين متتاليين
+  const weighs=[];
+  for(let d=1;d<=c.cycleLength;d++){const r=c.days[d];if(r&&num(r.weight)>0)weighs.push({d,w:num(r.weight)});}
+  for(let i=1;i<weighs.length;i++){
+    const d1=weighs[i-1].d,w1=weighs[i-1].w,d2=weighs[i].d,w2=weighs[i].w;
+    if(d2<=d1)continue;
+    const actualADG=(w2-w1)/(d2-d1);
+    const t1=targetAt(b.w,d1),t2=targetAt(b.w,d2);
+    const targetADG=(t2-t1)/(d2-d1);
+    if(targetADG>0&&actualADG<targetADG*0.8){
+      problems.push({type:'weight',from:d1,to:d2,
+        text:'من اليوم '+d1+' حتى اليوم '+d2+': تباطؤ في معدل النمو ('+fmt(actualADG,1)+' جم/يوم مقابل معيار '+fmt(targetADG,1)+' جم/يوم).'});
+    }
+  }
+  return problems.sort((a,b)=>a.from-b.from);
+}
+
+function closeCycle(id){
+  const c=DB.cycles.find(x=>x.id===id);if(!c)return;
+  const a=analyze(c);const problems=detectProblems(c);
+  c.finalReport={
+    closedAt:new Date().toISOString(),
+    grade:a.gradeTxt,gradeCls:a.gradeCls,
+    weightPct:a.weightPct,fcrDev:a.fcrDev,mortPct:a.st.mortPct,epef:a.st.epef,
+    avgW:a.st.avgW,fcr:a.st.fcr,feed:a.st.feed,age:a.st.age,
+    problems:problems
+  };
+  save();showCloseCycleModal(c,a,problems);render();
+}
+
+function showCloseCycleModal(c,a,problems){
+  const probHtml=problems.length
+    ? '<div style="margin-top:12px"><b style="font-size:13px">⚠️ فترات لوحظت خلال الدورة:</b>'
+      +'<ul style="margin:8px 0 0;padding-inline-start:18px;font-size:12.5px;line-height:1.9;color:#5a5245">'
+      +problems.map(p=>'<li>'+esc(p.text)+'</li>').join('')+'</ul></div>'
+    : '<p style="margin-top:12px;font-size:12.5px;color:#3f7d5a">✅ لم تُلاحَظ فترات مشاكل واضحة خلال هذه الدورة.</p>';
+  modal('<h3>🏁 تقييم نهاية الدورة — '+esc(c.houseName)+'</h3>'
+    +'<div class="wk-metrics" style="margin-top:10px">'
+    +'<div class="wk-metric"><div class="k">التقييم العام</div><div class="v">'+esc(a.gradeTxt)+'</div></div>'
+    +'<div class="wk-metric"><div class="k">EPEF</div><div class="v">'+(a.st.epef?fmt(a.st.epef,0):'—')+'</div></div>'
+    +'<div class="wk-metric"><div class="k">النافق</div><div class="v">'+fmt(a.st.mortPct,2)+'%</div></div>'
+    +'<div class="wk-metric"><div class="k">متوسط الوزن</div><div class="v">'+(a.st.avgW?fmt(a.st.avgW)+' جم':'—')+'</div></div>'
+    +'</div>'+probHtml
+    +'<div class="modal-actions"><button class="btn btn-primary" onclick="closeModal()">تمام</button></div>');
+}
+
+function viewClosedReport(id){
+  const c=DB.cycles.find(x=>x.id===id);if(!c||!c.finalReport)return;
+  const fr=c.finalReport;
+  const probHtml=fr.problems&&fr.problems.length
+    ? '<div style="margin-top:12px"><b style="font-size:13px">⚠️ فترات لوحظت خلال الدورة:</b>'
+      +'<ul style="margin:8px 0 0;padding-inline-start:18px;font-size:12.5px;line-height:1.9;color:#5a5245">'
+      +fr.problems.map(p=>'<li>'+esc(p.text)+'</li>').join('')+'</ul></div>'
+    : '<p style="margin-top:12px;font-size:12.5px;color:#3f7d5a">✅ لم تُلاحَظ فترات مشاكل واضحة خلال هذه الدورة.</p>';
+  modal('<h3>📋 تقييم دورة سابقة — '+esc(c.houseName)+'</h3>'
+    +'<p class="hint" style="margin-top:2px">أُغلقت في '+new Date(fr.closedAt).toLocaleDateString('ar-EG')+'</p>'
+    +'<div class="wk-metrics" style="margin-top:10px">'
+    +'<div class="wk-metric"><div class="k">التقييم العام</div><div class="v">'+esc(fr.grade)+'</div></div>'
+    +'<div class="wk-metric"><div class="k">EPEF</div><div class="v">'+(fr.epef?fmt(fr.epef,0):'—')+'</div></div>'
+    +'<div class="wk-metric"><div class="k">النافق</div><div class="v">'+fmt(fr.mortPct,2)+'%</div></div>'
+    +'<div class="wk-metric"><div class="k">متوسط الوزن</div><div class="v">'+(fr.avgW?fmt(fr.avgW)+' جم':'—')+'</div></div>'
+    +'</div>'+probHtml
+    +'<div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">إغلاق</button></div>');
+}
+
+function viewFarm(){
+ const fm=activeFarm();const houses=housesOfFarm();
+ if(!houses.length)return '<div class="card"><div class="empty"><div class="big">'+I('home')+'</div><h2>'+esc(fm?fm.name:'')+'</h2><p>لا توجد عنابر بعد. اضغط «+ عنبر» بالأعلى.</p></div></div>';
+ let tPlaced=0,tLive=0,tFeed=0,tRem=0,tWkg=0,tRev=0,cards='';
+ houses.forEach(c=>{const a=analyze(c);const st=a.st;tPlaced+=c.initialCount;tLive+=st.liveCount;tFeed+=st.feed;tRem+=st.removed;tWkg+=st.liveWkg;if(num(c.priceKg)>0)tRev+=st.revenue;
+   const status=c.finalReport?('مُقيَّمة — '+c.finalReport.grade):(st.age?('عمر '+st.age+' يوم — '+a.gradeTxt):'لم يبدأ');
+   const stcls=c.finalReport?c.finalReport.gradeCls:(a.gradeCls==='ok'?'ok':(a.gradeCls==='warn'?'warn':(a.gradeCls==='bad'?'bad':'neu')));
+   cards+='<div class="card" style="margin-top:10px;padding:13px"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap">'
+     +'<div><div style="font-weight:800;color:var(--pine-deep);font-size:16px">'+esc(c.houseName)+'</div><div class="hint" style="margin-top:2px">'+a.b.name+' • نُزّل '+fmt(c.initialCount)+' ← موجود '+fmt(st.liveCount)+'</div></div>'
+     +'<span class="pill '+stcls+'">'+status+'</span></div>'
+     +'<div class="wk-metrics" style="margin-top:10px">'
+     +'<div class="wk-metric"><div class="k">EPEF</div><div class="v">'+(st.epef?fmt(st.epef,0):'—')+'</div></div>'
+     +'<div class="wk-metric"><div class="k">النافق</div><div class="v">'+fmt(st.removedPct,2)+'%</div></div>'
+     +'<div class="wk-metric"><div class="k">متوسط الوزن</div><div class="v">'+(st.avgW?fmt(st.avgW)+' جم':'—')+'</div></div>'
+     +'<div class="wk-metric"><div class="k">العلف</div><div class="v">'+fmt(st.feed,0)+' كجم</div></div>'
+     +'</div><div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap" class="no-print">'
+     +'<button class="btn btn-primary" onclick="openHouse(\''+c.id+'\')">فتح العنبر</button>'
+     +(c.finalReport
+       ?'<button class="btn btn-ghost" onclick="viewClosedReport(\''+c.id+'\')">📋 عرض تقييم الدورة</button>'
+       :'<button class="btn btn-ghost" onclick="if(confirm(\'تقييم وإغلاق هذه الدورة؟ سيتم حفظ التقييم النهائي بشكل دائم.\'))closeCycle(\''+c.id+'\')">🏁 تقييم وإغلاق الدورة</button>')
+     +(getRecurringWarnings(c).length?'<button class="btn btn-ghost" onclick="showRecurringWarningsModal(cycleById(\''+c.id+'\'),getRecurringWarnings(cycleById(\''+c.id+'\')))">🔁 أنماط متكررة</button>':'')
+     +'</div></div>';
+ });
+ const mortPct=tPlaced?tRem/tPlaced*100:0;
+ const head='<div class="card"><div class="section-eyebrow">ملخص المزرعة</div><h2>'+I('home')+' '+esc(fm.name)+'</h2>'
+   +'<p class="hint">'+(fm.owner?('المالك: '+esc(fm.owner)+' • '):'')+(fm.location?('الموقع: '+esc(fm.location)+' • '):'')+'عدد العنابر: '+houses.length+'</p>'
+   +'<div class="kpis" style="margin-top:10px">'
+   +kpi('','إجمالي المُنزَّل',fmt(tPlaced),'طائر')
+   +kpi('','الموجود الحالي',fmt(tLive),'طائر')
+   +kpi('','إجمالي العلف',fmt(tFeed,0),'كجم')
+   +kpi('','إجمالي الوزن الحي',fmt(tWkg,0),'كجم')
+   +kpi(mortPct>5?'badb':(mortPct>4?'warnb':'good'),'النافق التراكمي (المزرعة)',fmt(mortPct,2),'%')
+   +(tRev>0?kpi('good','إجمالي الإيراد التقديري',fmt(tRev,0),'جنيه'):'')
+   +'</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px" class="no-print">'
+   +'<button class="btn btn-wa" onclick="waFarmReport()">'+I('wa')+' تقرير المزرعة للمركز</button>'
+   +'<button class="btn btn-ghost" onclick="farmPrint()">'+I('print')+' طباعة ملخص المزرعة</button></div></div>';
+ return head+cards;
+}
+function waFarmReport(){const fm=activeFarm();const houses=housesOfFarm();if(!houses.length)return;const L=[];
+ L.push('*'+DB.center.name+'*');L.push(DB.center.sub);L.push('— — — — —');
+ L.push('*مزرعة: '+fm.name+'*'+(fm.owner?(' | المالك: '+fm.owner):''));
+ let tPlaced=0,tLive=0,tFeed=0,tRem=0,tWkg=0,tRev=0;
+ houses.forEach(c=>{const a=analyze(c);const st=a.st;tPlaced+=c.initialCount;tLive+=st.liveCount;tFeed+=st.feed;tRem+=st.removed;tWkg+=st.liveWkg;if(num(c.priceKg)>0)tRev+=st.revenue;
+   L.push('');L.push('*'+c.houseName+'* ('+a.b.name+')');
+   L.push('  عمر '+st.age+' يوم | موجود '+fmt(st.liveCount));
+   L.push('  EPEF '+(st.epef?fmt(st.epef,0):'—')+' | نافق '+fmt(st.removedPct,2)+'% | وزن '+(st.avgW?fmt(st.avgW)+'جم':'—'));});
+ L.push('');L.push('*إجمالي المزرعة:*');
+ L.push('• موجود: '+fmt(tLive)+' من '+fmt(tPlaced));
+ L.push('• علف: '+fmt(tFeed,0)+' كجم | وزن حي: '+fmt(tWkg,0)+' كجم');
+ L.push('• نافق تراكمي: '+fmt(tPlaced?tRem/tPlaced*100:0,2)+'%');
+ if(tRev>0)L.push('• إيراد تقديري: '+fmt(tRev,0)+' ج');
+ L.push('');if(DB.center.phone1)L.push('للتواصل: '+DB.center.phone1+(DB.center.phone2?' / '+DB.center.phone2:''));
+ window.open('https://wa.me/'+waCenterNumber()+'?text='+encodeURIComponent(L.join('\n')),'_blank');}
+function farmPrint(){currentTab='farm';render();setTimeout(()=>window.print(),150);}
+function kpi(cls,k,v,u){return '<div class="kpi '+(cls||'')+'"><div class="k">'+k+'</div><div class="v">'+v+'</div><div class="u">'+u+'</div></div>';}
+
+/* ===== WhatsApp ===== */
+function waCenterNumber(){let p=(DB.center.phone1||'').replace(/\D/g,'');if(p.charAt(0)==='0')p='20'+p.slice(1);else if(p.slice(0,2)!=='20')p='20'+p;return p;}
+function waReport(toCenter){
+  const c=activeCycle();if(!c)return;const a=analyze(c);const st=a.st,b=a.b;
+  const L=[];
+  L.push('*'+DB.center.name+'*');L.push(DB.center.sub);L.push('— — — — —');
+  L.push('*'+c.houseName+'* | '+b.name);
+  L.push('تنزيل: '+c.placementDate+' | العمر: '+st.age+' يوم');
+  L.push('العدد: '+fmt(c.initialCount)+' ← الموجود: '+fmt(st.liveCount));
+  L.push('');
+  L.push('*الأرقام:*');
+  L.push('• العلف: '+fmt(st.feed,1)+' كجم');
+  L.push('• النافق: '+fmt(st.removed)+' ('+fmt(st.removedPct,2)+'%)');
+  L.push('• متوسط الوزن: '+(st.avgW?fmt(st.avgW)+' جم':'—')+' (هدف '+fmt(a.wT)+')');
+  L.push('• FCR: '+(st.fcr?fmt(st.fcr,3):'—')+' (هدف '+fmt(a.fT,2)+')');
+  L.push('• EPEF: '+(st.epef?fmt(st.epef,0):'—'));
+  if(num(c.priceKg)>0)L.push('• صافي ربح تقديري: '+fmt(st.profit,0)+' ج');
+  L.push('');
+  L.push('*قراءة إحصائية:*');
+  L.push('• نسبة الحياة '+fmt(st.livability,1)+'% — النافق '+a.vMort[1]);
+  if(st.avgW)L.push('• الوزن '+fmt(a.weightPct,0)+'% من القياسي ('+a.vW[1]+')');
+  if(a.adg)L.push('• معدل النمو '+fmt(a.adg,1)+' جم/يوم');
+  if(st.fcr)L.push('• FCR انحراف '+(a.fcrDev>=0?'+':'')+fmt(a.fcrDev,0)+'% ('+a.vF[1]+')');
+  L.push('• *التقييم العام: '+a.gradeTxt+'*');
+  L.push('');
+  if(DB.center.phone1)L.push('للتواصل: '+DB.center.phone1+(DB.center.phone2?' / '+DB.center.phone2:''));
+  const txt=encodeURIComponent(L.join('\n'));
+  const url=toCenter?('https://wa.me/'+waCenterNumber()+'?text='+txt):('https://wa.me/?text='+txt);
+  window.open(url,'_blank');
+}
+
+/* ===== Center ===== */
+function applyCenter(){
+  document.getElementById('centerName').textContent=GHAMRY_CENTER.name;
+  document.getElementById('centerSub').textContent=GHAMRY_CENTER.sub;
+  document.getElementById('centerContact').textContent=[GHAMRY_CENTER.address,GHAMRY_CENTER.phone1,GHAMRY_CENTER.phone2].filter(Boolean).join(' • ');
+  document.getElementById('logoImg').src=GHAMRY_CENTER.logo||EMBED_LOGO;
+  const actEl=document.getElementById('centerActions');
+  if(actEl){
+    const p1=(GHAMRY_CENTER.phone1||'').trim();
+    if(p1){
+      let wa=p1.replace(/\D/g,'');if(wa.charAt(0)==='0')wa='20'+wa.slice(1);else if(wa.slice(0,2)!=='20')wa='20'+wa;
+      actEl.innerHTML='<a class="contact-btn call" href="tel:'+esc(p1)+'">📞 اتصال</a>'
+        +'<a class="contact-btn wa" href="https://wa.me/'+wa+'?text='+encodeURIComponent('السلام عليكم، أنا مستخدم كراسة المتابعة وحابب أتواصل مع المركز.')+'" target="_blank" rel="noopener">💬 واتساب</a>';
+    }else{ actEl.innerHTML=''; }
+  }
+}
+//document.getElementById('logoBox').addEventListener('click',()=>document.getElementById('logoFile').click());
+function uploadLogo(e){const f=e.target.files[0];if(!f)return;const rd=new FileReader();
+  rd.onload=()=>{const img=new Image();img.onload=()=>{const max=360;let w=img.width,h=img.height;
+    if(w>max||h>max){const r=Math.min(max/w,max/h);w=Math.round(w*r);h=Math.round(h*r);}
+    const cv=document.createElement('canvas');cv.width=w;cv.height=h;const ctx=cv.getContext('2d');
+    ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);ctx.drawImage(img,0,0,w,h);
+    DB.center.logo=cv.toDataURL('image/jpeg',0.85);save();applyCenter();toast("تم حفظ اللوجو");};img.src=rd.result;};
+  rd.readAsDataURL(f);e.target.value='';}
+function openCenterModal(){const c=DB.center;
+  modal('<h3>بيانات المركز</h3><div class="grid" style="grid-template-columns:1fr">'
+   +'<div class="field"><label>اسم المركز</label><input id="ci_name" value="'+esc(c.name)+'"></div>'
+   +'<div class="field"><label>الصفة</label><input id="ci_sub" value="'+esc(c.sub)+'"></div>'
+   +'<div class="field"><label>العنوان</label><input id="ci_addr" value="'+esc(c.address)+'"></div>'
+   +'<div class="field"><label>تليفون 1 (رقم المركز للتقارير)</label><input id="ci_p1" value="'+esc(c.phone1)+'"></div>'
+   +'<div class="field"><label>تليفون 2</label><input id="ci_p2" value="'+esc(c.phone2)+'"></div></div>'
+   +'<div class="modal-actions"><button class="btn btn-primary" onclick="saveCenter()">حفظ</button>'
+   +'<button class="btn btn-ghost" onclick="closeModal()">إلغاء</button>'
+   +'<button class="btn btn-danger" onclick="removeLogo()">استعادة اللوجو الأصلي</button></div>');}
+function saveCenter(){DB.center.name=v('ci_name');DB.center.sub=v('ci_sub');DB.center.address=v('ci_addr');
+  DB.center.phone1=v('ci_p1');DB.center.phone2=v('ci_p2');save();applyCenter();closeModal();toast("تم الحفظ");}
+function removeLogo(){DB.center.logo='';save();applyCenter();closeModal();toast("تم استعادة اللوجو الأصلي");}
+function v(id){return document.getElementById(id).value;}
+
+/* ===== Backup ===== */
+function exportData(){const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);
+  a.download='نسخة_كراسة_العنبر_'+new Date().toISOString().slice(0,10)+'.json';a.click();toast("تم حفظ النسخة الاحتياطية");}
+function importData(e){const f=e.target.files[0];if(!f)return;const rd=new FileReader();
+  rd.onload=()=>{try{const d=JSON.parse(rd.result);if(!d.cycles)throw 0;
+    confirmModal("استيراد هذه النسخة سيستبدل البيانات الحالية. متابعة؟",()=>{DB=migrate(d);save();render();toast("تم الاستيراد");});
+  }catch(err){toast("ملف غير صالح");}};rd.readAsText(f);e.target.value='';}
+
+/* ===== Print all ===== */
+function printAll(){const c=activeCycle();if(!c){window.print();return;}
+  const app=document.getElementById('app');const saved=currentTab;
+  app.innerHTML=viewSetup(c)+'<div class="print-break"></div>'+viewDaily(c)+'<div class="print-break"></div>'+viewVacMed(c)+'<div class="print-break"></div>'+viewSummary(c);
+  window.print();setTimeout(()=>{currentTab=saved;render();},400);}
+
+/* ===== Modal ===== */
+function modal(html){document.getElementById('modalHost').innerHTML='<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal">'+html+'</div></div>';}
+function closeModal(){document.getElementById('modalHost').innerHTML='';}
+function confirmModal(msg,onYes){window._cy=onYes;
+  modal('<h3>تأكيد</h3><p>'+esc(msg)+'</p><div class="modal-actions"><button class="btn btn-danger" onclick="(window._cy&&window._cy());closeModal()">نعم، متابعة</button><button class="btn btn-ghost" onclick="closeModal()">إلغاء</button></div>');}
+
+render();
+</script>
+
+<!-- ===== ودجت المزامنة السحابية (مركز د. الغمري) ===== -->
+<script src="./config.js"></script>
+<style>
+#syncFab{position:fixed;bottom:18px;left:18px;z-index:9998;background:var(--pine,#1e4d3b);
+  color:#fff;border:none;border-radius:50%;width:52px;height:52px;box-shadow:0 6px 18px rgba(0,0,0,.25);
+  font-size:22px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+#syncFab.syncing{animation:syncSpin 1s linear infinite}
+@keyframes syncSpin{to{transform:rotate(360deg)}}
+#syncOverlay{position:fixed;inset:0;background:rgba(20,30,25,.55);z-index:9999;
+  display:none;align-items:center;justify-content:center;padding:16px}
+#syncOverlay.show{display:flex}
+#syncModal{background:#fffdf8;border-radius:16px;padding:20px;max-width:340px;width:100%;
+  box-shadow:0 20px 60px rgba(0,0,0,.3)}
+#syncModal h3{margin:0 0 6px;font-size:16px;color:var(--pine-deep,#143528)}
+#syncModal p{margin:0 0 14px;font-size:12.5px;color:var(--ink-soft,#6b6559)}
+#syncModal input{width:100%;padding:11px;border:1px solid var(--rule-strong,#c9c1ad);
+  border-radius:9px;font-size:14px;margin-bottom:10px;box-sizing:border-box}
+#syncModal .row{display:flex;gap:8px}
+#syncModal button{flex:1;padding:11px;border:none;border-radius:9px;font-size:13.5px;font-weight:800;cursor:pointer}
+#syncModal .primary{background:var(--pine,#1e4d3b);color:#fff}
+#syncModal .ghost{background:#eee;color:#333}
+#syncModal .editIdentity{background:none;border:none;color:var(--pine,#1e4d3b);
+  font-size:11.5px;text-decoration:underline;margin-top:2px;padding:0;cursor:pointer}
+</style>
+
+<button id="syncFab" title="مزامنة سحابية" onclick="ghamrySyncOpen()">☁️</button>
+
+<div id="syncOverlay">
+  <div id="syncModal">
+    <div id="syncStep1">
+      <h3>☁️ مزامنة سحابية</h3>
+      <p>هترسل نسخة من بيانات الكراسة إلى د. الغمري لمتابعتها. البيانات هتفضل محفوظة كمان على جهازك زي ما هي.</p>
+      <input type="text" id="syncFarmName" placeholder="اسم المزرعة">
+      <input type="tel" id="syncPhone" placeholder="رقم الموبايل" inputmode="tel">
+      <div class="row">
+        <button class="primary" onclick="ghamrySyncSubmit()">مزامنة الآن</button>
+        <button class="ghost" onclick="ghamrySyncClose()">إلغاء</button>
+      </div>
+    </div>
+    <div id="syncStep2" style="display:none;text-align:center">
+      <div style="font-size:40px">✅</div>
+      <h3 style="margin-top:8px">تمت المزامنة بنجاح</h3>
+      <p id="syncLastTime"></p>
+      <div class="row">
+        <button class="primary" onclick="ghamrySyncClose()">تمام</button>
+      </div>
+      <button class="editIdentity" onclick="ghamrySyncEditIdentity()">تعديل اسم المزرعة / الموبايل</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const GHAMRY_SHEET_TYPE = "house";
+const GHAMRY_ID_KEY = "ghamry_identity";
+
+function ghamryGetIdentity(){
+  try{ return JSON.parse(localStorage.getItem(GHAMRY_ID_KEY)) || null; }catch(e){ return null; }
+}
+function ghamrySaveIdentity(name, phone){
+  localStorage.setItem(GHAMRY_ID_KEY, JSON.stringify({name, phone}));
+}
+
+function ghamrySyncOpen(){
+  const id = ghamryGetIdentity();
+  document.getElementById('syncStep1').style.display = 'block';
+  document.getElementById('syncStep2').style.display = 'none';
+  if(id){
+    document.getElementById('syncFarmName').value = id.name || '';
+    document.getElementById('syncPhone').value = id.phone || '';
+  }
+  document.getElementById('syncOverlay').classList.add('show');
+}
+function ghamrySyncClose(){
+  document.getElementById('syncOverlay').classList.remove('show');
+}
+function ghamrySyncEditIdentity(){
+  document.getElementById('syncStep1').style.display = 'block';
+  document.getElementById('syncStep2').style.display = 'none';
+}
+
+async function ghamrySyncSubmit(){
+  const name = document.getElementById('syncFarmName').value.trim();
+  const phone = document.getElementById('syncPhone').value.trim();
+  if(!name || !phone){
+    if(typeof toast === 'function') toast('من فضلك اكتب اسم المزرعة ورقم الموبايل');
+    return;
+  }
+  if(!window.GHAMRY_API_URL){
+    if(typeof toast === 'function') toast('المزامنة لسه مش متاحة، تواصل مع الدعم الفني');
+    return;
+  }
+  ghamrySaveIdentity(name, phone);
+  const fab = document.getElementById('syncFab');
+  fab.classList.add('syncing');
+  try{
+    const res = await fetch(window.GHAMRY_API_URL + '/api/sync', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ farm_name: name, phone, sheet_type: GHAMRY_SHEET_TYPE, data: DB })
+    });
+    const out = await res.json();
+    fab.classList.remove('syncing');
+    if(!res.ok) throw new Error(out.error || 'فشلت المزامنة');
+    document.getElementById('syncStep1').style.display = 'none';
+    document.getElementById('syncStep2').style.display = 'block';
+    localStorage.setItem('ghamry_last_sync_' + GHAMRY_SHEET_TYPE, new Date().toISOString());
+    if(typeof updateSyncIndicator === 'function') updateSyncIndicator();
+    document.getElementById('syncLastTime').textContent = 'آخر مزامنة: ' + new Date().toLocaleString('ar-EG');
+    if(typeof toast === 'function') toast('تمت المزامنة ✅');
+  }catch(e){
+    fab.classList.remove('syncing');
+    if(typeof toast === 'function') toast('تعذرت المزامنة: ' + e.message);
+    else alert('تعذرت المزامنة: ' + e.message);
+  }
+}
+</script>
+
+
+<style>
+#syncStatus{position:fixed;bottom:78px;left:14px;z-index:9998;background:#fffdf8;color:var(--pine-deep,#143528);
+  font-size:11px;font-weight:700;padding:6px 12px;border-radius:99px;box-shadow:0 4px 14px rgba(0,0,0,.18);
+  display:none;white-space:nowrap;border:1px solid var(--rule-strong,#c9c1ad)}
+#syncStatus.show{display:block}
+</style>
+<div id="syncStatus"></div>
+
+<script>
+/* ===== مزامنة تلقائية + مؤشر آخر مزامنة ===== */
+const GHAMRY_LAST_SYNC_KEY = 'ghamry_last_sync_' + GHAMRY_SHEET_TYPE;
+
+function ghamryRelativeTime(iso){
+  const diffMs = Date.now() - new Date(iso).getTime();
+  const mins = Math.floor(diffMs/60000);
+  if(mins < 1) return 'الآن';
+  if(mins < 60) return 'منذ ' + mins + ' دقيقة';
+  const hrs = Math.floor(mins/60);
+  if(hrs < 24) return 'منذ ' + hrs + ' ساعة';
+  const days = Math.floor(hrs/24);
+  return 'منذ ' + days + ' يوم';
+}
+
+function updateSyncIndicator(){
+  const el = document.getElementById('syncStatus');
+  if(!el) return;
+  const iso = localStorage.getItem(GHAMRY_LAST_SYNC_KEY);
+  if(!iso){ el.classList.remove('show'); return; }
+  el.textContent = '☁️ آخر مزامنة: ' + ghamryRelativeTime(iso);
+  el.classList.add('show');
+}
+
+let _ghamryAutoSyncTimer = null;
+let _ghamryAutoSyncBusy = false;
+
+function ghamryScheduleAutoSync(){
+  const id = ghamryGetIdentity();
+  if(!id || !id.name || !id.phone) return; // لسه ما زامنش يدويًا ولا مرة، فمفيش هوية محفوظة
+  if(!window.GHAMRY_API_URL) return;
+  clearTimeout(_ghamryAutoSyncTimer);
+  _ghamryAutoSyncTimer = setTimeout(ghamryAutoSync, 8000);
+}
+
+async function ghamryAutoSync(){
+  if(_ghamryAutoSyncBusy) return;
+  const id = ghamryGetIdentity();
+  if(!id || !id.name || !id.phone || !window.GHAMRY_API_URL) return;
+  _ghamryAutoSyncBusy = true;
+  try{
+    const res = await fetch(window.GHAMRY_API_URL + '/api/sync', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ farm_name: id.name, phone: id.phone, sheet_type: GHAMRY_SHEET_TYPE, data: DB })
+    });
+    if(res.ok){
+      localStorage.setItem(GHAMRY_LAST_SYNC_KEY, new Date().toISOString());
+      updateSyncIndicator();
+    }
+  }catch(e){ /* فشل صامت — هيعاود المحاولة تلقائيًا مع أي تعديل جديد */ }
+  _ghamryAutoSyncBusy = false;
+}
+
+// نلف دالة الحفظ الأصلية عشان أي تعديل يجدول مزامنة تلقائية بعده
+if(typeof save === 'function'){
+  const _ghamryOrigSave = save;
+  save = function(){ _ghamryOrigSave(); ghamryScheduleAutoSync(); };
+}
+
+updateSyncIndicator();
+setInterval(updateSyncIndicator, 60000);
+</script>
+
+<!-- ===== وضع عرض الطبيب (Admin View) ===== -->
+<script>
+(function(){
+  let raw;
+  try{ raw = sessionStorage.getItem('ghamry_admin_view'); }catch(e){ raw = null; }
+  if(!raw) return;
+  let view;
+  try{ view = JSON.parse(raw); }catch(e){ return; }
+  if(!view || view.sheetType !== GHAMRY_SHEET_TYPE) return;
+
+  // تعطيل الحفظ المحلي تمامًا أثناء وضع العرض — أي تعديل لن يُخزَّن على هذا الجهاز
+  save = function(){};
+  const fabEl = document.getElementById('syncFab');
+  if(fabEl) fabEl.style.display = 'none';
+
+  const q = 'farm_name='+encodeURIComponent(view.farm_name)+'&phone='+encodeURIComponent(view.phone)+'&sheet_type='+view.sheetType;
+  fetch(view.api + '/api/farm-data?' + q, { headers: { 'X-Admin-Code': view.adminCode } })
+    .then(r => r.json())
+    .then(res => {
+      if(!res.data){ alert('تعذر تحميل بيانات المزرعة: ' + (res.error || 'غير معروف')); return; }
+      DB = migrate(res.data);
+      currentTab = view.tab || 'farm';
+      injectViewBanner(view);
+      render();
+    })
+    .catch(err => alert('خطأ في تحميل بيانات المزرعة: ' + err.message));
+
+  function injectViewBanner(view){
+    const bar = document.createElement('div');
+    bar.style.cssText = 'background:#143528;color:#f3efe4;padding:10px 16px;font-size:12.5px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:9997';
+    bar.innerHTML = '<span>👁️ وضع عرض الطبيب — المزرعة: <b>'+esc(view.farm_name)+'</b> — للقراءة فقط، أي تعديل لن يُحفظ</span>'
+      + '<button id="exitViewBtn" style="background:#c9a24b;color:#143528;border:none;border-radius:8px;padding:7px 14px;font-weight:800;cursor:pointer">إغلاق</button>';
+    document.body.insertBefore(bar, document.body.firstChild);
+    document.getElementById('exitViewBtn').addEventListener('click', function(){
+      try{ sessionStorage.removeItem('ghamry_admin_view'); }catch(e){}
+      window.close();
+      setTimeout(()=>{ location.href = 'dashboard.html'; }, 200);
+    });
+  }
+})();
+</script>
+
+
+<script>
+(function(){
+  var btn=document.getElementById('ghInstallBtn');
+  var deferredPrompt=null;
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault(); deferredPrompt=e; if(btn)btn.classList.add('show');
+  });
+  if(btn){
+    btn.addEventListener('click',async function(){
+      if(!deferredPrompt)return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt=null;
+      btn.classList.remove('show');
+    });
+  }
+  window.addEventListener('appinstalled',function(){ if(btn)btn.classList.remove('show'); });
+  var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var isStandalone=(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone;
+  if(isIOS && !isStandalone){
+    var tip=document.getElementById('ghIosTip'); if(tip)tip.classList.add('show');
+  }
+})();
+</script>
+<script>
+window.ghamryApplyIdentity=function(){ghamryAutoSync();};
+window.ghamryFlush=function(){ghamryAutoSync();};
+</script>
+<script src="./gh-register.js"></script>
+</body>
+</html>

@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<script src="./domain-guard.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="كراسة بط التسمين">
+<meta name="theme-color" content="#5c2c15">
+<title>كراسة بط تسمين — تربية وتسويق — مركز د. السيد الغمري</title>
+<link rel="manifest" href="./manifest.json">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./service-worker.js').catch(()=>{});});}</script>
+<meta name="theme-color" content="#1e4d3b">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="icon" href="./favicon-32.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="كراسات الغمري">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{
+  --pine:#3a3f7a;--pine-deep:#272b57;--moss:#3f7d5a;--amber:#c07f16;--clay:#a83a2a;
+  --gold:#c9a24b;--paper:#f8f4ec;--card:#fffdf8;--ink:#2a2620;--ink-soft:#6b6559;
+  --rule:#e6ddcd;--rule-strong:#cdc2ad;
+  --shadow:0 1px 2px rgba(60,40,25,.06),0 8px 24px rgba(60,40,25,.06);--r:14px;
+  font-family:"Tajawal","Cairo","Segoe UI",Tahoma,system-ui,sans-serif;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);line-height:1.55}
+h1,h2,h3,h4{margin:0;font-weight:800;color:var(--pine-deep)}
+.wrap{max-width:1150px;margin:0 auto;padding:0 14px 60px}
+.masthead{background:linear-gradient(180deg,var(--pine),var(--pine-deep));color:#f3efe4;border-radius:0 0 var(--r) var(--r);padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden;margin-top:0}
+.masthead::after{content:"";position:absolute;inset:auto 0 0 0;height:4px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.7}
+.mast-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;border-radius:12px;flex:0 0 auto;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border:2px solid var(--gold)}
+.logo-box img{width:100%;height:100%;object-fit:contain}
+.mast-titles{flex:1;min-width:220px}
+.mast-titles h1{color:#fff;font-size:19px}
+.mast-titles .sub{color:#eddccd;font-size:13px;margin-top:2px}
+.mast-titles .contact{color:#e0cbb8;font-size:12px;margin-top:4px}
+.app-brand{color:var(--gold);font-size:11.5px;font-weight:800;margin-bottom:3px;letter-spacing:.2px}
+.contact-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.contact-btn{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;
+  padding:6px 12px;border-radius:99px;text-decoration:none;color:#1c1f3f;background:#c9a24b}
+.contact-btn.wa{background:#25D366;color:#0b3b1e}
+.mast-actions{display:flex;gap:8px;flex-wrap:wrap}
+.mini-btn{background:rgba(255,255,255,.12);color:#f3efe4;border:1px solid rgba(255,255,255,.22);border-radius:9px;padding:8px 13px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.mini-btn:hover{background:rgba(255,255,255,.22)}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:16px;margin-top:16px;box-shadow:var(--shadow)}
+.section-eyebrow{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.section-eyebrow::before{content:"";width:22px;height:2px;background:var(--gold);display:inline-block}
+.card h2{font-size:19px;margin-bottom:4px}
+.card h3{font-size:15px;color:var(--pine);margin:16px 0 8px}
+.card h3.blk{padding-top:12px;border-top:1px solid var(--rule)}
+.note{background:#fbf4e1;border:1px solid #ecd9a6;color:#6b4d13;border-radius:10px;padding:10px 13px;font-size:13px;margin-top:10px;line-height:1.7}
+.note b{color:#4a3308}
+.note ul{margin:6px 0 0;padding-inline-start:18px}
+.tip-title{font-weight:800;color:#8a6212;font-size:12.5px;margin-bottom:3px;display:flex;align-items:center;gap:6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin-top:8px}
+.field label{display:block;font-size:12.5px;font-weight:700;color:var(--ink-soft);margin-bottom:4px}
+.field input,.field select{width:100%;padding:9px 10px;border:1px solid var(--rule-strong);border-radius:9px;background:#fff;color:var(--ink);font-size:13.5px}
+.tbl-scroll{overflow-x:auto;margin-top:8px}
+table.log{width:100%;border-collapse:collapse;min-width:760px;font-size:12.5px}
+table.log th{background:#f1ebe2;color:var(--pine-deep);font-weight:800;font-size:11.5px;padding:6px 4px;border:1px solid var(--rule-strong);text-align:center;white-space:nowrap}
+table.log td{padding:2px 3px;border:1px solid var(--rule);text-align:center}
+table.log tr:nth-child(even) td{background:#fbf8f2}
+table.log input{width:100%;min-width:46px;padding:6px 3px;border:1px solid var(--rule);border-radius:6px;background:#fff;text-align:center;font-size:12.5px}
+table.log input.wide{min-width:120px;text-align:right}
+table.log input:focus{border-color:var(--pine);outline:none}
+.daycol{font-weight:800;color:var(--pine-deep);white-space:nowrap;background:#f1ebe2 !important}
+th.group{background:#e8ded0 !important}
+.badge{display:inline-block;background:var(--gold);color:#fff;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:800;margin-inline-end:6px}
+.footnote{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:22px}
+.week-tag{display:flex;flex-wrap:wrap;align-items:center;gap:8px 10px;margin-top:18px}
+.week-tag input{font-weight:800;color:var(--pine-deep);border:1px solid var(--rule-strong);border-radius:8px;padding:6px 10px;font-size:13px;min-width:0}
+.week-tag label{white-space:nowrap}
+@media (max-width:480px){
+  .week-tag{gap:6px 8px}
+  .week-tag .mini-btn{flex:1 1 auto;text-align:center}
+  .week-tag input[type="number"]{max-width:80px !important}
+}
+.page-break{page-break-before:always}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%) translateY(20px);background:#2a2620;color:#fff;padding:9px 16px;border-radius:10px;font-size:13px;opacity:0;transition:.2s;pointer-events:none;z-index:99}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media print{
+ .no-print{display:none !important}
+ body{background:#fff}
+ .card{box-shadow:none;border:1px solid #ccc}
+ .week-block{break-inside:avoid-page;page-break-inside:avoid}
+ .kpis{break-inside:avoid}
+ table.log{break-inside:auto}
+ table.log tr{break-inside:avoid}
+ .masthead{background:#fff !important;color:#2a2620 !important;border:1px solid #ccc;box-shadow:none}
+ .masthead::after{display:none}
+ .mast-titles h1{color:var(--pine-deep) !important}
+ .app-brand{color:#8a6212 !important}
+ .mast-titles .sub,.mast-titles .contact{color:#333 !important}
+ table.log input,.field input{border:1px solid #999 !important}
+ .gallery .thumb{break-inside:avoid}
+}
+@media (max-width:560px){.mast-titles h1{font-size:16px}}
+
+.tabs{display:flex;gap:6px;margin:16px 0 4px;background:var(--card);padding:6px;border-radius:12px;border:1px solid var(--rule);box-shadow:var(--shadow);position:sticky;top:0;z-index:20;overflow-x:auto}
+.tabs::-webkit-scrollbar{height:5px}
+.tab{flex:1;min-width:120px;text-align:center;padding:10px 8px;border-radius:9px;border:none;background:transparent;color:var(--ink-soft);font-weight:800;font-size:13px;cursor:pointer;white-space:nowrap}
+.tab.active{background:var(--pine);color:#fff}
+.tabpanel{display:none}
+.tabpanel.active{display:block}
+@media print{
+ .tabs{display:none !important}
+ .tabpanel{display:block !important}
+}
+
+/* v8 additions */
+.profilebar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:var(--card);border:1px solid var(--rule);border-radius:12px;padding:8px 10px;margin-top:12px;box-shadow:var(--shadow)}
+.profilebar select{padding:8px 10px;border:1px solid var(--rule-strong);border-radius:9px;background:#fff;font-weight:800;color:var(--pine-deep);font-size:13px;min-width:160px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.kpi{background:#f6f1e6;border:1px solid var(--rule);border-radius:10px;padding:8px 10px}
+.kpi .k{font-size:11px;color:var(--ink-soft);font-weight:700;margin-bottom:3px}
+.kpi .v{font-size:16px;font-weight:900;color:var(--pine-deep)}
+.kpi .u{font-size:10.5px;font-weight:700;color:var(--ink-soft)}
+.kpi.good{background:#eaf6ee;border-color:#bfe3c8}
+.kpi.good .v{color:#1e7d31}
+.kpi.warnb{background:#fdf3e0;border-color:#f0d99a}
+.kpi.warnb .v{color:#8a6212}
+.kpi.badb{background:#fbeceb;border-color:#f0c3bd}
+.kpi.badb .v{color:#a83a2a}
+.alert-pill{display:inline-block;border-radius:20px;padding:2px 10px;font-size:11px;font-weight:800;margin-inline-start:6px}
+.alert-green{background:#eaf6ee;color:#1e7d31;border:1px solid #bfe3c8}
+.alert-amber{background:#fdf3e0;color:#8a6212;border:1px solid #f0d99a}
+.alert-red{background:#fbeceb;color:#a83a2a;border:1px solid #f0c3bd}
+.gallery{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.gallery .thumb{position:relative;width:84px;height:84px;border-radius:8px;overflow:hidden;border:1px solid var(--rule-strong)}
+.gallery .thumb img{width:100%;height:100%;object-fit:cover}
+.gallery .thumb button{position:absolute;top:2px;left:2px;background:rgba(168,58,42,.9);color:#fff;border:none;border-radius:50%;width:18px;height:18px;font-size:11px;line-height:1;cursor:pointer}
+.chart-wrap{background:#fff;border:1px solid var(--rule);border-radius:10px;padding:10px;margin-top:10px}
+.chart-legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;font-weight:700;margin-top:6px;color:var(--ink-soft)}
+.chart-legend span.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-inline-end:4px;vertical-align:middle}
+.serotable input, .serotable select{width:100%;min-width:90px;padding:6px 4px;border:1px solid var(--rule);border-radius:6px;text-align:center;font-size:12.5px}
+.target-banner{background:linear-gradient(90deg,#fbf4e1,#f6ecd2);border:1.5px solid var(--gold);border-radius:10px;padding:10px 14px;margin-top:14px;font-size:13.5px;font-weight:700;color:#6b4d13}
+.target-banner b{color:var(--pine-deep);font-size:15px}
+.target-banner-neu{background:#f2f2f2;border-color:#ddd;color:#777}
+.ready-banner{background:linear-gradient(90deg,#eaf6ee,#d7f0dd);border-color:#3f7d5a;color:#1e7d31;animation:pulseready 2s ease-in-out infinite}
+.backup-reminder{align-items:center;gap:10px;background:#fdf3e0;border:1.5px solid #f0d99a;color:#8a6212;border-radius:10px;padding:8px 14px;margin-top:10px;font-size:12.5px;font-weight:700}
+@keyframes pulseready{0%,100%{opacity:1}50%{opacity:.85}}
+@media print{.ready-banner{animation:none}}
+</style>
+<style>
+#ghInstallBtn{margin:12px 16px 0;max-width:calc(100% - 32px);background:var(--pine);color:#fff;border:none;
+  border-radius:12px;padding:13px 14px;font-size:14px;font-weight:800;display:none;
+  align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(0,0,0,.15);cursor:pointer}
+#ghInstallBtn.show{display:flex}
+#ghIosTip{margin:10px 16px 0;max-width:calc(100% - 32px);background:#fbf3df;border:1px solid #edd9a8;border-radius:12px;
+  padding:11px 13px;font-size:12.5px;color:#6b5324;display:none;gap:8px;align-items:flex-start}
+#ghIosTip.show{display:flex}
+#ghIosTip b{color:#5c4517}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead"><div class="mast-row">
+    <div class="logo-box"><img src="data:image/jpeg;base64,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" alt="logo"></div>
+    <div class="mast-titles">
+      <div class="app-brand">🐔 كراسات المزرعة الذكية</div>
+      <h1>مركز الدكتور السيد الغمري</h1>
+      <div class="sub">استشاري أمراض الدواجن والأرانب</div>
+      <div class="contact">أبو حماد – الشرقية – مصر &nbsp;|&nbsp; 01282262403 &nbsp;–&nbsp; 01003464485</div>
+      <div class="contact-actions no-print">
+        <a class="contact-btn call" href="tel:01282262403">📞 اتصال</a>
+        <a class="contact-btn wa" href="https://wa.me/201282262403?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D8%B3%D8%AA%D8%AE%D8%AF%D9%85%20%D9%83%D8%B1%D8%A7%D8%B3%D8%A9%20%D8%A7%D9%84%D9%85%D8%AA%D8%A7%D8%A8%D8%B9%D8%A9%20%D9%88%D8%AD%D8%A7%D8%A8%D8%A8%20%D8%A3%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%20%D8%A7%D9%84%D9%85%D8%B1%D9%83%D8%B2." target="_blank" rel="noopener">💬 واتساب</a>
+      </div>
+    </div>
+    <div class="mast-actions no-print">
+      <button class="mini-btn" onclick="openSyncModal()">☁️ مزامنة سحابية</button>
+      <button class="mini-btn" onclick="printAll()">🖨️ طباعة / حفظ PDF</button>
+      <button class="mini-btn" onclick="saveData()">💾 حفظ البيانات</button>
+      <button class="mini-btn" onclick="loadData()">↺ استعادة آخر حفظ</button>
+      <button class="mini-btn" onclick="exportBackup()">⬇️ نسخة احتياطية</button>
+      <label class="mini-btn" style="cursor:pointer">⬆️ استيراد نسخة<input type="file" accept="application/json" style="display:none" onchange="importBackup(this)"></label>
+    </div>
+  </div></header>
+  <button id="ghInstallBtn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+    تثبيت التطبيق على الشاشة الرئيسية
+  </button>
+  <div id="ghIosTip">
+    <span>ℹ️</span>
+    <span><b>على آيفون:</b> اضغط زر المشاركة <b>⬆️</b> بالأسفل، ثم اختر <b>"إضافة إلى الشاشة الرئيسية"</b>.</span>
+  </div>
+
+
+
+  <div class="profilebar no-print">
+    <span style="font-weight:800;color:var(--pine-deep);font-size:13px">🍗 الدورة/العنبر الحالي:</span>
+    <select id="profileSelect" onchange="switchProfile(this.value)"></select>
+    <button class="mini-btn" onclick="addProfile()">➕ دورة جديدة</button>
+    <button class="mini-btn" onclick="renameProfile()">✏️ إعادة تسمية</button>
+    <button class="mini-btn" style="background:#a83a2a1a;color:var(--clay);border-color:#e6c4bd" onclick="deleteProfile()">🗑️ حذف الدورة</button>
+    <span class="alert-pill alert-green" id="storageBadge" style="margin-inline-start:auto">—</span>
+    <span class="alert-pill" id="syncBadge" style="display:none"></span>
+  </div>
+
+  <div class="backup-reminder no-print" id="backupReminder" style="display:none"></div>
+
+    <nav class="tabs no-print" id="tabbar">
+    <button class="tab active" data-tab="setup" onclick="switchTab('setup')">🗂️ الإعداد وبيانات الدفعة</button>
+    <button class="tab" data-tab="ref" onclick="switchTab('ref')">📐 المعايير المرجعية</button>
+    <button class="tab" data-tab="daily" onclick="switchTab('daily')">📋 السجل اليومي</button>
+    <button class="tab" data-tab="vacmed" onclick="switchTab('vacmed')">🩺 التحصينات والأدوية</button>
+    <button class="tab" data-tab="weekly" onclick="switchTab('weekly')">📊 القياسات الأسبوعية</button>
+    <button class="tab" data-tab="bio" onclick="switchTab('bio')">🛡️ الأمان الحيوي</button>
+  </nav>
+
+<div class="tabpanel active" id="tab-setup">
+  <div class="card">
+    <div class="section-eyebrow">كراسة مزرعة متكاملة</div>
+    <h2>كراسة بط تسمين — سجل التربية والتسويق الميداني</h2>
+    <div class="grid">
+      <div class="field"><label>اسم المزرعة</label><input id="f_farm"></div>
+      <div class="field"><label>رقم موبايل المزرعة (للمزامنة السحابية)</label><input id="f_phone" placeholder="01xxxxxxxxx"></div>
+      <div class="field"><label>الموقع</label><input id="f_loc"></div>
+      <div class="field"><label>كود / رقم العنبر</label><input id="f_code"></div>
+      <div class="field"><label>السلالة (تتحكم تلقائيًا في كل المعايير والمستهدفات بالكراسة)</label>
+        <select id="f_breed" onchange="if(typeof recalcAllWeeks==='function'){recalcAllWeeks();renderWeeks();renderS4Auto();drawTrendChart();autosave();}">
+          <option value="pekin">بط بيكين (White Pekin) — قياسي</option>
+          <option value="star53m">هجين Star 53 Medium (Grimaud)</option>
+          <option value="star53h">هجين Star 53 Heavy (Grimaud)</option>
+          <option value="muscovym">بط مسكوفي — ذكور</option>
+          <option value="muscovyf">بط مسكوفي — إناث</option>
+          <option value="mulard">بط مولار (هجين عقيم)</option>
+          <option value="baladi">بط بلدي/دمياطي مصري (محلي)</option>
+        </select>
+      </div>
+      <div class="field"><label>تاريخ بدء التسجيل</label><input id="f_start" type="date"></div>
+      <div class="field"><label>المهندس / المسؤول</label><input id="f_eng"></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="section-eyebrow">القسم الأول</div>
+    <h2>١) بيانات الدفعة (Flock Profile)</h2>
+    <div class="grid">
+      <div class="field"><label>مصدر الكتاكيت</label><input id="p_source"></div>
+      <div class="field"><label>تاريخ الاستلام</label><input type="date" id="p_arrival" onchange="if(typeof autoFillDates==='function'){autoFillDates();renderWeeks();autosave();}"></div>
+      <div class="field"><label>عدد الكتاكيت المستلمة</label><input id="p_initialCount" type="number"></div>
+      <div class="field"><label>متوسط وزن الكتكوت عند الاستلام (جم)</label><input id="p_dayOldWeight" type="number"></div>
+      <div class="field"><label>العمر المستهدف للتسويق (يوم)</label><input id="p_targetAge" type="number" placeholder="مثال: 45"></div>
+      <div class="field"><label>الوزن المستهدف عند التسويق (كجم)</label><input id="p_targetWeight" type="number" step="0.01" placeholder="مثال: 3.2"></div>
+      <div class="field"><label>سعر شراء الكتكوت (جنيه/طائر)</label><input id="p_chickPrice" type="number" step="0.01"></div>
+      <div class="field"><label>سعر كيلو العلف (جنيه/كجم)</label><input id="p_feedPrice" type="number" step="0.01"></div>
+      <div class="field"><label>سعر البيع المتوقع (جنيه/كجم حي)</label><input id="p_sellPrice" type="number" step="0.01"></div>
+    </div>
+    <div class="note"><div class="tip-title">📌 ملاحظات حقلية</div>
+      <ul>
+        <li>يُفضَّل استلام الكتاكيت من مصدر واحد موثوق ونفس عمر الأم لضمان تجانس الدفعة من اليوم الأول.</li>
+        <li>وزن الكتكوت القياسي عند الفقس لبط البيكين حوالي ٦٠ جم؛ أي انحراف كبير عن ذلك يستدعي مراجعة جودة بيض التفريخ ومعاملات الحضانة مع المفرخ.</li>
+        <li>سجّل تاريخ ومصدر أي دفعة تدعيم منفصلة بوضوح لتفادي خلط بيانات النمو بين دفعتين مختلفتي العمر.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="tabpanel" id="tab-ref">
+  <div class="card">
+    <div class="section-eyebrow">مرجع علمي — White Pekin / Muscovy / Mule Duck</div>
+    <h2>المعايير القياسية المرجعية (Standard Reference Curves)</h2>
+    <p style="font-size:12.5px;color:var(--ink-soft);line-height:1.8">
+      القيم أدناه مستخلصة من مراجع علمية عامة لبط التسمين (Domestic Duck Production: Science &amp; Practice؛ Duck Production and Management؛ Manual of Poultry Diseases — H. Morin)،
+      وهي <b>قيم إرشادية عامة قابلة للتغير</b> حسب السلالة التجارية الفعلية. يُنصح بمعايرتها على كتالوج الشركة الأم عند توفره.
+    </p>
+
+    <h3 class="blk">أ) السلالة المرجعية للمقارنة التلقائية</h3>
+    <div class="phase-note" style="background:#fbf4e1;border:1px solid #ecd9a6;border-radius:10px;padding:10px 12px;font-size:13px">
+      🔗 اختيار السلالة بقى من تبويب «الإعداد وبيانات الدفعة» مباشرة — أي تغيير هناك بينعكس تلقائيًا على كل المعايير والتنبيهات هنا وفي السجل اليومي والقياسات الأسبوعية.
+    </div>
+
+    <h3 class="blk">ب) منحنى النمو واستهلاك العلف — بط بيكين قياسي (حتى ٨ أسابيع)</h3>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>العمر (أسبوع)</th><th>الوزن الحي المستهدف (جم)</th><th>الزيادة اليومية (جم)</th><th>استهلاك العلف الأسبوعي (جم)</th><th>العلف التراكمي (كجم)</th></tr></thead>
+      <tbody>
+        <tr><td>٠</td><td>٦٠</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td>١</td><td>٢٧٠</td><td>٣٠</td><td>٢١٠</td><td>٠.٢١</td></tr>
+        <tr><td>٢</td><td>٧٨٠</td><td>١١٠</td><td>٧٧٠</td><td>٠.٩٨</td></tr>
+        <tr><td>٣</td><td>١٣٨٠</td><td>١٦٠</td><td>١١٢٠</td><td>٢.١٠</td></tr>
+        <tr><td>٤</td><td>١٩٦٠</td><td>١٨٥</td><td>١٢٩٥</td><td>٣.٣٩٥</td></tr>
+        <tr><td>٥</td><td>٢٤٩٠</td><td>٢٠٠</td><td>١٤٠٠</td><td>٤.٧٩٥</td></tr>
+        <tr><td>٦</td><td>٢٩٦٠</td><td>٢٣٠</td><td>١٦١٠</td><td>٦.٤٠٥</td></tr>
+        <tr><td>٧</td><td>٣٣٤٠</td><td>٢٤٠</td><td>١٦٨٠</td><td>٨.٠٨٥</td></tr>
+        <tr><td>٨</td><td>٣٦١٠</td><td>٢٤٠</td><td>١٦٨٠</td><td>٩.٧٦٥</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:11px;color:var(--ink-soft)">المصدر: Duck Production and Management (VetBooks). FCR التراكمي المستهدف حتى التسويق ≈ ٢.٢-٢.٧.</p>
+
+    <h3 class="blk">ج) نقاط مرجعية موثّقة — هجين Star 53 (Grimaud Frères)</h3>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>العمر</th><th>Star 53 Medium</th><th>Star 53 Heavy</th></tr></thead>
+      <tbody>
+        <tr><td class="daycol">يوم واحد (الفقس)</td><td>≈ ٥٢ جم</td><td>≈ ٥٢ جم</td></tr>
+        <tr><td class="daycol">٤٢ يوم (٦ أسابيع)</td><td>≈ ٣.٤٠ كجم</td><td>≈ ٣.٤٥ كجم*</td></tr>
+        <tr><td class="daycol">٤٩ يوم (٧ أسابيع)</td><td>٣.٧٧ كجم</td><td>٣.٩٥ كجم</td></tr>
+        <tr><td class="daycol">FCR المستهدف حتى التسويق</td><td>≈ ٢.٠٥</td><td>≈ ٢.٠٠</td></tr>
+        <tr><td class="daycol">النافق المتوقع بالمزرعة</td><td colspan="2">≈ ٢.٤٪ (أفضل من المتوسط العالمي)</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:11px;color:var(--ink-soft)">* قيمة ٤٢ يوم لخط Heavy تقديرية بالتناسب مع خط Medium. المصادر: Grimaud Frères (اختبار Ustrasice)، Feed &amp; Livestock Magazine، Metzer Farms. هذه نقاط مرجعية موثّقة فقط (١، ٤٢، ٤٩ يوم) — يقوم النظام بحساب القيم البينية بالاستيفاء الخطي تلقائيًا للمقارنة.</p>
+
+    <h3 class="blk">د) نقاط مرجعية موثّقة — مسكوفي ومولار (تحت الظروف المصرية)</h3>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>السلالة</th><th>وزن يوم واحد</th><th>الوزن عند ١٢ أسبوعًا (٨٤ يوم)</th><th>FCR المستهدف</th></tr></thead>
+      <tbody>
+        <tr><td class="daycol">مسكوفي — ذكور</td><td>≈ ٥٥ جم</td><td>≈ ٤.٨ كجم (تغذية حرة بدون تعليف قسري)</td><td>٢.٢-٣.٠</td></tr>
+        <tr><td class="daycol">مسكوفي — إناث</td><td>≈ ٥٥ جم</td><td>≈ ٣.١ كجم (عند ١٢ أسبوعًا)</td><td>٣.٦-٤.٧</td></tr>
+        <tr><td class="daycol">مولار (هجين عقيم Muscovy × Pekin)</td><td>≈ ٦٠ جم</td><td>≈ ٤.٢٣ كجم</td><td>غير موثّق بدقة — قيمة الوزن فقط إرشادية</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:11px;color:var(--ink-soft)">المصدر: دراسة مصرية (Meat Production and Force Feeding Ability of Muscovy Ducks under Egyptian Condition) ودراسة مقارنة مصرية للسلالات الأربع. المسكوفي له فروق جنسية واضحة في الوزن (Sexual Dimorphism) لذلك تم فصل الذكور عن الإناث كمرجعين منفصلين، بعكس بيكين وStar 53. نقطتان فقط موثقتان لكل سلالة (يوم١ و١٢أسبوع) — الاستيفاء بينهما تقريبي.</p>
+
+    <h3 class="blk">هـ) بط بلدي / دمياطي مصري (سلالة محلية)</h3>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>السلالة</th><th>وزن الذكر البالغ</th><th>وزن الأنثى البالغة</th><th>ملاحظات</th></tr></thead>
+      <tbody>
+        <tr><td class="daycol">بط بلدي (فلاحي)</td><td>≈ ٢.٠ كجم</td><td>≈ ١.٥ كجم</td><td>نمو أبطأ بكثير من الهجن التجارية، عادة يُسوَّق بعد ١٠-١٢ أسبوعًا أو أكبر</td></tr>
+        <tr><td class="daycol">دمياطي / شهرماني</td><td>≈ ٢.٠ كجم</td><td>≈ ١.٥ كجم</td><td>يمكن تمييز الذكر بريشة ذيل معقوفة مميزة</td></tr>
+        <tr><td class="daycol">كاكي كامبل (بياض بالأساس)</td><td>≈ ١.٨ كجم</td><td>≈ ١.٧ كجم</td><td>يُربى غالبًا للبيض لا للتسمين</td></tr>
+      </tbody>
+    </table></div>
+    <div class="note" style="margin-top:8px"><div class="tip-title">⚠️ تنويه أمانة علمية</div>
+      <p style="margin:0;font-size:12.5px">لا يوجد منحنى نمو أسبوعي موثّق منشور للسلالات البلدية المصرية بنفس دقة الهجن التجارية (بيكين/Star 53) — الأرقام أعلاه أوزان بلوغ تقريبية من مصادر ميدانية/تجارية فقط، وليست منحنى نمو مرجعي دقيق. عند اختيار "بط بلدي" كمرجع، ستظهر تنبيهات الوزن الأسبوعي كمعلومة استرشادية فقط دون تقييم لوني دقيق (نظرًا لغياب بيانات كافية)، ويُنصح بشدة ببناء منحنى خاص بمزرعتك من بيانات دوراتك السابقة.</p>
+    </div>
+
+    <h3 class="blk">و) عمر التسويق المستهدف حسب النوع</h3>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>النوع</th><th>عمر التسويق</th><th>الوزن المتوقع</th><th>معامل التحويل الغذائي (FCR)</th></tr></thead>
+      <tbody>
+        <tr><td class="daycol">بط بيكين قياسي</td><td>٤٢-٤٩ يوم</td><td>٢.٢-٣.٦ كجم</td><td>٢.٢-٢.٧</td></tr>
+        <tr><td class="daycol">هجين Star 53 Medium</td><td>٤٢-٤٩ يوم</td><td>٣.٤-٣.٨ كجم</td><td>≈ ٢.٠٥</td></tr>
+        <tr><td class="daycol">هجين Star 53 Heavy</td><td>٤٥-٥٠ يوم</td><td>٣.٥-٤.٠ كجم</td><td>≈ ٢.٠٠</td></tr>
+        <tr><td class="daycol">بط مسكوفي — إناث</td><td>٩-١٠ أسابيع (٦٣-٧٠ يوم)</td><td>حسب السلالة</td><td>—</td></tr>
+        <tr><td class="daycol">بط مسكوفي — ذكور</td><td>١٢ أسبوعًا (٨٤ يوم)</td><td>حسب السلالة</td><td>—</td></tr>
+        <tr><td class="daycol">بط بلدي/دمياطي محلي</td><td>غالبًا &gt; ٦٠ يوم</td><td>١.٥-٢.٠ كجم</td><td>غير موثّق</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="blk">ز) كثافة التربية حسب نوع الأرضية</h3>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>النوع</th><th>أرضية مشبكة (طائر/م²)</th><th>فرشة (طائر/م²)</th></tr></thead>
+      <tbody>
+        <tr><td class="daycol">بط بيكين</td><td>١٠-١٢</td><td>٥-٦</td></tr>
+        <tr><td class="daycol">بط مسكوفي — ذكور</td><td>١٠</td><td>٦</td></tr>
+        <tr><td class="daycol">بط مسكوفي — إناث</td><td>١٥</td><td>١٠</td></tr>
+        <tr><td class="daycol">بط مولار (هجين)</td><td>٦-١٠*</td><td>٣-٦*</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:11px;color:var(--ink-soft)">* مع إتاحة مساحة حرة (Free-range) للمولار.</p>
+
+    <h3 class="blk">ح) برنامج الحرارة حسب العمر (تحت الدفاية / حرارة العنبر)</h3>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>العمر (يوم)</th><th>مسكوفي — تحت الدفاية</th><th>مسكوفي — العنبر</th><th>بيكين — تحت الدفاية</th><th>بيكين — العنبر</th></tr></thead>
+      <tbody>
+        <tr><td>١-٣</td><td>٤٠-٤٥°م</td><td>٣٠°م</td><td>٣٢-٣٥°م</td><td>٢٧°م</td></tr>
+        <tr><td>٤-٧</td><td>٣٨-٤٢°م</td><td>٢٩°م</td><td>٣٠-٣٢°م</td><td>٢٣°م</td></tr>
+        <tr><td>٧-١٤</td><td>٣٦-٣٨°م</td><td>٢٧°م</td><td>٢٥-٣٠°م</td><td>٢٠°م</td></tr>
+        <tr><td>١٤-٢١</td><td>٣٥-٣٧°م</td><td>٢٥°م</td><td>٢٠-٢٢°م</td><td>١٨°م</td></tr>
+        <tr><td>٢١-٢٨</td><td>٣٨-٤٢°م</td><td>٢٢°م</td><td>حسب الموسم</td><td>١٥°م</td></tr>
+        <tr><td>+٢٨</td><td>حسب الموسم</td><td>١٨-٢٢°م</td><td>—</td><td>—</td></tr>
+      </tbody>
+    </table></div>
+
+    <h3 class="blk">ط) برنامج الإضاءة</h3>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>العمر</th><th>الشدة</th><th>البرنامج</th></tr></thead>
+      <tbody>
+        <tr><td class="daycol">الأسبوع الأول</td><td>٦٠-٨٠ لوكس</td><td>إضاءة طوال اليوم (٢٤ ساعة)</td></tr>
+        <tr><td class="daycol">الأسبوع ٢-٣</td><td>٣٠ لوكس</td><td>تخفيض تدريجي من ٢٤ إلى ١٦ ساعة/يوم</td></tr>
+        <tr><td class="daycol">بعد الأسبوع ٤</td><td>١٠ لوكس</td><td>١٤ ساعة إضاءة / ١٠ ساعات ظلام</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="note"><div class="tip-title">📌 ملاحظات إدارية مهمة</div>
+      <ul>
+        <li>يستهلك البط ماءً بمعدل ١.٥-٢ ضعف استهلاك الدجاج تقريبًا؛ أي نقص في نقاط الشرب يؤدي بسرعة لالتهاب الكلى (Nephritis) الذي يتميز به البط.</li>
+        <li>معدلات التجهيز الأساسية: نقطة شرب واحدة لكل ٥٠ طائرًا، ومعلف واحد لكل ٥٠ طائرًا، ودائرة تحضين واحدة تكفي ٣٥٠ كتكوتًا (حرارة تحت الدفاية ٤٠-٤٥°م، مساحة حرة ٠.٨-١ م حول الدائرة).
+        <li>يُستخدم علف مفتت (Crumb) في الأسابيع الأولى، ثم يتحول لعلف مكعّب (Pellet) لتقليل الفاقد وتحسين معامل التحويل الغذائي.</li>
+        <li>قص المنقار والأصابع (إن لزم) يكون عادة بين ١٥-٢٠ يوم عمر، أو بالأشعة تحت الحمراء عند عمر يوم واحد بالمفرخ كبديل حديث.</li>
+        <li>راقب جودة الفرشة باستمرار — البط شديد الحساسية لرطوبة الفرشة والتهاب الأمونيا الذي يضر الجهاز التنفسي والقدم الكشفية (Webbed feet).</li>
+      </ul>
+    </div>
+
+    <h3 class="blk">ي) برنامج التغذية بالمراحل العمرية (يختلف عن الدجاج)</h3>
+    <p style="font-size:12px;color:var(--ink-soft);margin-bottom:6px">تختلف مراحل تغذية البط عن الدجاج في التوقيت ونسب البروتين — البط يحتاج فترة بادئ أطول ونسبة بروتين أقل نسبيًا من فروج اللحم.</p>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>المرحلة</th><th>التوقيت</th><th>بروتين خام %</th><th>طاقة ME (kcal/kg)</th><th>ملاحظات</th></tr></thead>
+      <tbody>
+        <tr><td class="daycol">بادئ (Starter)</td><td>١-٢١ يوم (٠-٣ أسابيع)</td><td>٢٠-٢٢٪</td><td>٢٦٠٠-٢٨٠٠</td><td>يُقدَّم خلال ٢٤-٣٦ ساعة من الفقس، مفتت (Crumb) أو مبلل</td></tr>
+        <tr><td class="daycol">نامي (Grower)</td><td>٢٢-٤٢ يوم (٣-٦ أسابيع)</td><td>١٦-١٨٪</td><td>٢٥٠٠-٢٦٠٠</td><td>يتحول تدريجيًا لعلف مكعّب (Pellet)</td></tr>
+        <tr><td class="daycol">ناهي/تسويق (Finisher)</td><td>بعد ٤٢ يوم حتى التسويق</td><td>١٤-١٦٪</td><td>٢٦٠٠-٢٩٠٠</td><td>يُستبعد منه مسحوق السمك ومصادر الروائح القوية قبل الذبح بـ ٧-١٠ أيام لتفادي نكهة غير مرغوبة باللحم</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:11px;color:var(--ink-soft)">المصدر: Duck Production and Management (VetBooks) — ICAR 2013، ومقارنة بالممارسة المصرية الشائعة (بادئ ٢٢٪ حتى الشهر، نامي ١٨٪ بعده).</p>
+
+    <h3 class="blk">ك) تركيبة عملية جاهزة (نسب فعلية % من العليقة)</h3>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>المكوّن</th><th>بادئ %</th><th>نامي %</th></tr></thead>
+      <tbody>
+        <tr><td class="daycol">ذرة صفراء / قمح مكسور</td><td>٥٤</td><td>٦٠</td></tr>
+        <tr><td class="daycol">ردة قمح (نخالة)</td><td>١٤</td><td>١٩</td></tr>
+        <tr><td class="daycol">كسب فول الصويا</td><td>١٩.٥</td><td>١٠.٥</td></tr>
+        <tr><td class="daycol">مسحوق سمك (يُستبعد قبل التسويق)</td><td>١٠</td><td>٨</td></tr>
+        <tr><td class="daycol">مسحوق عظم</td><td>١</td><td>١</td></tr>
+        <tr><td class="daycol">مخلوط معدني</td><td>١</td><td>١</td></tr>
+        <tr><td class="daycol">ملح طعام (حد أقصى)</td><td>٠.٢</td><td>٠.٢</td></tr>
+        <tr><td class="daycol">مثبّت سموم فطرية (Toxin binder)</td><td>٠.٠٨</td><td>٠.٠٨</td></tr>
+      </tbody>
+    </table></div>
+    <p style="font-size:11px;color:var(--ink-soft)">تركيبة مرجعية من Duck Production and Management — عدّلها حسب توفر وسعر المكوّنات محليًا مع الحفاظ على نسبة البروتين المستهدفة أعلاه.</p>
+
+    <h3 class="blk">ل) مكوّنات بديلة واقتصادية شائعة الاستخدام (لتقليل التكلفة)</h3>
+    <div class="tbl-scroll"><table class="log" style="min-width:0">
+      <thead><tr><th>المصدر</th><th>نسبة الإدخال المقترحة</th><th>ملاحظات</th></tr></thead>
+      <tbody>
+        <tr><td class="daycol">ردة الأرز / ردة الأرز منزوعة الزيت</td><td>١٠-٢٠٪</td><td>مصدر طاقة وبروتين جيد؛ ردة الأرز العادية سريعة التزنخ — يُفضَّل منزوعة الزيت للتخزين الطويل</td></tr>
+        <tr><td class="daycol">مخلفات المطاحن (سحالة/نخالة)</td><td>١٠-١٥٪</td><td>بديل اقتصادي جيد لجزء من الحبوب</td></tr>
+        <tr><td class="daycol">كسر ومخلفات المخابز/الحلويات</td><td>حتى ١٥-٢٠٪ من وزن العليقة</td><td>مصدر طاقة رخيص؛ <b>يُشترط خلوّها تمامًا من العفن</b> (خطر أفلاتوكسين — انظر التحذير أدناه)</td></tr>
+        <tr><td class="daycol">مخلفات المطاعم / بواقي الطعام البشري</td><td>٢٠-٣٥٪ من وزن العليقة</td><td>يُقبل عليها البط بشراهة؛ تُستخدم غالبًا عند تأخر التسويق لخفض التكلفة — <b>يُشترط طزاجتها ومنع التعفن</b> (خطر تسمم بوتيوليني)</td></tr>
+        <tr><td class="daycol">الشعير المطحون</td><td>حتى ١٥-٣٠٪ (مع إنزيمات مساعدة الهضم)</td><td>يقلل تكلفة الطاقة كبديل جزئي للذرة</td></tr>
+        <tr><td class="daycol">الفول البلدي المكسور (جاف أو مسلوق)</td><td>مكوّن مساعد وليس أساسي</td><td>يُقدَّم مع الخبز المبلول والنخالة كوجبة إضافية</td></tr>
+        <tr><td class="daycol">مسحوق اللحم / مسحوق الدم</td><td>مسحوق لحم ٠-٥٪، مسحوق دم ١-٢٪</td><td>مصدر بروتين حيواني مركّز؛ مسحوق الدم غني جدًا بالليسين</td></tr>
+      </tbody>
+    </table></div>
+
+    <div class="note" style="margin-top:8px;border-color:#e6a3a3;background:#fdecea">
+      <div class="tip-title" style="color:#a83a2a">⚠️ تحذيرات أمان حيوي وصحي إلزامية عند استخدام المكوّنات الاقتصادية</div>
+      <ul style="margin:0">
+        <li><b>حساسية البط الشديدة للأفلاتوكسين:</b> البط أكثر حساسية من الدجاج للأفلاتوكسين بحوالي ٢٠٠ مرة (يتحمل ٠.٠٣ جزء بالمليون فقط مقابل ٠.٢ بالدجاج) — أي حبوب أو مخلفات مخابز متعفنة أو رطبة التخزين تمثل خطرًا حقيقيًا وليس مجرد تحفظ نظري. افحص أي مكوّن اقتصادي بصريًا وشمّيًا قبل الاستخدام وتخلّص من أي كمية بها أثر عفن.</li>
+        <li><b>خطر التسمم البوتيوليني (Botulism):</b> بواقي الطعام والمطاعم إذا تُركت فترة قبل التقديم أو خُلطت برطوبة عالية في الجو الحار تُعد بيئة مثالية لنمو Clostridium botulinum؛ البط من أكثر الطيور تعرضًا لهذا التسمم. قدّم فقط كميات تُستهلك خلال ساعات، ولا تترك بواقي متراكمة بالعنبر.</li>
+        <li><b>مخلفات مصانع اللحوم المصنّعة (لانشون ومشتقاته):</b> غالبًا مرتفعة الملح والنترات/النتريت كمواد حافظة؛ البط حسّاس أصلًا لالتهاب الكلى (Nephritis)، وزيادة الملح تُفاقم هذا الخطر وتزيد استهلاك الماء والفرشة الرطبة. إن استُخدمت، فبكمية محدودة جدًا (لا تتجاوز ٥٪ من العليقة) مع توفير مياه شرب وفيرة باستمرار.</li>
+        <li><b>قبل التسويق بـ ٧-١٠ أيام:</b> استبعد مسحوق السمك وأي مكوّن ذو رائحة قوية (وكذلك بواقي المطاعم ذات التوابل القوية) لتفادي انتقال طعم أو رائحة غير مرغوبة للحم البط.</li>
+      </ul>
+    </div>
+
+    <div class="grid" style="margin-top:14px">
+      <div class="field"><label>السلالة الفعلية المستخدمة بالمزرعة</label><input id="ref_breed_used"></div>
+      <div class="field"><label>مصدر الكتالوج القياسي المعتمد</label><input id="ref_catalog_source"></div>
+    </div>
+  </div>
+</div>
+<div class="tabpanel" id="tab-daily">
+  <div class="card">
+    <div class="section-eyebrow">القسم الثاني</div>
+    <h2>٢) سجل الرعاية والنمو اليومي (Daily Log Sheet)</h2>
+    <p style="font-size:12.5px;color:var(--ink-soft)">أدخِل عينة الوزن الأسبوعية مرة واحدة كل أسبوع لحساب <b>معدل الزيادة اليومي</b> و<b>معامل التحويل الغذائي (FCR)</b> تلقائيًا مقارنة بالمعيار. اضغط «إضافة أسبوع جديد» لاستكمال باقي أسابيع الدورة.</p>
+    <div id="weeksHost"></div>
+    <div class="mast-actions no-print" style="margin-top:14px">
+      <button class="mini-btn" style="background:var(--pine);color:#fff" onclick="addWeek()">➕ إضافة أسبوع جديد</button>
+    </div>
+    <div class="note"><div class="tip-title">📌 ملاحظات حقلية — الرعاية اليومية</div>
+      <ul>
+        <li>زن عينة عشوائية لا تقل عن ٥٪ من القطيع أسبوعيًا في نفس الميعاد وقبل التغذية لضمان دقة المقارنة بالمعيار.</li>
+        <li>سجّل النفوق والفرز يوميًا بدقة — الفرق بين الاتنين: النفوق طبيعي/مرضي، والفرز استبعاد إرادي للطيور الضعيفة أو المصابة بعيوب واضحة.</li>
+        <li>راقب استهلاك الماء كمؤشر إنذار مبكر؛ أي هبوط مفاجئ غالبًا ينذر بمشكلة صحية قبل ظهور أعراض واضحة على الطيور.</li>
+        <li>راقب "بطاقات التنبيه" الملوّنة أسفل كل أسبوع — أي بطاقة حمراء (وزن متأخر عن المعيار، FCR مرتفع، نافق تراكمي زائد) تستدعي مراجعة فورية.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="tabpanel" id="tab-vacmed">
+  <div class="card">
+    <div class="section-eyebrow">السجل الطبي</div>
+    <h2>🩺 التحصينات والأدوية والمرفقات</h2>
+    <p style="font-size:12.5px;color:var(--ink-soft)">سجل الأدوية والتحصينات ونتائج التحاليل والصور الإكلينيكية لكل أسبوع — منفصل عن السجل اليومي لسهولة المتابعة.</p>
+    <div id="vacmedHost"></div>
+  </div>
+</div>
+<div class="tabpanel" id="tab-weekly">
+  <div class="card page-break">
+    <div class="section-eyebrow">القسم الثالث</div>
+    <h2>٣) الجدول الأسبوعي والقياسات الدورية (Weekly Performance Metrics)</h2>
+    <p style="font-size:12.5px;color:var(--ink-soft)">مُستخرج تلقائيًا من تبويب «السجل اليومي» — العمر، الوزن الفعلي مقابل المعيار، معدل الزيادة اليومي، العلف التراكمي، معامل التحويل الغذائي، والنافق التجميعي. التنبيهات الملوّنة مقارنة تلقائية بالمعايير المرجعية.</p>
+    <div id="s4Auto" class="tbl-scroll"></div>
+
+    <h3 class="blk">📈 اتجاه الوزن الفعلي مقابل المعيار، ومعامل التحويل الغذائي عبر الأسابيع</h3>
+    <div class="chart-wrap">
+      <canvas id="trendChart" width="900" height="260" style="width:100%;height:auto;max-height:280px"></canvas>
+      <div class="chart-legend">
+        <span><span class="sw" style="background:#7a3b1e"></span>الوزن الفعلي (كجم)</span>
+        <span><span class="sw" style="background:#c07f16"></span>الوزن القياسي (كجم)</span>
+        <span><span class="sw" style="background:#3f7d5a"></span>معامل التحويل الغذائي FCR</span>
+      </div>
+    </div>
+
+    <div class="note"><div class="tip-title">📌 دليل استرشادي</div>
+      <ul>
+        <li>معامل التحويل الغذائي التراكمي (FCR) = إجمالي العلف المستهلك (كجم) ÷ إجمالي وزن القطيع الحي الحالي (كجم). كلما اقترب الرقم من معيار السلالة كان الأداء أفضل.</li>
+        <li>هدف النافق التراكمي المقبول عادة أقل من ٣٪ حتى عمر التسويق؛ أي تجاوز ٥٪ يستدعي تدخلًا تشخيصيًا فوريًا.</li>
+        <li>تباطؤ الزيادة اليومية عن المعيار مع ثبات استهلاك العلف قد ينذر بمشكلة امتصاص معوية أو حمل طفيلي أو مرضي كامن.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+<div class="tabpanel" id="tab-bio">
+  <div class="card page-break">
+    <div class="section-eyebrow">القسم الرابع</div>
+    <h2>٤) برامج الأمان الحيوي والتحصينات (Biosecurity &amp; Health Log)</h2>
+
+    <h3 class="blk">أ) جدول التحصينات والبرامج العلاجية / الفيتامينات بمياه الشرب</h3>
+    <div id="tbl-s1a" class="tbl-scroll"></div>
+    <div class="mast-actions no-print" style="margin:8px 0"><button class="mini-btn" onclick="addSimpleRow('s1a')">➕ إضافة صف</button></div>
+
+    <h3 class="blk">ب) سجل حركة الدخول والخروج وتطهير الخطوط والمعدات</h3>
+    <div id="tbl-s1b" class="tbl-scroll"></div>
+    <div class="mast-actions no-print" style="margin:8px 0"><button class="mini-btn" onclick="addSimpleRow('s1b')">➕ إضافة صف</button></div>
+
+    <div class="note"><div class="tip-title">📌 أساسيات الأمان الحيوي في مزارع بط التسمين</div>
+      <ul>
+        <li>خطوط دخول وخروج واحدة (One-way flow) للعمالة والمعدات، مع حمام تطهير/تغيير ملابس إلزامي عند مدخل كل عنبر.</li>
+        <li>برنامج مكافحة قوارض وطيور برية منتظم لتقليل خطر انتقال أنفلونزا الطيور والسالمونيلا عبر مصادر المياه المفتوحة التي يفضلها البط.</li>
+        <li>تُطهَّر خطوط الشرب دوريًا (أسبوعيًا على الأقل) نظرًا لميل البط لتسييل العلف والفضلات في مياه الشرب.</li>
+        <li>راعِ فترة راحة كافية بين الدفعات (Downtime) مع تنظيف وتطهير كامل للعنبر والمعدات قبل استلام دفعة جديدة.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  <div class="footnote no-print">كراسة بط تسمين — تربية وتسويق — مركز الدكتور السيد الغمري • البيانات تُحفظ محليًا داخل هذا المتصفح؛ استخدم زر «نسخة احتياطية» بانتظام لتأمين بياناتك.</div>
+</div>
+<div class="toast" id="toast"></div>
+<script>
+
+/* ================================================================
+   Meat-duck weekly module (growth / FCR / mortality tracking)
+   ================================================================ */
+let weeksState = [];
+let profiles = [];
+let currentProfileId = null;
+
+function uidw(){return 'wk'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);}
+function num(v){const n=parseFloat(v);return isFinite(n)?n:0;}
+function esc(s){return (s==null?'':String(s)).replace(/[&<>"]/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));}
+
+function emptyDay(){return {date:'',feed:'',feedType:'',water:'',mort:'',cull:'',
+  temp:'',rh:'',lightH:'',lightLux:'',notes:''};}
+function newWeek(){return {id:uidw(),label:'',avgWeight:'',uniform:'',
+  autopsy:'',vaxProgram:'',doctorOpinion:'',
+  rxLabel:'',rxFile:'',labLabel:'',labFile:'',
+  clinicalPhotos:[], meds:[],
+  days:[emptyDay(),emptyDay(),emptyDay(),emptyDay(),emptyDay(),emptyDay(),emptyDay()]};}
+
+function entryAgeDays(){
+  const el=document.getElementById('p_arrival');
+  return 0; // meat ducks: age tracked purely by week/day position from day-old arrival
+}
+function ageLabel(weekIdx,dayIdx){
+  const totalDays = weekIdx*7 + dayIdx;
+  const wk = Math.floor(totalDays/7)+1;
+  const dInWk = (totalDays%7)+1;
+  return 'أسبوع '+wk+' - يوم '+dInWk;
+}
+function weekAgeWeeksNumber(weekIdx){ return weekIdx+1; }
+function defaultWeeksState(){ return Array.from({length:9},()=>newWeek()); } // ~63 يوم (قريب من دورة 60 يوم المعتادة لبط التسمين)
+function autoFillDates(){
+  const arrivalStr = (document.getElementById('p_arrival')||{}).value;
+  if(!arrivalStr) return false;
+  const arrival = new Date(arrivalStr+'T00:00:00');
+  if(isNaN(arrival.getTime())) return false;
+  let changed=false;
+  weeksState.forEach((w,wi)=>{
+    (w.days||[]).forEach((d,di)=>{
+      if(!d.date){
+        const dt = new Date(arrival.getTime());
+        dt.setDate(dt.getDate() + wi*7 + di);
+        d.date = dt.toISOString().slice(0,10);
+        changed=true;
+      }
+    });
+  });
+  return changed;
+}
+
+/* -------- multi-breed reference curves (sparse documented points + linear interpolation) -------- */
+const REF_CURVES = {
+  pekin:    {label:'بط بيكين قياسي',        points:{0:0.06, 7:0.27, 14:0.78, 21:1.38, 28:1.96, 35:2.49, 42:2.96, 49:3.34, 56:3.61}, fcrTarget:2.45, lowConfidence:false},
+  star53m:  {label:'Star 53 Medium',        points:{0:0.052, 42:3.40, 49:3.77}, fcrTarget:2.05, lowConfidence:false},
+  star53h:  {label:'Star 53 Heavy',         points:{0:0.052, 42:3.45, 49:3.95}, fcrTarget:2.00, lowConfidence:false},
+  muscovym: {label:'مسكوفي — ذكور',         points:{0:0.055, 84:4.80}, fcrTarget:2.60, lowConfidence:false},
+  muscovyf: {label:'مسكوفي — إناث',         points:{0:0.055, 70:3.10}, fcrTarget:4.00, lowConfidence:false},
+  mulard:   {label:'مولار (هجين عقيم)',     points:{0:0.060, 84:4.234}, fcrTarget:null, lowConfidence:false},
+  baladi:   {label:'بط بلدي/دمياطي محلي',    points:{0:0.045, 84:2.00}, fcrTarget:null, lowConfidence:true},
+};
+function getSelectedBreedKey(){
+  const el=document.getElementById('f_breed');
+  return (el && el.value && REF_CURVES[el.value]) ? el.value : 'pekin';
+}
+function interpolateCurve(points, ageDays){
+  const days = Object.keys(points).map(Number).sort((a,b)=>a-b);
+  if(!days.length) return null;
+  if(ageDays<=days[0]) return points[days[0]];
+  if(ageDays>=days[days.length-1]) return points[days[days.length-1]]; // flat beyond last documented point
+  for(let i=0;i<days.length-1;i++){
+    const d0=days[i], d1=days[i+1];
+    if(ageDays>=d0 && ageDays<=d1){
+      const w0=points[d0], w1=points[d1];
+      const t=(d1===d0)?0:(ageDays-d0)/(d1-d0);
+      return w0 + (w1-w0)*t;
+    }
+  }
+  return null;
+}
+function refWeightForWeek(wk){
+  const curve=REF_CURVES[getSelectedBreedKey()];
+  if(!curve) return null;
+  return interpolateCurve(curve.points, wk*7);
+}
+function refFcrForWeek(wk){
+  const curve=REF_CURVES[getSelectedBreedKey()];
+  return curve ? curve.fcrTarget : null;
+}
+function isLowConfidenceBreed(){
+  const curve=REF_CURVES[getSelectedBreedKey()];
+  return !!(curve && curve.lowConfidence);
+}
+
+function targetBannerHTML(weekIdx){
+  const ageWk = weekAgeWeeksNumber(weekIdx);
+  const ageDaysEnd = ageWk*7;
+  const curve = REF_CURVES[getSelectedBreedKey()];
+  const ref = refWeightForWeek(ageWk);
+  const lowConf = isLowConfidenceBreed();
+  if(ref==null){
+    return '<div class="target-banner target-banner-neu">🎯 لا يوجد معيار وزن موثّق لهذه السلالة عند هذا العمر</div>';
+  }
+  const label = curve ? curve.label : '';
+  if(lowConf){
+    return '<div class="target-banner target-banner-neu">🎯 المستهدف نهاية الأسبوع '+(weekIdx+1)+' (يوم '+ageDaysEnd+') — '+label+': <b>'+ref.toFixed(2)+' كجم</b> — قيمة إرشادية تقريبية بدون منحنى موثّق</div>';
+  }
+  return '<div class="target-banner">🎯 المستهدف نهاية الأسبوع '+(weekIdx+1)+' (يوم '+ageDaysEnd+') — '+label+': <b>'+ref.toFixed(2)+' كجم</b></div>';
+}
+function marketReadyBannerHTML(weekIdx){
+  const r = marketReadiness(weekIdx);
+  if(!r) return '';
+  if(r.ready){
+    return '<div class="target-banner ready-banner">🎉 القطيع جاهز للتسويق (بناءً على '+r.reason+') — راجع الأرقام الفعلية قبل اتخاذ القرار النهائي</div>';
+  }
+  return '';
+}
+
+/* -------- alert helpers (indicative thresholds) -------- */
+function alertPill(level,text){
+  if(!level) return '<span class="alert-pill" style="background:#eee;color:#777;border:1px solid #ddd">'+text+'</span>';
+  const cls = level==='green'?'alert-green':level==='amber'?'alert-amber':'alert-red';
+  return '<span class="alert-pill '+cls+'">'+text+'</span>';
+}
+function weightVsStdAlert(actualKg,wk){
+  if(actualKg==null) return {level:'',text:'—'};
+  if(isLowConfidenceBreed()) return {level:'',text:actualKg.toFixed(2)+' كجم (بدون معيار موثّق)'};
+  const ref=refWeightForWeek(wk);
+  if(!ref) return {level:'',text:actualKg.toFixed(2)+' كجم'};
+  const diffPct = (actualKg-ref)/ref*100;
+  if(Math.abs(diffPct)<=7) return {level:'green',text:actualKg.toFixed(2)+' كجم'};
+  if(Math.abs(diffPct)<=15) return {level:'amber',text:actualKg.toFixed(2)+' كجم'};
+  return {level:'red',text:actualKg.toFixed(2)+' كجم'};
+}
+function fcrAlert(actualFcr,wk){
+  if(actualFcr==null) return {level:'',text:'—'};
+  if(isLowConfidenceBreed()) return {level:'',text:actualFcr.toFixed(2)+' (بدون معيار موثّق)'};
+  const ref=refFcrForWeek(wk);
+  if(!ref) return {level:'',text:actualFcr.toFixed(2)};
+  const diff = actualFcr-ref;
+  if(diff<=0.15) return {level:'green',text:actualFcr.toFixed(2)};
+  if(diff<=0.35) return {level:'amber',text:actualFcr.toFixed(2)};
+  return {level:'red',text:actualFcr.toFixed(2)};
+}
+function mortAlert(pct){
+  if(pct==null) return {level:'',text:'—'};
+  if(pct<=3) return {level:'green',text:pct.toFixed(2)+'٪'};
+  if(pct<=5) return {level:'amber',text:pct.toFixed(2)+'٪'};
+  return {level:'red',text:pct.toFixed(2)+'٪'};
+}
+function uniformAlert(pct){
+  if(pct==null||pct==='') return {level:'',text:'—'};
+  const p=num(pct);
+  if(p>=80) return {level:'green',text:p+'٪'};
+  if(p>=70) return {level:'amber',text:p+'٪'};
+  return {level:'red',text:p+'٪'};
+}
+
+/* -------- central aggregate calculator (sequential across weeks) -------- */
+function computeAllWeeksAggregates(){
+  const initial = num((document.getElementById('p_initialCount')||{}).value);
+  const chickPrice = num((document.getElementById('p_chickPrice')||{}).value);
+  const feedPrice = num((document.getElementById('p_feedPrice')||{}).value);
+  const sellPrice = num((document.getElementById('p_sellPrice')||{}).value);
+  const chickCostTotal = initial*chickPrice;
+  let cumFeed=0, cumLoss=0, prevAvgWeight=null, prevWeightWeekIdx=null;
+  const out=[];
+  weeksState.forEach((w,idx)=>{
+    let weekFeed=0, weekWater=0, weekLoss=0;
+    w.days.forEach(d=>{
+      weekFeed+=num(d.feed); weekWater+=num(d.water);
+      weekLoss+=num(d.mort)+num(d.cull);
+    });
+    cumFeed+=weekFeed; cumLoss+=weekLoss;
+    const pop = Math.max(0, initial-cumLoss);
+    const avgWeight = w.avgWeight!==''? num(w.avgWeight): null;
+    // ADG accounts for gaps: if a week's weight sample was skipped, divide over the
+    // actual elapsed weeks since the last recorded sample, not always 7 days.
+    const elapsedWeeks = (avgWeight!=null && prevWeightWeekIdx!=null) ? (idx-prevWeightWeekIdx) : null;
+    const adg = (avgWeight!=null && prevAvgWeight!=null && elapsedWeeks>0) ? ((avgWeight-prevAvgWeight)*1000/(elapsedWeeks*7)) : null;
+    const fcr = (avgWeight!=null && pop>0 && cumFeed>0) ? (cumFeed/(avgWeight*pop)) : null;
+    const mortPct = initial>0 ? (cumLoss/initial*100) : null;
+
+    const feedCost = feedPrice>0 ? (cumFeed*feedPrice) : null;
+    const revenueEst = (sellPrice>0 && avgWeight!=null) ? (pop*avgWeight*sellPrice) : null;
+    const totalCostEst = (feedCost!=null || chickCostTotal>0) ? ((feedCost||0)+chickCostTotal) : null;
+    const netProfitEst = (revenueEst!=null && totalCostEst!=null) ? (revenueEst-totalCostEst) : null;
+    const costPerKg = (totalCostEst!=null && avgWeight!=null && pop>0 && (avgWeight*pop)>0) ? (totalCostEst/(avgWeight*pop)) : null;
+
+    out.push({idx,weekFeed,weekWater,weekLoss,cumFeed,cumLoss,pop,avgWeight,adg,fcr,mortPct,initial,
+      feedCost,chickCostTotal,revenueEst,totalCostEst,netProfitEst,costPerKg});
+    if(avgWeight!=null){ prevAvgWeight=avgWeight; prevWeightWeekIdx=idx; }
+  });
+  return out;
+}
+function marketReadiness(idx){
+  const all=computeAllWeeksAggregates();
+  const a=all[idx]; if(!a) return null;
+  const ageDays=(idx+1)*7;
+  const targetAge=num((document.getElementById('p_targetAge')||{}).value);
+  const targetWeight=num((document.getElementById('p_targetWeight')||{}).value);
+  if(!targetAge && !targetWeight) return null;
+  const ageReady = targetAge>0 && ageDays>=targetAge;
+  const weightReady = targetWeight>0 && a.avgWeight!=null && a.avgWeight>=targetWeight;
+  if(!targetAge && targetWeight) return {ready:weightReady, reason:'الوزن'};
+  if(targetAge && !targetWeight) return {ready:ageReady, reason:'العمر'};
+  if(ageReady && weightReady) return {ready:true, reason:'العمر والوزن معًا'};
+  if(ageReady || weightReady) return {ready:true, reason: ageReady?'العمر المستهدف':'الوزن المستهدف'};
+  return {ready:false, reason:null};
+}
+function weekAggregateById(id){
+  const idx=weeksState.findIndex(x=>x.id===id);
+  if(idx<0) return null;
+  return computeAllWeeksAggregates()[idx];
+}
+
+/* ---------------------------- weekly log rendering ---------------------------- */
+function addWeek(){weeksState.push(newWeek());syncProfileArrays();if(typeof autoFillDates==='function')autoFillDates();renderWeeks();toast('تمت إضافة أسبوع جديد');autosave();}
+function removeWeek(id){if(!confirm('حذف هذا الأسبوع من السجل؟'))return;weeksState=weeksState.filter(x=>x.id!==id);syncProfileArrays();renderWeeks();autosave();}
+
+function newMedRow(){return {id:uidw(),date:'',drug:'',dose:''};}
+function addMedRow(weekId){
+  const w=weeksState.find(x=>x.id===weekId); if(!w)return;
+  if(!w.meds) w.meds=[];
+  w.meds.push(newMedRow());
+  renderVacMed(); autosave();
+}
+function removeMedRow(weekId,rowId){
+  const w=weeksState.find(x=>x.id===weekId); if(!w)return;
+  w.meds=(w.meds||[]).filter(r=>r.id!==rowId);
+  renderVacMed(); autosave();
+}
+function onMedInput(weekId,rowId,field,val){
+  const w=weeksState.find(x=>x.id===weekId); if(!w)return;
+  const r=(w.meds||[]).find(x=>x.id===rowId); if(!r)return;
+  r[field]=val; autosave();
+}
+
+function medsRows(w){
+   const meds=w.meds||[];
+   if(!meds.length) return '<tr><td colspan="4" style="color:var(--ink-soft);text-align:center;padding:8px">لا توجد أدوية مسجّلة هذا الأسبوع</td></tr>';
+   return meds.map(r=>
+    '<tr><td><input class="cell" type="date" value="'+esc(r.date)+'" onchange="onMedInput(\''+w.id+'\',\''+r.id+'\',\'date\',this.value)"></td>'+
+    '<td><input class="cell" value="'+esc(r.drug)+'" placeholder="اسم الدواء/العلاج" onchange="onMedInput(\''+w.id+'\',\''+r.id+'\',\'drug\',this.value)"></td>'+
+    '<td><input class="cell" value="'+esc(r.dose)+'" placeholder="الجرعة" onchange="onMedInput(\''+w.id+'\',\''+r.id+'\',\'dose\',this.value)"></td>'+
+    '<td><button class="mini-btn no-print" style="background:#a83a2a1a;color:var(--clay);border-color:#e6c4bd;padding:5px 8px" onclick="removeMedRow(\''+w.id+'\',\''+r.id+'\')">🗑️</button></td></tr>'
+   ).join('');
+}
+function galleryHTML(w){
+   const photos=w.clinicalPhotos||[];
+   let html='<div class="gallery" id="gallery-'+w.id+'">';
+   photos.forEach((p,pi)=>{ html+='<div class="thumb"><img src="'+p+'"><button onclick="removePhoto(\''+w.id+'\','+pi+')">×</button></div>'; });
+   html+='</div>';
+   return html;
+}
+function vacMedBlockHTML(w,idx){
+ return '<div class="week-block" id="vacmed-'+w.id+'" style="'+(idx>0?'margin-top:20px;padding-top:14px;border-top:2px dashed var(--rule-strong)':'')+'">'
+ +'<div class="week-tag no-print"><span class="badge">أسبوع '+(idx+1)+'</span>'+(w.label?('<span style="font-size:12px;color:var(--ink-soft)">'+esc(w.label)+'</span>'):'')+'</div>'
+ +'<h3 class="blk" style="margin-top:8px;font-size:13px">🩺 السجل الطبي والوقائي</h3>'
+ +'<div class="tbl-scroll"><table class="log"><thead><tr><th>التاريخ</th><th>الدواء/العلاج</th><th>الجرعة</th><th></th></tr></thead><tbody>'+medsRows(w)+'</tbody></table></div>'
+ +'<div class="mast-actions no-print" style="margin:8px 0"><button class="mini-btn" onclick="addMedRow(\''+w.id+'\')">➕ إضافة دواء / تحصين</button></div>'
+ +'<div class="grid" style="grid-template-columns:1fr;margin-top:8px">'
+ +'<div class="field"><label>ملاحظات الصفة التشريحية والتشخيص الميداني</label>'
+ +'<textarea rows="2" style="width:100%;padding:9px 10px;border:1px solid var(--rule-strong);border-radius:9px;font-family:inherit;font-size:13.5px" onchange="onWeekMeta(\''+w.id+'\',\'autopsy\',this.value)">'+esc(w.autopsy)+'</textarea></div>'
+ +'<div class="field"><label style="color:var(--clay)">رأي وتوصية الطبيب المعالج</label>'
+ +'<textarea rows="2" style="width:100%;padding:9px 10px;border:1.5px solid var(--clay);border-radius:9px;font-family:inherit;font-size:13.5px;background:#fbf1ee" onchange="onWeekMeta(\''+w.id+'\',\'doctorOpinion\',this.value)">'+esc(w.doctorOpinion)+'</textarea></div>'
+ +'</div>'
+ +'<div class="field" style="margin-top:10px"><label style="font-weight:800;color:var(--pine-deep)">📎 المرفقات (روشتات / نتائج تحاليل)</label>'
+ +'<p style="font-size:11px;color:var(--ink-soft);margin:2px 0 8px">ارفع صورة الروشتة أو نتيجة التحليل. الصور تُضغط تلقائيًا لتوفير المساحة.</p></div>'
+ +'<div class="grid">'
+ +'<div class="field"><label>روشتة العلاج — وصف/رقم</label><input value="'+esc(w.rxLabel)+'" onchange="onWeekMeta(\''+w.id+'\',\'rxLabel\',this.value)"></div>'
+ +'<div class="field"><label>رفع صورة الروشتة</label><input type="file" accept="image/*,.pdf" onchange="handleFileUpload(\''+w.id+'\',\'rxFile\',this)">'
+ + (w.rxFile ? '<div style="margin-top:5px"><a href="'+w.rxFile+'" target="_blank" style="font-size:11.5px">📎 عرض الملف المرفوع</a></div>' : '') + '</div>'
+ +'<div class="field"><label>نتيجة التحليل المعملي — وصف/رقم</label><input value="'+esc(w.labLabel)+'" onchange="onWeekMeta(\''+w.id+'\',\'labLabel\',this.value)"></div>'
+ +'<div class="field"><label>رفع صورة نتيجة التحليل</label><input type="file" accept="image/*,.pdf" onchange="handleFileUpload(\''+w.id+'\',\'labFile\',this)">'
+ + (w.labFile ? '<div style="margin-top:5px"><a href="'+w.labFile+'" target="_blank" style="font-size:11.5px">📎 عرض الملف المرفوع</a></div>' : '') + '</div>'
+ +'</div>'
+ +'<div class="field" style="margin-top:8px"><label>أرشيف صور إكلينيكية/باثولوجية للأسبوع</label>'
+ +'<input type="file" accept="image/*" multiple onchange="handlePhotoUpload(\''+w.id+'\',this)">'
+ + galleryHTML(w) + '</div>'
+ +'</div>';
+}
+function renderVacMed(){
+ const host=document.getElementById('vacmedHost');
+ if(!host)return;
+ host.innerHTML = weeksState.map((w,i)=>vacMedBlockHTML(w,i)).join('');
+}
+function weekBlockHTML(w,idx){
+ const dayNames=['اليوم ١','اليوم ٢','اليوم ٣','اليوم ٤','اليوم ٥','اليوم ٦','اليوم ٧'];
+ function rowsMerged(){return w.days.map((d,i)=>
+  '<tr><td class="daycol">'+dayNames[i]+'</td>'+
+  '<td class="daycol" style="font-size:11px">'+esc(ageLabel(idx,i))+'</td>'+
+  '<td><input id="daycell-'+w.id+'-'+i+'-date" class="cell" type="date" value="'+esc(d.date)+'" onchange="onDayInput(\''+w.id+'\','+i+',\'date\',this.value)"></td>'+
+  '<td><input id="daycell-'+w.id+'-'+i+'-feed" class="cell" type="number" value="'+esc(d.feed)+'" oninput="onDayInput(\''+w.id+'\','+i+',\'feed\',this.value)"></td>'+
+  '<td><input id="daycell-'+w.id+'-'+i+'-water" class="cell" type="number" value="'+esc(d.water)+'" oninput="onDayInput(\''+w.id+'\','+i+',\'water\',this.value)"></td>'+
+  '<td><input id="daycell-'+w.id+'-'+i+'-temp" class="cell" type="number" value="'+esc(d.temp)+'" oninput="onDayInput(\''+w.id+'\','+i+',\'temp\',this.value)"></td>'+
+  '<td><input id="daycell-'+w.id+'-'+i+'-rh" class="cell" type="number" value="'+esc(d.rh)+'" oninput="onDayInput(\''+w.id+'\','+i+',\'rh\',this.value)"></td>'+
+  '<td><input id="daycell-'+w.id+'-'+i+'-mort" class="cell" type="number" value="'+esc(d.mort)+'" oninput="onDayInput(\''+w.id+'\','+i+',\'mort\',this.value)"></td>'+
+  '<td><input id="daycell-'+w.id+'-'+i+'-cull" class="cell" type="number" value="'+esc(d.cull)+'" oninput="onDayInput(\''+w.id+'\','+i+',\'cull\',this.value)"></td>'+
+  '<td><span id="dtot-'+w.id+'-'+i+'" style="font-weight:800;color:var(--clay)">٠</span></td>'+
+  '<td><input class="cell wide" value="'+esc(d.notes)+'" onchange="onDayInput(\''+w.id+'\','+i+',\'notes\',this.value)"></td></tr>').join('');}
+
+ return '<div class="week-block" id="week-'+w.id+'" style="'+(idx>0?'margin-top:20px;padding-top:14px;border-top:2px dashed var(--rule-strong)':'')+'">'
+ +'<div class="week-tag no-print"><span class="badge">أسبوع '+(idx+1)+'</span>'
+ +'<input placeholder="تاريخ بداية الأسبوع / رقمه" value="'+esc(w.label)+'" onchange="onWeekMeta(\''+w.id+'\',\'label\',this.value)" style="min-width:180px">'
+ +'<label style="font-size:12px;font-weight:700;color:var(--ink-soft)">متوسط وزن العينة (كجم)</label>'
+ +'<input type="number" step="0.01" style="max-width:100px" value="'+esc(w.avgWeight)+'" oninput="onWeekMeta(\''+w.id+'\',\'avgWeight\',this.value)">'
+ +'<label style="font-size:12px;font-weight:700;color:var(--ink-soft)">تجانس القطيع %</label>'
+ +'<input type="number" style="max-width:90px" value="'+esc(w.uniform)+'" oninput="onWeekMeta(\''+w.id+'\',\'uniform\',this.value)">'
+ +'<button class="mini-btn no-print" style="background:#25943a1a;color:#1e7d31;border-color:#bfe3c8" onclick="sendWeeklyReportWhatsApp(\''+w.id+'\')">📤 إرسال تقرير الأسبوع واتساب</button>'
+ +'<button class="mini-btn no-print" style="background:#a83a2a1a;color:var(--clay);border-color:#e6c4bd" onclick="removeWeek(\''+w.id+'\')">🗑️ حذف الأسبوع</button>'
+ +'</div>'
+ +targetBannerHTML(idx)
+ +marketReadyBannerHTML(idx)
+ +'<div class="tbl-scroll"><table class="log"><thead><tr><th>اليوم</th><th>العمر</th><th>التاريخ</th><th>علف(كجم)</th><th>ماء(لتر)</th><th>الحرارة °م</th><th>رطوبة%</th><th>نفوق</th><th>فرز</th><th>إجمالي الفقد</th><th class="wide">ملاحظات</th></tr></thead><tbody>'+rowsMerged()+
+ '<tr><td class="daycol">الإجمالي</td><td>—</td><td>—</td><td id="totA-'+w.id+'-feed">٠</td><td id="totA-'+w.id+'-water">٠</td><td>—</td><td>—</td><td id="totA-'+w.id+'-mort">٠</td><td id="totA-'+w.id+'-cull">٠</td><td id="totA-'+w.id+'-dtot" style="font-weight:800;color:var(--clay)">٠</td><td>—</td></tr>'
+ +'</tbody></table></div>'
+
+ +'<div class="kpis" id="summary-'+w.id+'" style="margin-top:12px"></div>' +'<h3 class="blk" style="margin-top:12px;font-size:13px">💰 الملخص المالي التقديري</h3>' +'<p style="font-size:10.5px;color:var(--ink-soft);margin:0 0 6px">⚠️ تقدير مبدئي (علف + كتاكيت فقط) — لا يشمل العمالة/الإيجار/الأدوية/الكهرباء. استخدمه كمؤشر سريع لا كحساب مالي نهائي.</p>' +'<div class="kpis" id="finsummary-'+w.id+'" style="margin-top:6px"></div>'
+ +'</div>';
+}
+
+function renderWeeks(){
+  const host=document.getElementById('weeksHost');
+  if(!host)return;
+  host.innerHTML=weeksState.map((w,i)=>weekBlockHTML(w,i)).join('');
+  renderVacMed();
+  recalcAllWeeks();
+  renderS4Auto();
+  drawTrendChart();
+}
+
+function onWeekMeta(id,field,val){
+  const w=weeksState.find(x=>x.id===id); if(!w)return;
+  w[field]=val; recalcWeek(id); renderS4Auto(); drawTrendChart(); autosave();
+}
+const NUMERIC_DAY_FIELDS = ['feed','water','temp','rh','mort','cull'];
+function onDayInput(id,dayIdx,field,val){
+  const w=weeksState.find(x=>x.id===id); if(!w)return;
+  if(NUMERIC_DAY_FIELDS.includes(field) && val!=='' && num(val)<0){
+    toast('⚠️ لا يمكن إدخال رقم سالب — تم تجاهل القيمة');
+    const el=document.getElementById('daycell-'+id+'-'+dayIdx+'-'+field);
+    if(el)el.value='';
+    return;
+  }
+  w.days[dayIdx][field]=val;
+  if(field==='mort' || field==='cull'){
+    const initial = num((document.getElementById('p_initialCount')||{}).value);
+    const idx=weeksState.findIndex(x=>x.id===id);
+    const all=computeAllWeeksAggregates();
+    const a=all[idx];
+    if(initial>0 && a && a.cumLoss>initial){
+      toast('⚠️ تنبيه: إجمالي النافق والفرز التراكمي تجاوز عدد الكتاكيت المستلمة — راجع الأرقام');
+    }
+  }
+  recalcWeek(id); renderS4Auto(); drawTrendChart(); autosave();
+}
+
+function handleFileUpload(weekId,field,inputEl){
+  const file=inputEl.files[0]; if(!file) return;
+  if(file.type==='application/pdf'){
+    const rd=new FileReader();
+    rd.onload=()=>{ const w=weeksState.find(x=>x.id===weekId); if(!w)return; w[field]=rd.result; renderVacMed(); toast('تم رفع الملف ✔'); autosave(); };
+    rd.readAsDataURL(file); return;
+  }
+  compressImage(file, dataUrl=>{ const w=weeksState.find(x=>x.id===weekId); if(!w)return; w[field]=dataUrl; renderVacMed(); toast('تم رفع الصورة ✔'); autosave(); });
+}
+function handlePhotoUpload(weekId, inputEl){
+  const files=Array.from(inputEl.files||[]);
+  if(!files.length) return;
+  const w=weeksState.find(x=>x.id===weekId); if(!w) return;
+  if(!w.clinicalPhotos) w.clinicalPhotos=[];
+  let remaining=files.length;
+  files.forEach(file=>{
+    compressImage(file, dataUrl=>{
+      w.clinicalPhotos.push(dataUrl);
+      const MAX_PHOTOS=6;
+      if(w.clinicalPhotos.length>MAX_PHOTOS){
+        w.clinicalPhotos=w.clinicalPhotos.slice(w.clinicalPhotos.length-MAX_PHOTOS);
+        toast('⚠️ الحد الأقصى '+MAX_PHOTOS+' صور للأسبوع — اتشالت أقدم صورة تلقائيًا لتوفير المساحة');
+      }
+      remaining--;
+      if(remaining===0){ renderVacMed(); toast('تم رفع الصور ✔'); autosave(); }
+    });
+  });
+}
+function removePhoto(weekId, photoIdx){
+  const w=weeksState.find(x=>x.id===weekId); if(!w) return;
+  w.clinicalPhotos.splice(photoIdx,1);
+  renderVacMed(); autosave();
+}
+function compressImage(file, cb){
+  const rd=new FileReader();
+  rd.onload=()=>{
+    const img=new Image();
+    img.onload=()=>{
+      const max=640; let width=img.width,height=img.height;
+      if(width>max||height>max){const r=Math.min(max/width,max/height);width=Math.round(width*r);height=Math.round(height*r);}
+      const cv=document.createElement('canvas'); cv.width=width; cv.height=height;
+      const ctx=cv.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,width,height); ctx.drawImage(img,0,0,width,height);
+      cb(cv.toDataURL('image/jpeg',0.65));
+    };
+    img.src=rd.result;
+  };
+  rd.readAsDataURL(file);
+}
+
+function kpiCard(label,val,unit,tone){
+  tone=tone||'';
+  return '<div class="kpi '+tone+'"><div class="k">'+label+'</div><div class="v">'+val+' <span class="u">'+(unit||'')+'</span></div></div>';
+}
+
+function recalcWeek(id){
+  const w=weeksState.find(x=>x.id===id); if(!w)return;
+  const idx=weeksState.findIndex(x=>x.id===id);
+  const all=computeAllWeeksAggregates();
+  const a=all[idx];
+
+  w.days.forEach((d,i)=>{
+    const dayLoss=num(d.mort)+num(d.cull);
+    const dtotEl=document.getElementById('dtot-'+id+'-'+i); if(dtotEl) dtotEl.textContent = dayLoss || '٠';
+  });
+
+  const set=(sid,val)=>{const el=document.getElementById(sid); if(el) el.textContent=val;};
+  set('totA-'+id+'-feed', a.weekFeed?a.weekFeed.toLocaleString('en-US'):'٠');
+  set('totA-'+id+'-water', a.weekWater?a.weekWater.toLocaleString('en-US'):'٠');
+  set('totA-'+id+'-mort', w.days.reduce((s,d)=>s+num(d.mort),0)||'٠');
+  set('totA-'+id+'-cull', w.days.reduce((s,d)=>s+num(d.cull),0)||'٠');
+  set('totA-'+id+'-dtot', a.weekLoss||'٠');
+
+  const ageWk = weekAgeWeeksNumber(idx);
+  const wAlert = weightVsStdAlert(a.avgWeight, ageWk);
+  const fAlert = fcrAlert(a.fcr, ageWk);
+  const mAlert = mortAlert(a.mortPct);
+  const uAlert = uniformAlert(w.uniform);
+  const ref = refWeightForWeek(ageWk);
+
+  const sumHost=document.getElementById('summary-'+id);
+  if(sumHost){
+    sumHost.innerHTML =
+      kpiCard('القطيع الحالي (بعد الفقد)', a.pop.toLocaleString('en-US'), 'طائر', '')
+    + kpiCard('الوزن الفعلي مقابل المعيار', wAlert.text + (ref?(' (معيار '+ref.toFixed(2)+')'):''), '', wAlert.level==='green'?'good':wAlert.level==='amber'?'warnb':wAlert.level==='red'?'badb':'')
+    + kpiCard('معدل الزيادة اليومي', a.adg!=null?a.adg.toFixed(0):'—', 'جم/يوم', '')
+    + kpiCard('العلف التراكمي', a.cumFeed?a.cumFeed.toLocaleString('en-US'):'٠', 'كجم', '')
+    + kpiCard('معامل التحويل الغذائي (FCR)', fAlert.text, '', fAlert.level==='green'?'good':fAlert.level==='amber'?'warnb':fAlert.level==='red'?'badb':'')
+    + kpiCard('النافق والفرز التجميعي', mAlert.text, '', mAlert.level==='green'?'good':mAlert.level==='amber'?'warnb':mAlert.level==='red'?'badb':'')
+    + kpiCard('تجانس القطيع', uAlert.text, '', uAlert.level==='green'?'good':uAlert.level==='amber'?'warnb':uAlert.level==='red'?'badb':'');
+  }
+
+  const finHost=document.getElementById('finsummary-'+id);
+  if(finHost){
+    if(a.feedCost==null && a.chickCostTotal<=0 && a.revenueEst==null){
+      finHost.innerHTML = '<p style="font-size:11.5px;color:var(--ink-soft);margin:0">أدخل أسعار الكتكوت/العلف/البيع بتبويب الإعداد لعرض الملخص المالي التقديري هنا.</p>';
+    } else {
+      finHost.innerHTML =
+        kpiCard('تكلفة العلف التراكمية', a.feedCost!=null?a.feedCost.toLocaleString('en-US',{maximumFractionDigits:0}):'—', 'جنيه', '')
+      + kpiCard('تكلفة الكتاكيت (ثابتة)', a.chickCostTotal>0?a.chickCostTotal.toLocaleString('en-US',{maximumFractionDigits:0}):'—', 'جنيه', '')
+      + kpiCard('التكلفة الإجمالية التقديرية', a.totalCostEst!=null?a.totalCostEst.toLocaleString('en-US',{maximumFractionDigits:0}):'—', 'جنيه', '')
+      + kpiCard('تكلفة الكيلو الحي', a.costPerKg!=null?a.costPerKg.toFixed(2):'—', 'جنيه/كجم', '')
+      + kpiCard('الإيراد التقديري', a.revenueEst!=null?a.revenueEst.toLocaleString('en-US',{maximumFractionDigits:0}):'—', 'جنيه', '')
+      + kpiCard('صافي الربح التقديري', a.netProfitEst!=null?a.netProfitEst.toLocaleString('en-US',{maximumFractionDigits:0}):'—', 'جنيه', a.netProfitEst!=null?(a.netProfitEst>=0?'good':'badb'):'');
+    }
+  }
+}
+function recalcAllWeeks(){weeksState.forEach(w=>recalcWeek(w.id));}
+let _autosaveTimer=null;
+function autosave(){ clearTimeout(_autosaveTimer); _autosaveTimer=setTimeout(()=>{ try{ collectCurrentProfile(); localStorage.setItem('duck_meat_booklet_app_v1', JSON.stringify({profiles, currentProfileId})); updateStorageBadge(); if(typeof maybeAutoSync==='function')maybeAutoSync(); }catch(e){ updateStorageBadge(); } }, 1200); }
+
+/* ---------------------------- auto table (weekly performance) ---------------------------- */
+function renderS4Auto(){
+  const host=document.getElementById('s4Auto'); if(!host) return;
+  const all=computeAllWeeksAggregates();
+  let rows='';
+  weeksState.forEach((w,wi)=>{
+    const a=all[wi];
+    const ageWk=weekAgeWeeksNumber(wi);
+    const wAlert=weightVsStdAlert(a.avgWeight,ageWk);
+    const fAlert=fcrAlert(a.fcr,ageWk);
+    const mAlert=mortAlert(a.mortPct);
+    const ref=refWeightForWeek(ageWk);
+    const ready = marketReadiness(wi);
+    const readyText = ready ? (ready.ready ? '🎉 جاهز' : '— لسه') : '—';
+    rows += '<tr><td>أسبوع '+(wi+1)+'</td><td>'+ageWk+'</td>'
+      +'<td>'+alertPill(wAlert.level,wAlert.text)+'</td>'
+      +'<td>'+(ref!=null?ref.toFixed(2)+' كجم':'—')+'</td>'
+      +'<td>'+(a.adg!=null?a.adg.toFixed(0)+' جم/يوم':'—')+'</td>'
+      +'<td>'+(a.cumFeed?a.cumFeed.toFixed(2)+' كجم':'—')+'</td>'
+      +'<td>'+alertPill(fAlert.level,fAlert.text)+'</td>'
+      +'<td>'+alertPill(mAlert.level,mAlert.text)+'</td>'
+      +'<td>'+(ready&&ready.ready?alertPill('green',readyText):readyText)+'</td></tr>';
+  });
+  if(!rows) rows='<tr><td colspan="9" style="color:var(--ink-soft)">لا توجد بيانات بعد</td></tr>';
+  host.innerHTML = '<table class="log"><thead><tr><th>الأسبوع</th><th>العمر (أسبوع)</th><th>الوزن الفعلي</th><th>الوزن القياسي</th><th>الزيادة اليومية</th><th>العلف التراكمي</th><th>FCR</th><th>النافق التجميعي</th><th>جاهزية التسويق</th></tr></thead><tbody>'+rows+'</tbody></table>'
+    +'<p style="font-size:11px;color:var(--ink-soft);margin-top:6px">التنبيهات: 🟢 ضمن المعيار — 🟡 قريب/حدّي — 🔴 خارج المعيار، مقارنة بمنحنى السلالة المختارة في تبويب «المعايير المرجعية».</p>';
+}
+
+/* ---------------------------- trend chart ---------------------------- */
+function drawTrendChart(){
+  const cv=document.getElementById('trendChart'); if(!cv || !cv.getContext) return;
+  const ctx=cv.getContext('2d');
+  const W=cv.width, H=cv.height;
+  ctx.clearRect(0,0,W,H);
+  if(!weeksState.length) return;
+  const pad={l:44,r:16,t:16,b:30};
+  const plotW=W-pad.l-pad.r, plotH=H-pad.t-pad.b;
+  const n=weeksState.length;
+  const all=computeAllWeeksAggregates();
+  const actualW=[], stdW=[], fcrVals=[];
+  weeksState.forEach((w,i)=>{ const ageWk=weekAgeWeeksNumber(i); actualW.push(all[i].avgWeight); stdW.push(refWeightForWeek(ageWk)); fcrVals.push(all[i].fcr); });
+  const maxW = Math.max(4, ...actualW.filter(v=>v!=null), ...stdW.filter(v=>v!=null));
+  const maxFcr = 4;
+  ctx.strokeStyle='#e6ddcd'; ctx.lineWidth=1; ctx.font='10px Tajawal, sans-serif'; ctx.fillStyle='#6b6559';
+  for(let g=0; g<=4; g++){
+    const y=pad.t+plotH*g/4;
+    ctx.beginPath(); ctx.moveTo(pad.l,y); ctx.lineTo(W-pad.r,y); ctx.stroke();
+    ctx.fillText((maxW-(maxW)*g/4).toFixed(1)+'كجم', 2, y+3);
+  }
+  const xFor=i=> n>1 ? pad.l + plotW*i/(n-1) : pad.l+plotW/2;
+  const yForW = v=> pad.t + plotH*(1-(v/maxW));
+  const yForFcr = v=> pad.t + plotH*(1-(v/maxFcr));
+
+  function drawLine(vals, yFn, color, dashed){
+    ctx.strokeStyle=color; ctx.lineWidth=2.4; ctx.beginPath();
+    if(dashed && ctx.setLineDash) ctx.setLineDash([5,4]); else if(ctx.setLineDash) ctx.setLineDash([]);
+    let started=false;
+    vals.forEach((v,i)=>{
+      if(v==null) return;
+      const x=xFor(i), y=yFn(v);
+      if(!started){ ctx.moveTo(x,y); started=true; } else { ctx.lineTo(x,y); }
+    });
+    ctx.stroke();
+    if(ctx.setLineDash) ctx.setLineDash([]);
+    ctx.fillStyle=color;
+    vals.forEach((v,i)=>{ if(v==null) return; const x=xFor(i), y=yFn(v); ctx.beginPath(); ctx.arc(x,y,2.6,0,7); ctx.fill(); });
+  }
+  drawLine(stdW, yForW, '#c07f16', true);
+  drawLine(actualW, yForW, '#7a3b1e', false);
+  drawLine(fcrVals, yForFcr, '#3f7d5a', false);
+
+  ctx.fillStyle='#6b6559';
+  weeksState.forEach((w,i)=>{ const x=xFor(i); ctx.fillText('أ'+(i+1), x-6, H-8); });
+}
+
+/* ---------------------------- WhatsApp weekly report ---------------------------- */
+function normalizePhone(v){
+  let s=(v||'').replace(/[^0-9+]/g,'');
+  if(s.startsWith('+')) return s.slice(1);
+  if(s.startsWith('0')) return '20'+s.slice(1);
+  if(s.startsWith('20')) return s;
+  return s;
+}
+function sendWeeklyReportWhatsApp(id){
+  const w=weeksState.find(x=>x.id===id); if(!w)return;
+  const idx=weeksState.findIndex(x=>x.id===id);
+  const a=computeAllWeeksAggregates()[idx];
+  const farmName=(document.getElementById('f_farm')||{}).value||'';
+  const targetRaw='01282262403'; // رقم واتساب مركز الدكتور السيد الغمري الثابت
+  const target=normalizePhone(targetRaw);
+
+  let msg = 'تقرير أسبوعي — كراسة بط تسمين\n';
+  msg += 'مركز الدكتور السيد الغمري لأمراض الدواجن والأرانب\n';
+  msg += '——————————————\n';
+  if(farmName) msg += 'المزرعة: '+farmName+'\n';
+  msg += 'الأسبوع: '+(w.label||('رقم '+(idx+1)))+'\n';
+  msg += 'القطيع الحالي: '+a.pop+' طائر\n';
+  msg += '——————————————\n';
+  msg += 'متوسط الوزن: '+(a.avgWeight!=null?a.avgWeight.toFixed(2)+' كجم':'—')+'\n';
+  msg += 'معدل الزيادة اليومي: '+(a.adg!=null?a.adg.toFixed(0)+' جم/يوم':'—')+'\n';
+  msg += 'العلف التراكمي: '+(a.cumFeed?a.cumFeed.toFixed(2)+' كجم':'—')+'\n';
+  msg += 'معامل التحويل الغذائي: '+(a.fcr!=null?a.fcr.toFixed(2):'—')+'\n';
+  msg += 'النافق والفرز التجميعي: '+(a.mortPct!=null?a.mortPct.toFixed(2)+'٪':'—')+'\n';
+  const ready = marketReadiness(idx);
+  if(ready && ready.ready) msg += '——————————————\n🎉 القطيع جاهز للتسويق (بناءً على '+ready.reason+')\n';
+  if(a.netProfitEst!=null){
+    msg += '——————————————\n';
+    msg += 'التكلفة التقديرية: '+a.totalCostEst.toLocaleString('en-US',{maximumFractionDigits:0})+' جنيه\n';
+    msg += 'الإيراد التقديري: '+(a.revenueEst!=null?a.revenueEst.toLocaleString('en-US',{maximumFractionDigits:0}):'—')+' جنيه\n';
+    msg += 'صافي الربح التقديري: '+a.netProfitEst.toLocaleString('en-US',{maximumFractionDigits:0})+' جنيه\n';
+    msg += '(تقدير مبدئي: علف+كتاكيت فقط، بدون عمالة/إيجار/أدوية)\n';
+  }
+  if(w.autopsy) msg += '——————————————\nملاحظات تشريحية: '+w.autopsy+'\n';
+  if(w.vaxProgram) msg += 'برنامج التحصين/التطهير: '+w.vaxProgram+'\n';
+  if(w.doctorOpinion) msg += 'رأي الطبيب: '+w.doctorOpinion+'\n';
+
+  const url = 'https://wa.me/'+target+'?text='+encodeURIComponent(msg);
+  window.open(url,'_blank');
+}
+
+/* ---------------------------- generic expandable simple-tables module ---------------------------- */
+let simpleTables = {}; // { s3b:[{id,...cols}], s3d:[...], s3e:[...], s5a:[...], s5b:[...] }
+
+const TABLE_DEFS = {
+  s1a: {container:'tbl-s1a', cols:[
+    {k:'date',label:'التاريخ',type:'date'},
+    {k:'age',label:'العمر',type:'text'},
+    {k:'vaccine',label:'نوع اللقاح/العلاج/الفيتامين',type:'text'},
+    {k:'dose',label:'الجرعة',type:'text'},
+    {k:'method',label:'طريقة الإعطاء',type:'text'},
+    {k:'manufacturer',label:'الشركة المصنعة/رقم التشغيلة',type:'text'},
+    {k:'responsible',label:'المسؤول',type:'text'},
+    {k:'notes',label:'ملاحظات',type:'text',wide:true},
+  ]},
+  s1b: {container:'tbl-s1b', cols:[
+    {k:'date',label:'التاريخ',type:'date'},
+    {k:'visitor',label:'اسم الزائر/المورد',type:'text'},
+    {k:'purpose',label:'الغرض من الزيارة',type:'text'},
+    {k:'entryDisinfect',label:'إجراء التطهير عند الدخول',type:'text'},
+    {k:'waterlineDisinfect',label:'تطهير خطوط المياه',type:'text'},
+    {k:'equipDisinfect',label:'تطهير المعدات/العربات',type:'text'},
+    {k:'signature',label:'التوقيع',type:'text'},
+  ]},
+};
+
+function newSimpleRow(defKey){
+  const def=TABLE_DEFS[defKey];
+  const row={id:uidw()};
+  def.cols.forEach(c=>row[c.k]='');
+  return row;
+}
+function addSimpleRow(defKey){
+  if(!simpleTables[defKey]) simpleTables[defKey]=[];
+  simpleTables[defKey].push(newSimpleRow(defKey));
+  renderSimpleTable(defKey);
+  autosave();
+}
+function removeSimpleRow(defKey,rowId){
+  if(!confirm('حذف هذا الصف؟'))return;
+  simpleTables[defKey]=(simpleTables[defKey]||[]).filter(r=>r.id!==rowId);
+  renderSimpleTable(defKey);
+  autosave();
+}
+function onSimpleInput(defKey,rowId,colKey,val){
+  const arr=simpleTables[defKey]||[];
+  const row=arr.find(r=>r.id===rowId); if(!row) return;
+  row[colKey]=val;
+  autosave();
+}
+function renderSimpleTable(defKey){
+  const def=TABLE_DEFS[defKey];
+  const host=document.getElementById(def.container); if(!host) return;
+  const rows=simpleTables[defKey]||[];
+  let thead='<tr>'+def.cols.map(c=>'<th'+(c.wide?' class="wide"':'')+'>'+c.label+'</th>').join('')+'<th></th></tr>';
+  let tbody = rows.map(r=>{
+    const cells = def.cols.map(c=>{
+      const val = esc(r[c.k]||'');
+      return '<td><input class="cell'+(c.wide?' wide':'')+'" type="'+c.type+'" value="'+val+'" onchange="onSimpleInput(\''+defKey+'\',\''+r.id+'\',\''+c.k+'\',this.value)"></td>';
+    }).join('');
+    return '<tr>'+cells+'<td><button class="mini-btn no-print" style="background:#a83a2a1a;color:var(--clay);border-color:#e6c4bd;padding:5px 8px" onclick="removeSimpleRow(\''+defKey+'\',\''+r.id+'\')">🗑️</button></td></tr>';
+  }).join('');
+  if(!tbody) tbody='<tr><td colspan="'+(def.cols.length+1)+'" style="color:var(--ink-soft);text-align:center;padding:8px">لا توجد صفوف بعد — اضغط «إضافة صف»</td></tr>';
+  host.innerHTML = '<table class="log"><thead>'+thead+'</thead><tbody>'+tbody+'</tbody></table>';
+}
+function renderAllSimpleTables(){ Object.keys(TABLE_DEFS).forEach(k=>renderSimpleTable(k)); }
+function ensureSimpleTablesDefaults(){
+  Object.keys(TABLE_DEFS).forEach(k=>{
+    if(!simpleTables[k] || !simpleTables[k].length){
+      simpleTables[k]=[newSimpleRow(k),newSimpleRow(k)];
+    }
+  });
+}
+
+/* ---------------------------- storage usage indicator ---------------------------- */
+function estimateStorageKB(){
+  try{
+    const raw = localStorage.getItem('duck_meat_booklet_app_v1') || '';
+    return (raw.length*2)/1024; // rough UTF-16 byte estimate
+  }catch(e){ return 0; }
+}
+function updateStorageBadge(){
+  const el=document.getElementById('storageBadge'); if(!el) return;
+  const kb=estimateStorageKB();
+  const mb=(kb/1024).toFixed(2);
+  let cls='alert-green', label='المساحة المستخدمة: '+mb+' م.ب.';
+  if(kb>4500){ cls='alert-red'; label='⚠️ المساحة ممتلئة تقريبًا: '+mb+' م.ب. — صدّر نسخة احتياطية واحذف مرفقات قديمة'; }
+  else if(kb>2500){ cls='alert-amber'; label='المساحة المستخدمة: '+mb+' م.ب. (راقبها)'; }
+  el.className='alert-pill '+cls;
+  el.textContent=label;
+}
+
+/* ---------------------------- multi-farm / multi-cycle profiles ---------------------------- */
+function defaultProfile(name){
+  ensureSimpleTablesDefaults();
+  return {id:'p'+Date.now().toString(36)+Math.random().toString(36).slice(2,6), name:name||'دورة جديدة',
+    fields:{}, cells:{}, weeksState:defaultWeeksState(), simpleTables:JSON.parse(JSON.stringify(simpleTables))};
+}
+function syncProfileArrays(){
+  const p=profiles.find(x=>x.id===currentProfileId);
+  if(p){ p.weeksState=weeksState; p.simpleTables=simpleTables; }
+}
+function collectCurrentProfile(){
+  const p=profiles.find(x=>x.id===currentProfileId); if(!p) return;
+  const fields={};
+  document.querySelectorAll('input[id]:not([type=file]), select[id]').forEach(el=>{ if(el.id) fields[el.id]=el.value; });
+  const cells={};
+  document.querySelectorAll('input[data-k]').forEach(el=>{ const k=el.getAttribute('data-k'); if(k) cells[k]=el.value; });
+  p.fields=fields; p.cells=cells; p.weeksState=weeksState; p.simpleTables=simpleTables;
+}
+function applyProfileToDOM(p){
+  document.querySelectorAll('input[id]:not([type=file]), select[id]').forEach(el=>{
+    el.value = (p.fields && p.fields[el.id]!=null) ? p.fields[el.id] : '';
+  });
+  document.querySelectorAll('input[data-k]').forEach(el=>{
+    const k=el.getAttribute('data-k');
+    el.value = (p.cells && p.cells[k]!=null) ? p.cells[k] : '';
+  });
+  weeksState = (p.weeksState && p.weeksState.length) ? p.weeksState : defaultWeeksState();
+  simpleTables = p.simpleTables || {};
+  ensureSimpleTablesDefaults();
+  p.weeksState = weeksState; p.simpleTables = simpleTables;
+  if(typeof autoFillDates==='function')autoFillDates();
+  renderWeeks();
+  renderAllSimpleTables();
+  updateStorageBadge();
+  if(typeof updateSyncBadge==='function')updateSyncBadge();
+  updateBackupReminder();
+}
+function populateProfileSelect(){
+  const sel=document.getElementById('profileSelect'); if(!sel) return;
+  sel.innerHTML = profiles.map(p=>'<option value="'+p.id+'" '+(p.id===currentProfileId?'selected':'')+'>'+esc(p.name)+'</option>').join('');
+}
+function switchProfile(id){
+  if(id===currentProfileId) return;
+  collectCurrentProfile();
+  currentProfileId=id;
+  const p=profiles.find(x=>x.id===id); if(!p) return;
+  applyProfileToDOM(p);
+  populateProfileSelect();
+  toast('تم التبديل إلى: '+p.name);
+}
+function addProfile(){
+  collectCurrentProfile();
+  const name = prompt('اسم الدورة/المزرعة الجديدة:', 'دورة جديدة');
+  if(name===null) return;
+  const p=defaultProfile(name||'دورة جديدة');
+  profiles.push(p);
+  currentProfileId=p.id;
+  applyProfileToDOM(p);
+  populateProfileSelect();
+  toast('تمت إضافة دورة جديدة');
+}
+function renameProfile(){
+  const p=profiles.find(x=>x.id===currentProfileId); if(!p) return;
+  const name=prompt('اسم جديد للدورة/المزرعة:', p.name);
+  if(!name) return;
+  p.name=name; populateProfileSelect(); toast('تم تغيير الاسم');
+}
+function deleteProfile(){
+  if(profiles.length<=1){ toast('لا يمكن حذف الدورة الوحيدة المتبقية'); return; }
+  const p=profiles.find(x=>x.id===currentProfileId); if(!p) return;
+  if(!confirm('حذف الدورة "'+p.name+'" نهائيًا مع كل بياناتها؟')) return;
+  profiles=profiles.filter(x=>x.id!==currentProfileId);
+  currentProfileId=profiles[0].id;
+  applyProfileToDOM(profiles[0]);
+  populateProfileSelect();
+  toast('تم حذف الدورة');
+}
+
+/* ---------------------------- save / load / backup / restore ---------------------------- */
+async function saveData(){
+  try{
+    collectCurrentProfile();
+    localStorage.setItem('duck_meat_booklet_app_v1', JSON.stringify({profiles, currentProfileId}));
+    updateStorageBadge();
+    toast('تم حفظ البيانات ✔');
+  }catch(e){toast('تعذر الحفظ (مساحة التخزين ممتلئة؟) — صدّر نسخة احتياطية واحذف مرفقات قديمة');}
+}
+async function loadData(){
+  try{
+    const raw = localStorage.getItem('duck_meat_booklet_app_v1');
+    if(raw){
+      const data=JSON.parse(raw);
+      if(data && Array.isArray(data.profiles) && data.profiles.length){
+        profiles=data.profiles;
+        currentProfileId=data.currentProfileId && profiles.find(p=>p.id===data.currentProfileId) ? data.currentProfileId : profiles[0].id;
+      }
+    }
+  }catch(e){}
+  if(!profiles.length){ const p=defaultProfile('الدورة الأولى'); profiles=[p]; currentProfileId=p.id; }
+  const cur=profiles.find(x=>x.id===currentProfileId) || profiles[0];
+  currentProfileId=cur.id;
+  applyProfileToDOM(cur);
+  populateProfileSelect();
+}
+function exportBackup(){
+  collectCurrentProfile();
+  const blob=new Blob([JSON.stringify({profiles, currentProfileId, exportedAt:new Date().toISOString()}, null, 2)], {type:'application/json'});
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url; a.download='duck_meat_booklet_backup_'+(new Date().toISOString().slice(0,10))+'.json';
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+  try{ localStorage.setItem('duck_meat_last_backup_v1', String(Date.now())); }catch(e){}
+  updateBackupReminder();
+  toast('تم تنزيل النسخة الاحتياطية');
+}
+function updateBackupReminder(){
+  const el=document.getElementById('backupReminder'); if(!el) return;
+  let lastTs=null;
+  try{ lastTs=parseInt(localStorage.getItem('duck_meat_last_backup_v1')||'','10'); }catch(e){}
+  const hasData = weeksState.some(w=> w.days.some(d=>d.feed!=='' || d.eggs) || w.avgWeight!=='');
+  if(!hasData){ el.style.display='none'; return; }
+  const days = (lastTs && !isNaN(lastTs)) ? Math.floor((Date.now()-lastTs)/86400000) : null;
+  if(days==null){
+    el.style.display='flex';
+    el.innerHTML = '⚠️ لم تُنشئ نسخة احتياطية بعد لهذه البيانات. <button class="mini-btn" style="padding:5px 10px" onclick="exportBackup()">⬇️ نسخة الآن</button>';
+  } else if(days>=3){
+    el.style.display='flex';
+    el.innerHTML = '⚠️ آخر نسخة احتياطية منذ '+days+' يوم. <button class="mini-btn" style="padding:5px 10px" onclick="exportBackup()">⬇️ نسخة الآن</button>';
+  } else {
+    el.style.display='none';
+  }
+}
+function importBackup(inputEl){
+  const file=inputEl.files[0]; if(!file) return;
+  const rd=new FileReader();
+  rd.onload=()=>{
+    try{
+      const data=JSON.parse(rd.result);
+      if(!data || !Array.isArray(data.profiles) || !data.profiles.length){ toast('ملف غير صالح'); return; }
+      if(!confirm('استيراد هذه النسخة سيستبدل كل البيانات الحالية في المتصفح. متابعة؟')) return;
+      profiles=data.profiles;
+      currentProfileId = data.currentProfileId && profiles.find(p=>p.id===data.currentProfileId) ? data.currentProfileId : profiles[0].id;
+      applyProfileToDOM(profiles.find(x=>x.id===currentProfileId));
+      populateProfileSelect();
+      saveData();
+      toast('تم استيراد النسخة الاحتياطية ✔');
+    }catch(e){ toast('تعذر قراءة الملف'); }
+  };
+  rd.readAsText(file);
+  inputEl.value='';
+}
+
+
+function toast(msg){const t=document.getElementById('toast');if(!t)return;t.textContent=msg;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2200);}
+function printAll(){window.print();}
+function switchTab(id){
+  document.querySelectorAll('.tabpanel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+  const panel=document.getElementById('tab-'+id); if(panel) panel.classList.add('active');
+  const btn=document.querySelector('.tab[data-tab="'+id+'"]'); if(btn) btn.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+window.addEventListener('load', ()=>{ loadData(); });
+
+/* ===================== المزامنة السحابية ===================== */
+const API_URL="https://ghamry-farm-api.poultrylabcenter.workers.dev";
+const SHEET_TYPE="duck_fattening";
+let autoSyncTimer=null;
+function currentSyncMeta(){const p=profiles.find(x=>x.id===currentProfileId);if(!p)return null;if(p.syncEnabled==null)p.syncEnabled=false;if(p.lastSync==null)p.lastSync=null;return p;}
+function farmSyncPayload(){collectCurrentProfile();const p=profiles.find(x=>x.id===currentProfileId);if(!p)return null;
+ let farm_name=(p.fields&&p.fields.f_farm)?p.fields.f_farm.trim():'';let phone=(p.fields&&p.fields.f_phone)?p.fields.f_phone.trim():'';
+ if(!farm_name)farm_name=ghIdName();if(!phone)phone=ghIdPhone();if(!farm_name||!phone)return {error:'missing'};
+ return {farm_name,phone,sheet_type:SHEET_TYPE,data:{profileName:p.name,fields:p.fields,cells:p.cells,weeksState:p.weeksState,simpleTables:p.simpleTables}};
+}
+function openSyncModal(){collectCurrentProfile();const p=currentSyncMeta();if(!p)return;
+ let farm_name=(p.fields&&p.fields.f_farm)||'';let phone=(p.fields&&p.fields.f_phone)||'';
+ if(!farm_name||!phone){alert('محتاجين اسم المزرعة ورقم الموبايل الأول (من تبويب «الإعداد وبيانات الدفعة») عشان المزامنة تشتغل.');switchTab('setup');return;}
+ if(!confirm('هترسل نسخة من بيانات كراسة بط التسمين لمزرعة «'+farm_name+'» إلى د. الغمري لمتابعتها. البيانات هتفضل محفوظة كمان على جهازك زي ما هي.\n\nلو فيه صور مرفقة (روشتات/تحاليل) المزامنة ممكن تاخد وقت أطول شوية حسب سرعة النت.\n\nمتابعة؟'))return;
+ syncNow(false);
+}
+async function syncNow(silent){
+ const payload=farmSyncPayload();if(!payload||payload.error){if(!silent)alert('محتاجين اسم المزرعة ورقم الموبايل الأول.');return;}
+ const sizeKb=Math.round(JSON.stringify(payload).length/1024);
+ if(!silent)toast('⏳ جاري رفع البيانات'+(sizeKb>300?(' ('+sizeKb+' ك.ب، فيه صور مرفقة، ممكن ياخد وقت)'):'')+'...');
+ const ctrl=new AbortController();
+ const timeoutId=setTimeout(()=>ctrl.abort(),30000);
+ try{
+  const res=await fetch(API_URL+'/api/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload),signal:ctrl.signal});
+  clearTimeout(timeoutId);
+  const out=await res.json();
+  if(!res.ok||out.error)throw new Error(out.error||'خطأ غير متوقع');
+  const p=currentSyncMeta();if(p){p.syncEnabled=true;p.lastSync=out.updated_at;saveData();}
+  updateSyncBadge();
+  if(!silent)toast('☁️ تمت المزامنة بنجاح'); else toast('☁️ مزامنة تلقائية');
+ }catch(err){
+  clearTimeout(timeoutId);
+  const msg=(err&&err.name==='AbortError')?'المزامنة أخدت وقت طويل جدًا (أكتر من 30 ثانية) — على الأغلب بسبب الصور المرفقة وضعف النت. جرّب لما يبقى الاتصال أقوى، أو قلّل حجم/عدد الصور المرفقة.':(err.message||'تأكد من الاتصال بالإنترنت');
+  if(!silent)alert('تعذّرت المزامنة: '+msg);
+ }
+}
+function maybeAutoSync(){const p=currentSyncMeta();if(!p||!(p.syncEnabled||ghIdValid()))return;clearTimeout(autoSyncTimer);autoSyncTimer=setTimeout(()=>{syncNow(true);},8000);}
+function updateSyncBadge(){const el=document.getElementById('syncBadge');if(!el)return;const p=currentSyncMeta();
+ if(!p||!p.syncEnabled||!p.lastSync){el.style.display='none';return;}
+ el.style.display='inline-block';el.className='alert-pill alert-green';el.textContent='☁️ آخر مزامنة: '+new Date(p.lastSync).toLocaleString('ar-EG',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'});}
+
+</script>
+
+<!-- ===== وضع عرض الطبيب (Admin View) ===== -->
+<script>
+(function(){
+  let raw;
+  try{ raw = sessionStorage.getItem('ghamry_admin_view'); }catch(e){ raw = null; }
+  if(!raw) return;
+  let view;
+  try{ view = JSON.parse(raw); }catch(e){ return; }
+  if(!view || view.sheetType !== 'duck_fattening') return;
+
+  saveData = function(){ /* تعطيل الحفظ المحلي أثناء وضع العرض */ };
+  autosave = function(){ /* تعطيل الحفظ التلقائي أثناء وضع العرض */ };
+
+  const q = 'farm_name='+encodeURIComponent(view.farm_name)+'&phone='+encodeURIComponent(view.phone)+'&sheet_type='+view.sheetType;
+  fetch(view.api + '/api/farm-data?' + q, { headers: { 'X-Admin-Code': view.adminCode } })
+    .then(r => r.json())
+    .then(res => {
+      if(!res.data){ alert('تعذر تحميل بيانات المزرعة: ' + (res.error || 'غير معروف')); return; }
+      const raw = res.data;
+      profiles = [{
+        id:'admin-view-profile',
+        name: raw.profileName || view.farm_name,
+        fields: raw.fields || {},
+        cells: raw.cells || {},
+        weeksState: raw.weeksState || [],
+        simpleTables: raw.simpleTables || {}
+      }];
+      currentProfileId = 'admin-view-profile';
+      applyProfileToDOM(profiles[0]);
+      if(typeof populateProfileSelect==='function')populateProfileSelect();
+      switchTab('setup');
+      injectViewBanner(view);
+    })
+    .catch(err => alert('خطأ في تحميل بيانات المزرعة: ' + err.message));
+
+  function injectViewBanner(view){
+    const bar = document.createElement('div');
+    bar.style.cssText = 'background:var(--pine-deep);color:#f3efe4;padding:10px 16px;font-size:12.5px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:9997';
+    bar.innerHTML = '<span>👁️ وضع عرض الطبيب — المزرعة: <b>'+esc(view.farm_name)+'</b> — للقراءة فقط، أي تعديل لن يُحفظ</span>'
+      + '<button id="exitViewBtn" style="background:var(--gold);color:var(--pine-deep);border:none;border-radius:8px;padding:7px 14px;font-weight:800;cursor:pointer">إغلاق</button>';
+    document.body.insertBefore(bar, document.body.firstChild);
+    document.getElementById('exitViewBtn').addEventListener('click', function(){
+      try{ sessionStorage.removeItem('ghamry_admin_view'); }catch(e){}
+      window.close();
+      setTimeout(()=>{ location.href = 'dashboard.html'; }, 200);
+    });
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var btn=document.getElementById('ghInstallBtn');
+  var deferredPrompt=null;
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault(); deferredPrompt=e; if(btn)btn.classList.add('show');
+  });
+  if(btn){
+    btn.addEventListener('click',async function(){
+      if(!deferredPrompt)return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt=null;
+      btn.classList.remove('show');
+    });
+  }
+  window.addEventListener('appinstalled',function(){ if(btn)btn.classList.remove('show'); });
+  var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var isStandalone=(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone;
+  if(isIOS && !isStandalone){
+    var tip=document.getElementById('ghIosTip'); if(tip)tip.classList.add('show');
+  }
+})();
+</script>
+<script>
+window.ghamryApplyIdentity=function(id){profiles.forEach(function(p){p.fields=p.fields||{};if(!p.fields.f_farm)p.fields.f_farm=id.name;if(!p.fields.f_phone)p.fields.f_phone=id.phone;p.syncEnabled=true;});var a=document.getElementById('f_farm'),b=document.getElementById('f_phone');if(a&&!a.value)a.value=id.name;if(b&&!b.value)b.value=id.phone;try{autosave();}catch(e){}syncNow(true);};
+window.ghamryFlush=function(){syncNow(true);};
+window.ghamryGuessIdentity=function(){var p=profiles.find(function(x){return x.fields&&x.fields.f_phone&&String(x.fields.f_phone).replace(/\D/g,'').length>=9&&x.fields.f_farm});return p?{name:p.fields.f_farm,phone:p.fields.f_phone}:null;};
+</script>
+<script src="./gh-register.js"></script>
+</body>
+</html>

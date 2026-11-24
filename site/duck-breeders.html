@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<script src="./domain-guard.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>كراسة بط الأمهات — مركز د. السيد الغمري</title>
+<link rel="manifest" href="./manifest.json">
+<script>if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('./service-worker.js').catch(()=>{});});}</script>
+<meta name="theme-color" content="#1e4d3b">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="icon" href="./favicon-32.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="كراسات الغمري">
+<meta name="mobile-web-app-capable" content="yes">
+<style>
+:root{
+  --pine:#0f6b6b;--pine-deep:#0a4a4a;--moss:#3f7d5a;--amber:#c07f16;--clay:#a83a2a;
+  --gold:#c9a24b;--paper:#f6f4ec;--card:#fffdf8;--ink:#2a2620;--ink-soft:#6b6559;
+  --rule:#e2ddc9;--rule-strong:#c9c0a3;
+  --shadow:0 1px 2px rgba(30,50,35,.06),0 8px 24px rgba(30,50,35,.06);--r:14px;
+  font-family:"Tajawal","Cairo","Segoe UI",Tahoma,system-ui,sans-serif;
+}
+*{box-sizing:border-box}html,body{margin:0;padding:0}
+body{background:var(--paper);color:var(--ink);line-height:1.55;-webkit-text-size-adjust:100%}
+h1,h2,h3,h4{margin:0;font-weight:800;color:var(--pine-deep)}
+a{color:var(--pine)}button{font-family:inherit;cursor:pointer}
+input,select,textarea{font-family:inherit;font-size:15px}
+.hidden{display:none !important}
+.ic{display:inline-flex;align-items:center;justify-content:center;vertical-align:-.15em}
+.ic svg{width:1.15em;height:1.15em;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.wrap{max-width:1100px;margin:0 auto;padding:0 14px 90px}
+.masthead{background:linear-gradient(180deg,var(--pine),var(--pine-deep));color:#f3f7f3;border-radius:0 0 var(--r) var(--r);padding:16px 18px;box-shadow:var(--shadow);position:relative;overflow:hidden}
+.masthead::after{content:"";position:absolute;inset:auto 0 0 0;height:4px;background:linear-gradient(90deg,var(--gold),transparent);opacity:.7}
+.mast-row{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.logo-box{width:64px;height:64px;border-radius:12px;flex:0 0 auto;background:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden;border:2px solid var(--gold);cursor:pointer}
+.logo-box img{width:100%;height:100%;object-fit:contain}
+.mast-titles{flex:1;min-width:180px}
+.mast-titles h1{color:#fff;font-size:19px}
+.mast-titles .sub{color:#e6ecdd;font-size:13px;margin-top:2px}
+.mast-titles .contact{color:#d7e2cc;font-size:12px;margin-top:4px}
+.app-brand{color:var(--gold);font-size:11.5px;font-weight:800;margin-bottom:3px;letter-spacing:.2px}
+.contact-actions{display:flex;gap:8px;margin-top:8px;flex-wrap:wrap}
+.contact-btn{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:800;
+  padding:6px 12px;border-radius:99px;text-decoration:none;color:#0a3a3a;background:#c9a24b}
+.contact-btn.wa{background:#25D366;color:#0b3b1e}
+.mast-actions{display:flex;gap:8px;flex-wrap:wrap}
+.mini-btn{background:rgba(255,255,255,.14);color:#f3f7f3;border:1px solid rgba(255,255,255,.24);border-radius:9px;padding:7px 11px;font-size:13px;font-weight:700;display:inline-flex;align-items:center;gap:6px;transition:.15s}
+.mini-btn:hover{background:rgba(255,255,255,.24)}
+.cyclebar{display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:10px 12px;margin-top:14px;box-shadow:var(--shadow)}
+.cyclebar label{font-size:13px;color:var(--ink-soft);font-weight:700}
+.cyclebar select{flex:1;min-width:150px;padding:9px 10px;border:1px solid var(--rule-strong);border-radius:9px;background:#fff;font-weight:700;color:var(--pine-deep)}
+.btn{border:none;border-radius:9px;padding:9px 13px;font-size:13px;font-weight:800;display:inline-flex;align-items:center;gap:6px;transition:.15s;white-space:nowrap}
+.btn-primary{background:var(--pine);color:#fff}.btn-primary:hover{background:var(--pine-deep)}
+.btn-ghost{background:#fff;color:var(--pine);border:1px solid var(--rule-strong)}.btn-ghost:hover{background:#eef0e6}
+.btn-danger{background:#fff;color:var(--clay);border:1px solid #e6c4bd}.btn-danger:hover{background:#fbeeeb}
+.btn-wa{background:#25943a;color:#fff}.btn-wa:hover{background:#1e7d31}
+.tabs{display:flex;gap:6px;margin:16px 0 4px;background:var(--card);padding:6px;border-radius:12px;border:1px solid var(--rule);box-shadow:var(--shadow);position:sticky;top:0;z-index:20;overflow-x:auto}
+.tab{flex:1;min-width:110px;text-align:center;padding:10px 6px;border-radius:9px;border:none;background:transparent;color:var(--ink-soft);font-weight:800;font-size:14px;transition:.15s;display:inline-flex;align-items:center;justify-content:center;gap:6px;white-space:nowrap}
+.tab.active{background:var(--pine);color:#fff}
+.card{background:var(--card);border:1px solid var(--rule);border-radius:var(--r);padding:16px;margin-top:14px;box-shadow:var(--shadow)}
+.section-eyebrow{font-size:12px;font-weight:800;letter-spacing:1px;color:var(--gold);text-transform:uppercase;display:flex;align-items:center;gap:8px;margin-bottom:2px}
+.section-eyebrow::before{content:"";width:22px;height:2px;background:var(--gold);display:inline-block}
+.card h2{font-size:18px;margin-bottom:12px}.card h3{font-size:15px;color:var(--pine)}
+.card h3.blk{display:flex;align-items:center;gap:8px;margin:20px 0 10px;padding-top:14px;border-top:1px solid var(--rule)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px}
+.field label{display:block;font-size:13px;font-weight:700;color:var(--ink-soft);margin-bottom:5px}
+.field input,.field select,.field textarea{width:100%;padding:10px 11px;border:1px solid var(--rule-strong);border-radius:9px;background:#fff;color:var(--ink)}
+.field input:focus,.field select:focus{outline:none;border-color:var(--pine);box-shadow:0 0 0 3px rgba(47,107,79,.12)}
+.hint{font-size:12px;color:var(--ink-soft);margin-top:4px}
+.tbl-scroll{overflow-x:auto}
+table.log{width:100%;border-collapse:collapse;min-width:860px;font-size:14px}
+table.log th{background:#eef1e6;color:var(--pine-deep);font-weight:800;font-size:12px;padding:8px 6px;border-bottom:1px solid var(--rule-strong);white-space:nowrap;text-align:center}
+table.log td{padding:4px 5px;border-bottom:1px solid var(--rule);text-align:center}
+table.log tr:nth-child(even) td{background:#fbfaf4}
+table.log input{width:100%;min-width:54px;padding:7px 5px;border:1px solid var(--rule);border-radius:7px;background:#fff;text-align:center;font-size:14px}
+table.log input.notes{min-width:140px;text-align:right}
+table.log input:focus{border-color:var(--pine)}
+table.log td.calc{background:#eef1e6 !important;color:var(--pine-deep);font-weight:800;font-size:13px}
+.pill{display:inline-flex;align-items:center;gap:4px;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:800}
+.pill.ok{background:#e5f0e8;color:var(--moss)}.pill.warn{background:#f8efd9;color:var(--amber)}
+.pill.bad{background:#f6e2dd;color:var(--clay)}.pill.neu{background:#eceae2;color:var(--ink-soft)}
+.wk-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin-top:6px}
+.wk-metric{background:#fff;border:1px solid var(--rule);border-radius:9px;padding:8px 10px}
+.wk-metric .k{font-size:11px;color:var(--ink-soft);font-weight:700}
+.wk-metric .v{font-size:15px;font-weight:800;color:var(--pine-deep);margin-top:1px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:12px}
+.kpi{background:linear-gradient(180deg,#fff,#f9faf3);border:1px solid var(--rule);border-radius:12px;padding:14px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;inset-inline-start:0;width:4px;height:100%;background:var(--gold)}
+.kpi .k{font-size:12px;color:var(--ink-soft);font-weight:700}
+.kpi .v{font-size:25px;font-weight:800;color:var(--pine-deep);margin-top:3px;letter-spacing:-.5px}
+.kpi .u{font-size:13px;color:var(--ink-soft);font-weight:600}
+.kpi.good::before{background:var(--moss)}.kpi.warnb::before{background:var(--amber)}.kpi.badb::before{background:var(--clay)}
+.alert{display:flex;gap:10px;align-items:flex-start;padding:11px 13px;border-radius:10px;margin-bottom:8px;font-size:14px;font-weight:600;border:1px solid}
+.alert.bad{background:#faece8;border-color:#e6c4bd;color:#7d2a1e}
+.alert.warn{background:#fbf4e1;border-color:#ecd9a6;color:#8a6212}
+.alert.ok{background:#eaf1ea;border-color:#c8d9c3;color:#245239}
+.breedcard{background:#fbfaf4;border:1px dashed var(--rule-strong);border-radius:10px;padding:12px 13px;margin-top:10px;font-size:13px}
+.breedcard .bh{font-weight:800;color:var(--pine-deep);margin-bottom:6px;display:flex;align-items:center;gap:8px}
+.breedcard dl{display:grid;grid-template-columns:auto 1fr;gap:4px 10px;margin:0}
+.breedcard dt{color:var(--ink-soft);font-weight:700}
+.breedcard dd{margin:0}
+.breedcard .src{color:var(--ink-soft);font-size:11px;margin-top:8px;padding-top:8px;border-top:1px solid var(--rule)}
+.modal-bg{position:fixed;inset:0;background:rgba(20,30,20,.5);display:flex;align-items:center;justify-content:center;z-index:100;padding:16px}
+.modal{background:var(--card);border-radius:16px;max-width:560px;width:100%;padding:20px;box-shadow:0 20px 60px rgba(0,0,0,.3);max-height:90vh;overflow:auto}
+.modal h3{font-size:17px;margin-bottom:14px}
+.modal-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
+.empty{text-align:center;padding:40px 16px;color:var(--ink-soft)}
+.empty .big .ic svg{width:44px;height:44px;color:var(--gold)}
+.toast{position:fixed;bottom:18px;inset-inline-start:50%;transform:translateX(50%);background:var(--pine-deep);color:#fff;padding:11px 18px;border-radius:10px;font-weight:700;font-size:14px;z-index:200;box-shadow:var(--shadow);opacity:0;transition:.25s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(50%) translateY(-4px)}
+.phase-note{background:#eef1e6;border:1px solid var(--rule);border-radius:10px;padding:10px 12px;font-size:13px;color:var(--ink-soft);margin-top:10px}
+.footnote{text-align:center;color:var(--ink-soft);font-size:12px;margin-top:22px;line-height:1.7}
+.storage-ind{display:inline-flex;align-items:center;gap:5px;font-size:11px;color:var(--ink-soft)}
+.storage-dot{width:8px;height:8px;border-radius:50%}
+.breed-chips{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin-top:6px}
+.breed-chip{border:2px solid var(--rule-strong);background:#fff;border-radius:11px;padding:11px 12px;text-align:right;cursor:pointer;transition:.15s}
+.breed-chip:hover{border-color:var(--pine)}
+.breed-chip.active{border-color:var(--pine);background:#eef4ef;box-shadow:0 0 0 3px rgba(47,107,79,.12)}
+.breed-chip .bn{font-weight:800;color:var(--pine-deep);font-size:14px}
+.breed-chip .bt{font-size:11px;color:var(--ink-soft);margin-top:2px}
+@media print{
+  @page{size:A4;margin:12mm}body{background:#fff}
+  .no-print,.tabs,.cyclebar,.mast-actions,.mini-btn,.btn{display:none !important}
+  .wrap{max-width:none;padding:0}
+  .card{box-shadow:none;break-inside:avoid;border-color:#bbb}
+  .masthead{background:#fff !important;color:#000 !important;border-bottom:3px solid var(--pine);border-radius:0;padding:0 0 10px}
+  .masthead::after{display:none}.mast-titles h1{color:var(--pine-deep) !important}
+  .app-brand{color:#8a6212 !important}
+  .mast-titles .sub,.mast-titles .contact{color:#333 !important}
+  table.log th{background:#f0f0f0 !important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .pill,.kpi::before{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .print-break{break-before:page}
+}
+@media (max-width:560px){.mast-titles h1{font-size:16px}.kpi .v{font-size:22px}}
+</style>
+<style>
+#ghInstallBtn{margin:12px 16px 0;max-width:calc(100% - 32px);background:var(--pine);color:#fff;border:none;
+  border-radius:12px;padding:13px 14px;font-size:14px;font-weight:800;display:none;
+  align-items:center;justify-content:center;gap:8px;box-shadow:0 4px 14px rgba(0,0,0,.15);cursor:pointer}
+#ghInstallBtn.show{display:flex}
+#ghIosTip{margin:10px 16px 0;max-width:calc(100% - 32px);background:#fbf3df;border:1px solid #edd9a8;border-radius:12px;
+  padding:11px 13px;font-size:12.5px;color:#6b5324;display:none;gap:8px;align-items:flex-start}
+#ghIosTip.show{display:flex}
+#ghIosTip b{color:#5c4517}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead"><div class="mast-row">
+    <div class="logo-box"><img src="data:image/jpeg;base64,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" alt="logo"></div>
+    <div class="mast-titles"><div class="app-brand">🐔 كراسات المزرعة الذكية</div><h1>مركز الدكتور السيد الغمري</h1>
+      <div class="sub">استشاري أمراض الدواجن والأرانب</div>
+      <div class="contact">أبو حماد – الشرقية – مصر • 01282262403 / 01003464485</div>
+      <div class="contact-actions no-print">
+        <a class="contact-btn call" href="tel:01282262403">📞 اتصال</a>
+        <a class="contact-btn wa" href="https://wa.me/201282262403?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D9%86%D8%A7%20%D9%85%D8%B3%D8%AA%D8%AE%D8%AF%D9%85%20%D9%83%D8%B1%D8%A7%D8%B3%D8%A9%20%D8%A7%D9%84%D9%85%D8%AA%D8%A7%D8%A8%D8%B9%D8%A9%20%D9%88%D8%AD%D8%A7%D8%A8%D8%A8%20%D8%A3%D8%AA%D9%88%D8%A7%D8%B5%D9%84%20%D9%85%D8%B9%20%D8%A7%D9%84%D9%85%D8%B1%D9%83%D8%B2." target="_blank" rel="noopener">💬 واتساب</a>
+      </div></div>
+    <div class="mast-actions no-print">
+      <button class="mini-btn" onclick="openSyncModal()"><span class="ic" id="i_cloud"></span> <span id="syncBtnLabel">مزامنة سحابية</span></button>
+      <button class="mini-btn" onclick="printAll()"><span class="ic" id="i_print"></span> طباعة</button>
+      <button class="mini-btn" onclick="exportData()"><span class="ic" id="i_save"></span> نسخة احتياطية</button>
+      <button class="mini-btn" onclick="document.getElementById('importFile').click()"><span class="ic" id="i_import"></span> استيراد</button>
+      <input type="file" id="importFile" accept="application/json" class="hidden" onchange="importData(event)">
+    </div></div>
+  </header>
+  <button id="ghInstallBtn">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+    تثبيت التطبيق على الشاشة الرئيسية
+  </button>
+  <div id="ghIosTip">
+    <span>ℹ️</span>
+    <span><b>على آيفون:</b> اضغط زر المشاركة <b>⬆️</b> بالأسفل، ثم اختر <b>"إضافة إلى الشاشة الرئيسية"</b>.</span>
+  </div>
+
+
+  <div class="cyclebar no-print" style="flex-direction:column;align-items:stretch;gap:10px">
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <label>المزرعة:</label>
+      <select id="farmSelect" onchange="switchFarm(this.value)"></select>
+      <button class="btn btn-primary" onclick="newFarm()"><span class="ic" id="i_plus"></span> مزرعة</button>
+      <button class="btn btn-ghost" onclick="editFarmContact()">تعديل</button>
+      <button class="btn btn-danger" onclick="deleteFarm()"><span class="ic" id="i_trash"></span> حذف المزرعة</button>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+      <label>قطيع الأمهات:</label>
+      <select id="cycleSelect" onchange="switchCycle(this.value)"></select>
+      <button class="btn btn-primary" onclick="newCycle()"><span class="ic" id="i_plus2"></span> قطيع جديد</button>
+      <button class="btn btn-danger" onclick="deleteCycle()"><span class="ic" id="i_trash2"></span> حذف</button>
+    </div>
+    <div style="display:flex;justify-content:space-between;align-items:center"><span class="storage-ind" id="syncStatusInd"></span><span class="storage-ind"><span class="storage-dot" id="storageDot" style="background:#3f7d5a"></span><span id="storageTxt">مساحة التخزين: جيدة</span></span></div>
+  </div>
+
+  <nav class="tabs no-print" id="tabbar"></nav>
+  <div id="app"></div>
+  <div class="footnote no-print">كراسة بط الأمهات — مركز الدكتور السيد الغمري • البيانات محفوظة على هذا الجهاز فقط (localStorage) — خُد نسخة احتياطية دوريًا.<br>مسودة أولى للمراجعة قبل الدمج مع منظومة كراسات المزرعة الذكية.</div>
+</div>
+<div class="toast" id="toast"></div>
+<div id="modalHost"></div>
+
+<script>
+/* ============================================================
+   كراسة بط الأمهات — مسودة أولى
+   يحتوي على بيانات مرجعية حقيقية لخمس سلالات بط تُربى في مصر:
+   - بيور (Star 53 / Grimaud Frères) — خط بكيني نقي
+   - مسكوفي (Muscovy / Grimaud Frères + دراسة جامعة الزقازيق)
+   - مولار (Mulard) — هجين عقيم، للحم فقط، بدون تفريخ
+   - سوداني/بلدي (البح) — سلالة محلية مصرية
+   - دمياطي — سلالة محلية مصرية (بيانات محطة السرو البحثية)
+   ============================================================ */
+
+const IC={
+ home:'<svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8"/><path d="M5 10v10a1 1 0 001 1h4v-6h4v6h4a1 1 0 001-1V10"/></svg>',
+ gear:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 11-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 110-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 114 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 110 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>',
+ print:'<svg viewBox="0 0 24 24"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>',
+ save:'<svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>',
+ import:'<svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>',
+ plus:'<svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+ trash:'<svg viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14a2 2 0 01-2 2H8a2 2 0 01-2-2L5 6"/><path d="M10 11v6M14 11v6"/><path d="M9 6V4a1 1 0 011-1h4a1 1 0 011 1v2"/></svg>',
+ wa:'<svg viewBox="0 0 24 24"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 2.1.55 4.05 1.6 5.78L2 22l4.44-1.7a9.9 9.9 0 004.6 1.17c5.46 0 9.9-4.45 9.9-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2z"/></svg>',
+ chart:'<svg viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>',
+ check:'<svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>',
+ warn:'<svg viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+ egg:'<svg viewBox="0 0 24 24"><path d="M12 3c3.6 0 6.2 5.1 6.2 9.2A6.2 6.2 0 0112 18.5 6.2 6.2 0 015.8 12.2C5.8 8.1 8.4 3 12 3z"/></svg>',
+ chick:'<svg viewBox="0 0 24 24"><circle cx="12" cy="13" r="6"/><path d="M12 7V4"/><path d="M10.5 4.5L12 3l1.5 1.5"/><path d="M6.5 13l-2 .5"/></svg>',
+ bulb:'<svg viewBox="0 0 24 24"><path d="M9 18h6"/><path d="M10 22h4"/><path d="M12 2a7 7 0 00-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0012 2z"/></svg>',
+ scale:'<svg viewBox="0 0 24 24"><path d="M12 3v18M5 7l-3 7a3 3 0 006 0zM19 7l-3 7a3 3 0 006 0zM3 7h18M8 3h8"/></svg>',
+ doc:'<svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>',
+ cloud:'<svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 109 20h9a5 5 0 000-10z"/></svg>',
+ check2:'<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="8 12 11 15 16 9"/></svg>'
+};
+function ico(el,n){document.getElementById(el)&&(document.getElementById(el).innerHTML=IC[n]);}
+function initHeaderIcons(){ico('i_cloud','cloud');ico('i_print','print');ico('i_save','save');ico('i_import','import');ico('i_plus','plus');ico('i_plus2','plus');ico('i_trash','trash');ico('i_trash2','trash');}
+function I(n){return '<span class="ic">'+(IC[n]||'')+'</span>';}
+
+/* ===================== بيانات السلالات المرجعية ===================== */
+const BREEDS_D={
+ pure:{
+  name:"بيور (Star 53) — بكيني",
+  isBreeder:true,
+  maturityWk:24,
+  fertilityPct:"91%",
+  eggProd:"273–281 بيضة خلال 52 أسبوع إنتاج",
+  eggWeight:"غير محدد بالفيش — يُقاس ميدانيًا",
+  note:"خط بكيني نقي (Pure Pekin line) من Grimaud Frères. منحنى النمو أدناه هو وزن أمهات بتغذية مقيّدة (Restricted feeding) — مش تسمين حر — لأن تسمين الأمهات بيسبب سمنة تقفل الجهاز التناسلي وتقلل الإنتاج ~20%. الذكور أثقل شوية من الإناث بنفس المنحنى تقريبًا.",
+  source:"NC State University Extension — Davis & Anderson, «Management Program for Raising Breeder Duck Flocks» (Table 1: Mallard/Muscovy/Pekin Target Weights)",
+  rear:{0:54,1:91,2:227,3:454,4:816,5:953,6:1225,7:1588,8:2059,9:2145,10:2209,11:2277,12:2340,13:2409,14:2477,15:2509,16:2554,17:2590,18:2631,19:2667,20:2708,21:2753,22:2803,23:2840,24:2880,25:2912,26:2948},incubDays:28
+ },
+ muscovy:{
+  name:"مسكوفي (Muscovy)",
+  isBreeder:true,
+  maturityWk:30,
+  fertilityPct:"88–93% (متوسط ~90%)",
+  eggProd:"220 بيضة خلال دورتي وضع، نسبة فقس 90%",
+  eggWeight:"~ 70–90 جم (مراجع ميدانية)",
+  note:"نضج جنسي أبطأ من باقي السلالات (~7 أشهر). منحنى النمو أدناه وزن أمهات بتغذية مقيّدة (نفس مصدر بكيني/مالارد أدناه، ينطبق على المسكوفي بنفس القيم للإناث حسب المصدر). الذكور أثقل بوضوح من الإناث (ثنائية شكل جنسي قوية أكبر من بكيني).",
+  source:"NC State University Extension — Davis & Anderson, «Management Program for Raising Breeder Duck Flocks» (Table 1: Mallard/Muscovy/Pekin Target Weights)",
+  rear:{0:54,1:91,2:227,3:454,4:816,5:953,6:1225,7:1588,8:2059,9:2145,10:2209,11:2277,12:2340,13:2409,14:2477,15:2509,16:2554,17:2590,18:2631,19:2667,20:2708,21:2753,22:2803,23:2840,24:2880,25:2912,26:2948,30:3100},incubDays:35
+ },
+ sudani:{
+  name:"سوداني / بلدي (البح)",
+  isBreeder:true,
+  maturityWk:26,
+  fertilityPct:"غير موثّق تجاريًا (تفريخ طبيعي غالبًا)",
+  eggProd:"40–60 بيضة/موسم (تفريخ طبيعي)",
+  eggWeight:"75–80 جم",
+  note:"أقدم سلالة بط في مصر، منحدرة من المالارد محليًا (مش من المسكوفي رغم تشابه الشكل). مناعة طبيعية أعلى من المسكوفي التجاري، ومقاومة أمراض ممتازة، لكن معدل نمو أقل. مفضّلة للمربي الصغير قليل الإمكانيات. منحنى النمو أدناه تقديري (يعتمد على وزن النضج المعروف ميدانيًا فقط، وليس من تجربة نمو أسبوعي منشورة) — يُنصح بمراجعته وتعديله حسب ملاحظاتك الميدانية.",
+  source:"مراجع ميدانية مصرية (معهد بحوث الإنتاج الحيواني) + دراسات مقارنة منشورة (Sudani vs Muscovy)",
+  rear:{1:60,4:520,8:1450,12:2400,16:3200,20:3600,26:3750},incubDays:28
+ },
+ domyati:{
+  name:"دمياطي",
+  isBreeder:true,
+  maturityWk:24,
+  fertilityPct:"غير موثّق بدقة — يُقاس ميدانيًا",
+  eggProd:"~100–110 بيضة/سنة (حتى 9 شهور وضع)؛ ~37 بيضة/أنثى خلال أول 12 أسبوع إنتاج (محطة السرو)",
+  eggWeight:"57–67 جم (يزداد مع العمر) — لون القشرة أبيض مخضر",
+  note:"سلالة محلية منتشرة في شمال الدلتا، أخف وزنًا من السوداني وأعلى إنتاج بيض نسبيًا. ملحوظة بحثية مهمة: الوزن يتوقف عن الزيادة بل يتراجع قليلًا بعد الأسبوع 16 (سمة موثقة للسلالة، وليست خطأ قياس).",
+  source:"محطة بحوث الدواجن المائية بالسرو — معهد بحوث الإنتاج الحيواني (دراسات Ali 2005، El-Tehiti 2001، Ghonim 2005)",
+  rear:{4:463,8:1238,12:1708,16:1807,20:1800,24:1780},incubDays:28
+ }
+};
+function breedRefCard(key){const b=BREEDS_D[key];if(!b)return'';
+ return '<div class="breedcard"><div class="bh">'+I('doc')+' بطاقة مرجعية — '+b.name+'</div><dl>'
+  +'<dt>الاستخدام</dt><dd>'+(b.isBreeder?'قطيع أمهات (تفريخ)':'إنتاج لحم فقط — غير مخصص للتفريخ')+'</dd>'
+  +(b.maturityWk?('<dt>النضج الجنسي</dt><dd>~ '+b.maturityWk+' أسبوع</dd>'):'')
+  +'<dt>مدة التحضين</dt><dd>'+b.incubDays+' يوم</dd>'
+  +'<dt>نسبة الخصوبة</dt><dd>'+b.fertilityPct+'</dd>'
+  +'<dt>إنتاج البيض</dt><dd>'+b.eggProd+'</dd>'
+  +'<dt>وزن البيضة</dt><dd>'+b.eggWeight+'</dd>'
+  +'</dl><p style="margin:8px 0 0">'+b.note+'</p>'
+  +'<div class="src">المصدر: '+b.source+'</div></div>';
+}
+function interp(map,x){const k=Object.keys(map).map(Number).sort((a,b)=>a-b);
+ if(x<=k[0])return map[k[0]];if(x>=k[k.length-1])return map[k[k.length-1]];
+ for(let i=0;i<k.length-1;i++){if(x>=k[i]&&x<=k[i+1]){const t=(x-k[i])/(k[i+1]-k[i]);return map[k[i]]+t*(map[k[i+1]]-map[k[i]]);}}return map[k[0]];}
+
+/* ===================== بيانات المركز — ثابتة غير قابلة للتعديل ===================== */
+const GHAMRY_CENTER={name:"مركز الدكتور السيد الغمري",sub:"استشاري أمراض الدواجن والأرانب",address:"أبو حماد – الشرقية – مصر",phone1:"01282262403",phone2:"01003464485"};
+
+/* ===================== تخزين البيانات ===================== */
+const LS_KEY="duck_breeders_v1";
+let DB=migrate(load());let currentTab="setup";
+function load(){try{const r=JSON.parse(localStorage.getItem(LS_KEY));if(r&&r.cycles)return r;}catch(e){}return {farms:[],cycles:[],activeFarm:null,active:null};}
+function migrate(db){db.center=GHAMRY_CENTER;
+ (db.cycles||[]).forEach(f=>{if(!BREEDS_D[f.breed])f.breed='pure';});
+ (db.cycles||[]).forEach(f=>{
+  if(Array.isArray(f.rearRows)){/* already migrated */}
+  else if(f.rearing&&typeof f.rearing==='object'){f.rearRows=Object.keys(f.rearing).map(w=>Object.assign({id:uid(),week:+w},f.rearing[w])).sort((a,b)=>a.week-b.week);}
+  else f.rearRows=[];
+  f.prodDays=Array.isArray(f.prodDays)?f.prodDays:[];
+  f.hatchBatches=Array.isArray(f.hatchBatches)?f.hatchBatches:[];
+  f.replaceRows=Array.isArray(f.replaceRows)?f.replaceRows:[];
+  f.healthRows=Array.isArray(f.healthRows)?f.healthRows:[];
+  f.serologyRows=Array.isArray(f.serologyRows)?f.serologyRows:[];
+  if(f.feedPriceKg==null)f.feedPriceKg='';if(f.eggPrice==null)f.eggPrice='';if(f.chickPrice==null)f.chickPrice='';
+  if(f.closed==null)f.closed=false;if(f.closedDate==null)f.closedDate=null;if(f.closedProblems==null)f.closedProblems=null;
+  delete f.rearing;delete f.prod;delete f.prodRows;
+  if(f.breed==null)f.breed="pure";if(f.initialF==null)f.initialF=0;if(f.initialM==null)f.initialM=0;
+  if(f.entryDate==null)f.entryDate=new Date().toISOString().slice(0,10);if(f.entryAgeDays==null)f.entryAgeDays=0;
+ });
+ if(!db.farms||!db.farms.length){const fid='farm'+Date.now().toString(36);db.farms=[{id:fid,name:'المزرعة 1',owner:'',location:'',phone:'',syncEnabled:false,lastSync:null}];(db.cycles||[]).forEach(c=>{if(!c.farmId)c.farmId=fid;});db.activeFarm=fid;}
+ else{(db.cycles||[]).forEach(c=>{if(!c.farmId)c.farmId=db.farms[0].id;});if(!db.activeFarm)db.activeFarm=db.farms[0].id;}
+ (db.farms||[]).forEach(fm=>{if(fm.phone==null)fm.phone='';if(fm.syncEnabled==null)fm.syncEnabled=false;if(fm.lastSync==null)fm.lastSync=null;});
+ if(db.cycles&&db.cycles.length&&!db.active)db.active=db.cycles.find(c=>c.farmId===db.activeFarm)?.id||db.cycles[0].id;
+ return db;}
+let saveTimer=null;
+function save(){localStorage.setItem(LS_KEY,JSON.stringify(DB));updateStorageIndicator();if(typeof maybeAutoSync==='function')maybeAutoSync();}
+function updateStorageIndicator(){try{let total=0;for(let k in localStorage)if(localStorage.hasOwnProperty(k))total+=localStorage[k].length;
+ const pct=total/(5*1024*1024);const dot=document.getElementById('storageDot'),txt=document.getElementById('storageTxt');if(!dot)return;
+ if(pct<0.6){dot.style.background='#3f7d5a';txt.textContent='مساحة التخزين: جيدة';}
+ else if(pct<0.85){dot.style.background='#c07f16';txt.textContent='مساحة التخزين: متوسطة — خُد نسخة احتياطية';}
+ else{dot.style.background='#a83a2a';txt.textContent='مساحة التخزين: شارفت على الامتلاء!';}}catch(e){}}
+
+function uid(){return 'x'+Date.now().toString(36)+Math.random().toString(36).slice(2,7);}
+function esc(s){return (s==null?'':String(s)).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function num(v){const n=parseFloat(v);return isNaN(n)?0:n;}
+function fmt(n,d){if(n==null||isNaN(n))return '—';d=d==null?0:d;return Number(n).toLocaleString('ar-EG',{minimumFractionDigits:d,maximumFractionDigits:d});}
+function toast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');clearTimeout(window._tt);window._tt=setTimeout(()=>t.classList.remove('show'),2200);}
+function gv(id){return document.getElementById(id).value;}
+
+/* ===================== مزارع / قطعان ===================== */
+function activeFarm(){return DB.farms.find(f=>f.id===DB.activeFarm)||DB.farms[0];}
+function cyclesOfFarm(){return DB.cycles.filter(c=>c.farmId===DB.activeFarm);}
+function activeCycle(){return DB.cycles.find(c=>c.id===DB.active);}
+function renderFarmSelect(){const sel=document.getElementById('farmSelect');sel.innerHTML=DB.farms.map(f=>'<option value="'+f.id+'" '+(f.id===DB.activeFarm?'selected':'')+'>'+esc(f.name)+'</option>').join('');}
+function renderCycleSelect(){const sel=document.getElementById('cycleSelect');const list=cyclesOfFarm();
+ sel.innerHTML=list.length?list.map(c=>'<option value="'+c.id+'" '+(c.id===DB.active?'selected':'')+'>'+esc(c.houseName||'قطيع بلا اسم')+' — '+BREEDS_D[c.breed].name+'</option>').join(''):'<option value="">لا يوجد قطيع بعد</option>';}
+function switchFarm(id){DB.activeFarm=id;const list=cyclesOfFarm();DB.active=list.length?list[0].id:null;save();renderCycleSelect();render();}
+function switchCycle(id){DB.active=id;save();render();}
+function newFarm(){const name=prompt('اسم المزرعة الجديدة:');if(!name)return;const id=uid();DB.farms.push({id,name,owner:'',location:'',phone:ghIdPhone(),syncEnabled:ghIdValid(),lastSync:null});DB.activeFarm=id;DB.active=null;save();renderFarmSelect();renderCycleSelect();render();}
+function editFarmContact(){const f=activeFarm();if(!f)return;modal('<h3>تعديل اسم المزرعة / الموبايل</h3><p class="hint">الاسم ورقم الموبايل بيستخدموا في المزامنة السحابية عشان د. الغمري يعرف يميّز مزرعتك.</p><div class="grid" style="grid-template-columns:1fr">'
+ +'<div class="field"><label>اسم المزرعة</label><input id="ef_name" value="'+esc(f.name)+'"></div>'
+ +'<div class="field"><label>رقم الموبايل</label><input id="ef_phone" value="'+esc(f.phone||'')+'" placeholder="01xxxxxxxxx"></div></div>'
+ +'<div class="modal-actions"><button class="btn btn-primary" onclick="saveFarmContact()">حفظ</button><button class="btn btn-ghost" onclick="closeModal()">إلغاء</button></div>');}
+function saveFarmContact(){const f=activeFarm();if(!f)return;f.name=gv('ef_name')||f.name;f.phone=gv('ef_phone');save();renderFarmSelect();closeModal();toast('تم الحفظ');}
+function deleteFarm(){if(DB.farms.length<=1){toast('لازم تفضل مزرعة واحدة على الأقل');return;}
+ confirmModal('حذف المزرعة وكل قطعانها؟ الإجراء لا يمكن التراجع عنه.',()=>{const fid=DB.activeFarm;DB.farms=DB.farms.filter(f=>f.id!==fid);DB.cycles=DB.cycles.filter(c=>c.farmId!==fid);DB.activeFarm=DB.farms[0].id;const list=cyclesOfFarm();DB.active=list.length?list[0].id:null;save();renderFarmSelect();renderCycleSelect();render();});}
+function newCycle(){const id=uid();DB.cycles.push({id,farmId:DB.activeFarm,houseName:'قطيع '+(cyclesOfFarm().length+1),breed:'pure',initialF:0,initialM:0,entryDate:new Date().toISOString().slice(0,10),entryAgeDays:0,rearRows:[],prodDays:[],hatchBatches:[],replaceRows:[],healthRows:[],serologyRows:[],feedPriceKg:'',eggPrice:'',chickPrice:'',closed:false,closedDate:null,closedProblems:null});DB.active=id;currentTab='setup';save();renderCycleSelect();render();toast('اضبط السلالة والبيانات الأساسية لهذا القطيع بالأسفل');}
+function deleteCycle(){const f=activeCycle();if(!f)return;confirmModal('حذف هذا القطيع؟',()=>{DB.cycles=DB.cycles.filter(c=>c.id!==f.id);const list=cyclesOfFarm();DB.active=list.length?list[0].id:null;save();renderCycleSelect();render();});}
+
+/* ===================== التبويبات ===================== */
+const TABS=[
+ {id:'setup',label:'الإعداد',ic:'home'},
+ {id:'rear',label:'التربية',ic:'scale'},
+ {id:'prod',label:'الإنتاج اليومي',ic:'egg'},
+ {id:'hatch',label:'التفريخ',ic:'chick'},
+ {id:'health',label:'الصحة والاستبدال',ic:'bulb'},
+ {id:'report',label:'التقرير',ic:'chart'}
+];
+function renderTabs(){document.getElementById('tabbar').innerHTML=TABS.map(t=>'<button class="tab '+(currentTab===t.id?'active':'')+'" onclick="setTab(\''+t.id+'\')">'+I(t.ic)+' '+t.label+'</button>').join('');}
+function setTab(id){currentTab=id;render();}
+
+function render(){renderFarmSelect();renderCycleSelect();renderTabs();updateStorageIndicator();updateSyncIndicator();
+ const app=document.getElementById('app');const f=activeCycle();
+ if(!f){app.innerHTML='<div class="card"><div class="empty"><div class="big">'+I('egg')+'</div><h3 style="margin-top:10px">لا يوجد قطيع أمهات مُسجَّل</h3><p class="hint">اضغط «قطيع جديد» بالأعلى للبدء.</p></div></div>';return;}
+ if(currentTab==='setup')app.innerHTML=viewSetup(f);
+ else if(currentTab==='rear')app.innerHTML=viewRear(f);
+ else if(currentTab==='prod')app.innerHTML=viewProd(f);
+ else if(currentTab==='hatch')app.innerHTML=viewHatch(f);
+ else if(currentTab==='health')app.innerHTML=viewHealth(f);
+ else if(currentTab==='report')app.innerHTML=viewReport(f);
+}
+function renderPreservingFocus(){
+ const active=document.activeElement;let focusId=null,selStart=null,selEnd=null;
+ if(active&&active.id&&(active.tagName==='INPUT'||active.tagName==='TEXTAREA'||active.tagName==='SELECT')){
+  focusId=active.id;
+  if(typeof active.selectionStart==='number'){try{selStart=active.selectionStart;selEnd=active.selectionEnd;}catch(e){}}
+ }
+ render();
+ if(focusId){
+  const el=document.getElementById(focusId);
+  if(el){el.focus();if(selStart!=null&&typeof el.setSelectionRange==='function'){try{el.setSelectionRange(selStart,selEnd);}catch(e){}}}
+ }
+}
+
+/* ===================== تبويب الإعداد ===================== */
+function viewSetup(f){
+ const b=BREEDS_D[f.breed];
+ const chips=Object.keys(BREEDS_D).map(k=>{const bb=BREEDS_D[k];
+   return '<div class="breed-chip '+(f.breed===k?'active':'')+'" onclick="setBreed(\''+k+'\')"><div class="bn">'+bb.name+'</div><div class="bt">'+(bb.isBreeder?'قطيع أمهات':'إنتاج لحم فقط')+'</div></div>';}).join('');
+ return '<div class="card"><div class="section-eyebrow">بيانات أساسية</div><h2>بيانات قطيع الأمهات</h2><div class="grid">'
+  +ftxt('اسم القطيع/العنبر',f.houseName,'houseName')
+  +fnum('عدد الإناث المُنزَّل',f.initialF,'initialF')
+  +fnum('عدد الذكور المُنزَّل',f.initialM,'initialM')
+  +fnum('عمر الشراء (باليوم) — 0 = عمر يوم',f.entryAgeDays,'entryAgeDays')
+  +'<div class="field"><label>تاريخ الدخول للمزرعة</label><input type="date" value="'+f.entryDate+'" oninput="setF(\'entryDate\',this.value)"></div>'
+  +'</div>'
+  +'<h3 class="blk">'+I('doc')+' التكاليف والأسعار (اختياري — لحساب الجدوى في التقرير)</h3><div class="grid">'
+  +fnum('سعر كيلو العلف (جنيه)',f.feedPriceKg,'feedPriceKg')
+  +fnum('سعر بيضة المائدة (جنيه)',f.eggPrice,'eggPrice')
+  +fnum('سعر الكتكوت الناتج (جنيه)',f.chickPrice,'chickPrice')
+  +'</div>'
+  +'<h3 class="blk">اختر السلالة — القطيع الحالي: <span style="color:var(--pine)">'+b.name+'</span></h3>'
+  +'<div class="breed-chips">'+chips+'</div>'
+  +breedRefCard(f.breed)
+  +'</div>';
+}
+function setBreed(k){const f=activeCycle();if(!f||!BREEDS_D[k])return;f.breed=k;save();renderCycleSelect();render();toast('تم اختيار سلالة: '+BREEDS_D[k].name);}
+function ftxt(l,v,k){return '<div class="field"><label>'+l+'</label><input id="f-'+k+'" value="'+esc(v)+'" oninput="setF(\''+k+'\',this.value)"></div>';}
+function fnum(l,v,k,ph){return '<div class="field"><label>'+l+'</label><input id="f-'+k+'" type="number" value="'+(v==null?'':v)+'" placeholder="'+(ph||'')+'" oninput="setF(\''+k+'\',this.value)"></div>';}
+function setF(k,v){const f=activeCycle();if(!f)return;if(['initialF','initialM','entryAgeDays','feedPriceKg','eggPrice','chickPrice'].indexOf(k)>=0)v=v===''?'':(+v||0);f[k]=v;save();
+ if(k==='houseName'){renderCycleSelect();}
+ else if(k==='breed'){renderCycleSelect();render();}}
+
+/* ===================== تبويب التربية ===================== */
+function weightAlert(actual,target){if(!actual)return['neu','—'];const pct=actual/target*100;
+ if(pct>=95&&pct<=108)return['ok','مطابق للمعيار'];if(pct>=88)return['warn','أقل قليلًا من المعيار'];if(pct>108)return['warn','أعلى من المعيار — راجع التغذية'];return['bad','أقل بوضوح من المعيار'];}
+function viewRear(f){
+ const b=BREEDS_D[f.breed];const rows_=f.rearRows.slice().sort((a,b2)=>a.week-b2.week);
+ let rows='',cumMortF=0,cumMortM=0,lastWeight=null,lastTarget=null;
+ rows_.forEach(r=>{const target=interp(b.rear,r.week);const wt=num(r.weight);const va=weightAlert(wt,target);
+  cumMortF+=num(r.mortF);cumMortM+=num(r.mortM);if(wt){lastWeight=wt;lastTarget=target;}
+  rows+='<tr><td class="calc">أسبوع '+r.week+'</td><td class="calc">'+fmt(target,0)+' جم</td>'
+   +'<td><input id="rear-'+r.id+'-weight" type="number" value="'+(r.weight||'')+'" oninput="setRear(\''+r.id+'\',\'weight\',this.value)"></td>'
+   +'<td><input id="rear-'+r.id+'-mortF" type="number" value="'+(r.mortF||'')+'" oninput="setRear(\''+r.id+'\',\'mortF\',this.value)"></td>'
+   +'<td><input id="rear-'+r.id+'-mortM" type="number" value="'+(r.mortM||'')+'" oninput="setRear(\''+r.id+'\',\'mortM\',this.value)"></td>'
+   +'<td><input id="rear-'+r.id+'-feed" type="number" value="'+(r.feed||'')+'" oninput="setRear(\''+r.id+'\',\'feed\',this.value)"></td>'
+   +'<td><span class="pill '+va[0]+'">'+va[1]+'</span></td>'
+   +'<td><input id="rear-'+r.id+'-notes" class="notes" value="'+esc(r.notes||'')+'" oninput="setRear(\''+r.id+'\',\'notes\',this.value)"></td>'
+   +'<td><button class="btn btn-danger" style="padding:6px 8px" onclick="removeRear(\''+r.id+'\')">'+I('trash')+'</button></td></tr>';});
+ const totalInit=f.initialF+f.initialM;const mortPct=totalInit?((cumMortF+cumMortM)/totalInit*100):0;
+ const vLast=lastWeight?weightAlert(lastWeight,lastTarget):['neu','—'];
+ const emptyMsg=rows_.length?'':'<div class="empty"><div class="big">'+I('scale')+'</div><p class="hint" style="margin-top:8px">مفيش أسابيع مُسجَّلة لسه — اضغط «إضافة أسبوع» تحت.</p></div>';
+ return '<div class="card"><div class="section-eyebrow">مرحلة التربية</div><h2>'+I('scale')+' منحنى النمو — '+esc(f.houseName)+'</h2>'
+  +'<div class="wk-metrics">'
+  +'<div class="wk-metric"><div class="k">آخر وزن مُسجَّل</div><div class="v">'+(lastWeight?fmt(lastWeight,0)+' جم':'—')+' <span class="pill '+vLast[0]+'">'+vLast[1]+'</span></div></div>'
+  +'<div class="wk-metric"><div class="k">النافق التراكمي</div><div class="v">'+fmt(mortPct,2)+'%</div></div>'
+  +'<div class="wk-metric"><div class="k">الموجود التقديري</div><div class="v">'+fmt(totalInit-cumMortF-cumMortM)+' طائر</div></div>'
+  +'</div>'
+  +(rows_.length?'<div class="tbl-scroll" style="margin-top:12px"><table class="log"><thead><tr><th>الأسبوع</th><th>الوزن القياسي</th><th>الوزن الفعلي (جم)</th><th>نافق إناث</th><th>نافق ذكور</th><th>علف (كجم)</th><th>الحالة</th><th>ملاحظات</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>':emptyMsg)
+  +'<div class="no-print" style="margin-top:12px"><button class="btn btn-primary" onclick="addRearWeek()">'+I('plus')+' إضافة أسبوع</button></div>'
+  +breedRefCard(f.breed)
+  +'</div>';
+}
+function addRearWeek(){const f=activeCycle();if(!f)return;const last=f.rearRows.length?Math.max(...f.rearRows.map(r=>r.week)):0;
+ f.rearRows.push({id:uid(),week:last+1,weight:'',mortF:'',mortM:'',feed:'',notes:''});save();render();}
+function removeRear(id){const f=activeCycle();if(!f)return;confirmModal('حذف بيانات هذا الأسبوع؟',()=>{f.rearRows=f.rearRows.filter(r=>r.id!==id);save();render();});}
+function setRear(id,k,v){const f=activeCycle();if(!f)return;const r=f.rearRows.find(x=>x.id===id);if(!r)return;if(['weight','mortF','mortM','feed'].indexOf(k)>=0)v=+v||0;r[k]=v;save();
+ clearTimeout(saveTimer);saveTimer=setTimeout(()=>{if(currentTab==='rear')renderPreservingFocus();},900);}
+
+/* ===================== تبويب الإنتاج اليومي ===================== */
+function computeStock(f){
+ let rearMortF=0,rearMortM=0;f.rearRows.forEach(r=>{rearMortF+=num(r.mortF);rearMortM+=num(r.mortM);});
+ let prodMortF=0,prodMortM=0;f.prodDays.forEach(d=>{prodMortF+=num(d.mortF);prodMortM+=num(d.mortM);});
+ let netReplaceM=0;f.replaceRows.forEach(r=>{netReplaceM+=num(r.addedM)-num(r.removedM);});
+ const currentF=Math.max(0,f.initialF-rearMortF-prodMortF);
+ const currentM=Math.max(0,f.initialM-rearMortM-prodMortM+netReplaceM);
+ return {rearMortF,rearMortM,prodMortF,prodMortM,netReplaceM,currentF,currentM};
+}
+function ratioAlert(ratio){if(ratio==null)return['neu','—'];if(ratio>=4&&ratio<=5.5)return['ok','مثالية (4:1–5.5:1)'];if(ratio>=3&&ratio<7)return['warn','مقبولة — راجع لاحقًا'];return['bad',ratio<3?'ذكور زيادة عن اللزوم':'ذكور قليلة — خطر على الخصوبة'];}
+function henDayAlert(pct){if(pct==null)return['neu','—'];if(pct>=75)return['ok','ممتازة'];if(pct>=55)return['warn','متوسطة'];return['bad','منخفضة — راجع الإضاءة/التغذية/الإجهاد'];}
+function viewProd(f){
+ const rows_=f.prodDays.slice().sort((a,b)=>a.date<b.date?-1:1);
+ let rows='',cumEggs=0,cumBroken=0,cumThin=0,cumMortF=0,cumMortM=0,runF=f.initialF;
+ rows_.forEach(r=>{const eggs=num(r.eggs);cumEggs+=eggs;cumBroken+=num(r.broken);cumThin+=num(r.thin);
+  const hd=runF>0?eggs/runF*100:null;const vh=henDayAlert(hd);
+  runF=Math.max(0,runF-num(r.mortF));cumMortF+=num(r.mortF);cumMortM+=num(r.mortM);
+  rows+='<tr><td class="calc" style="white-space:nowrap">'+r.date+'</td>'
+   +'<td><input id="prod-'+r.id+'-eggs" type="number" value="'+(r.eggs||'')+'" oninput="setProdDay(\''+r.id+'\',\'eggs\',this.value)"></td>'
+   +'<td class="calc">'+(hd!=null?fmt(hd,1)+'%':'—')+' <span class="pill '+vh[0]+'">'+vh[1]+'</span></td>'
+   +'<td><input id="prod-'+r.id+'-broken" type="number" value="'+(r.broken||'')+'" oninput="setProdDay(\''+r.id+'\',\'broken\',this.value)"></td>'
+   +'<td><input id="prod-'+r.id+'-thin" type="number" value="'+(r.thin||'')+'" oninput="setProdDay(\''+r.id+'\',\'thin\',this.value)"></td>'
+   +'<td><input id="prod-'+r.id+'-mortF" type="number" value="'+(r.mortF||'')+'" oninput="setProdDay(\''+r.id+'\',\'mortF\',this.value)"></td>'
+   +'<td><input id="prod-'+r.id+'-mortM" type="number" value="'+(r.mortM||'')+'" oninput="setProdDay(\''+r.id+'\',\'mortM\',this.value)"></td>'
+   +'<td><input id="prod-'+r.id+'-feed" type="number" value="'+(r.feed||'')+'" oninput="setProdDay(\''+r.id+'\',\'feed\',this.value)"></td>'
+   +'<td><input id="prod-'+r.id+'-notes" class="notes" value="'+esc(r.notes||'')+'" oninput="setProdDay(\''+r.id+'\',\'notes\',this.value)"></td>'
+   +'<td><button class="btn btn-danger" style="padding:6px 8px" onclick="removeProdDay(\''+r.id+'\')">'+I('trash')+'</button></td></tr>';});
+ const totalInit=f.initialF+f.initialM;const mortPct=totalInit?((cumMortF+cumMortM)/totalInit*100):0;
+ const avgHD=f.initialF?(cumEggs/Math.max(1,rows_.length)/f.initialF*100):null;
+ const st=computeStock(f);const ratio=st.currentM>0?st.currentF/st.currentM:null;const vr=ratioAlert(ratio);
+ const emptyMsg=rows_.length?'':'<div class="empty"><div class="big">'+I('egg')+'</div><p class="hint" style="margin-top:8px">مفيش أيام مُسجَّلة لسه — اضغط «إضافة يوم» تحت.</p></div>';
+ return '<div class="card"><div class="section-eyebrow">الإنتاج اليومي</div><h2>'+I('egg')+' سجل جمع البيض اليومي — '+esc(f.houseName)+'</h2>'
+  +'<div class="wk-metrics">'
+  +'<div class="wk-metric"><div class="k">إجمالي البيض</div><div class="v">'+fmt(cumEggs)+'</div></div>'
+  +'<div class="wk-metric"><div class="k">متوسط Hen-Day%</div><div class="v">'+(avgHD!=null?fmt(avgHD,1)+'%':'—')+'</div></div>'
+  +'<div class="wk-metric"><div class="k">الموجود حاليًا (إناث)</div><div class="v">'+fmt(runF)+'</div></div>'
+  +'<div class="wk-metric"><div class="k">نسبة ذكور:إناث</div><div class="v">'+(ratio!=null?('1 : '+fmt(ratio,1)):'—')+' <span class="pill '+vr[0]+'">'+vr[1]+'</span></div></div>'
+  +'<div class="wk-metric"><div class="k">النافق التراكمي (إنتاج)</div><div class="v">'+fmt(mortPct,2)+'%</div></div>'
+  +'</div>'
+  +(rows_.length?'<div class="tbl-scroll" style="margin-top:12px"><table class="log"><thead><tr><th>التاريخ</th><th>بيض</th><th>Hen-Day%</th><th>كسر</th><th>رقيق/مشوّه</th><th>نافق إناث</th><th>نافق ذكور</th><th>علف (كجم)</th><th>ملاحظات</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>':emptyMsg)
+  +'<div class="no-print" style="margin-top:12px"><button class="btn btn-primary" onclick="addProdDay()">'+I('plus')+' إضافة يوم</button></div>'
+  +'</div>';
+}
+function addProdDay(){const f=activeCycle();if(!f)return;const last=f.prodDays.length?f.prodDays.slice().sort((a,b)=>a.date<b.date?1:-1)[0].date:null;
+ let nd=new Date().toISOString().slice(0,10);if(last){const dt=new Date(last);dt.setDate(dt.getDate()+1);nd=dt.toISOString().slice(0,10);}
+ f.prodDays.push({id:uid(),date:nd,eggs:'',broken:'',thin:'',mortF:'',mortM:'',feed:'',notes:''});save();render();}
+function removeProdDay(id){const f=activeCycle();if(!f)return;confirmModal('حذف بيانات هذا اليوم؟',()=>{f.prodDays=f.prodDays.filter(r=>r.id!==id);save();render();});}
+function setProdDay(id,k,v){const f=activeCycle();if(!f)return;const r=f.prodDays.find(x=>x.id===id);if(!r)return;
+ if(k==='date'){r.date=v;save();return;}
+ if(['eggs','broken','thin','mortF','mortM','feed'].indexOf(k)>=0)v=+v||0;r[k]=v;save();
+ clearTimeout(saveTimer);saveTimer=setTimeout(()=>{if(currentTab==='prod')renderPreservingFocus();},900);}
+
+/* ===================== تبويب التفريخ (دفعات) ===================== */
+function fertilityAlert(pct){if(pct==null)return['neu','—'];if(pct>=88)return['ok','ممتازة'];if(pct>=78)return['warn','مقبولة — راجع نسبة الذكور:الإناث']; return['bad','منخفضة — تدخل عاجل'];}
+function hatchAlert(pct){if(pct==null)return['neu','—'];if(pct>=85)return['ok','ممتازة'];if(pct>=70)return['warn','مقبولة'];return['bad','منخفضة — راجع التخزين والتفريخ'];}
+function addDays(dateStr,n){const d=new Date(dateStr);d.setDate(d.getDate()+n);return d.toISOString().slice(0,10);}
+function viewHatch(f){
+ const b=BREEDS_D[f.breed];
+ const rows_=f.hatchBatches.slice().sort((a,b2)=>a.sentDate<b2.sentDate?-1:1);
+ let rows='',cumSent=0,cumFert=0,cumHatch=0;
+ rows_.forEach(r=>{const sent=num(r.eggsSent);const fert=num(r.fertile);const hatch=num(r.hatched);
+  cumSent+=sent;cumFert+=fert;cumHatch+=hatch;
+  const fertPct=sent?fert/sent*100:null;const hosPct=fert?hatch/fert*100:null;const hoePct=sent?hatch/sent*100:null;
+  const vf=fertilityAlert(fertPct),vh=hatchAlert(hosPct);
+  const expDate=r.sentDate?addDays(r.sentDate,b.incubDays):'';
+  rows+='<tr><td class="calc" style="white-space:nowrap">'+r.sentDate+'</td>'
+   +'<td><input id="hatch-'+r.id+'-eggsSent" type="number" value="'+(r.eggsSent||'')+'" oninput="setHatch(\''+r.id+'\',\'eggsSent\',this.value)"></td>'
+   +'<td><input id="hatch-'+r.id+'-hatchery" value="'+esc(r.hatchery||'')+'" style="min-width:100px" oninput="setHatch(\''+r.id+'\',\'hatchery\',this.value)"></td>'
+   +'<td class="calc" style="white-space:nowrap">'+expDate+'</td>'
+   +'<td><input id="hatch-'+r.id+'-fertile" type="number" value="'+(r.fertile||'')+'" oninput="setHatch(\''+r.id+'\',\'fertile\',this.value)"></td>'
+   +'<td class="calc">'+(fertPct!=null?fmt(fertPct,1)+'%':'—')+' <span class="pill '+vf[0]+'">'+vf[1]+'</span></td>'
+   +'<td><input id="hatch-'+r.id+'-hatched" type="number" value="'+(r.hatched||'')+'" oninput="setHatch(\''+r.id+'\',\'hatched\',this.value)"></td>'
+   +'<td class="calc">'+(hosPct!=null?fmt(hosPct,1)+'%':'—')+' <span class="pill '+vh[0]+'">'+vh[1]+'</span></td>'
+   +'<td class="calc">'+(hoePct!=null?fmt(hoePct,1)+'%':'—')+'</td>'
+   +'<td><input id="hatch-'+r.id+'-notes" class="notes" value="'+esc(r.notes||'')+'" oninput="setHatch(\''+r.id+'\',\'notes\',this.value)"></td>'
+   +'<td><button class="btn btn-danger" style="padding:6px 8px" onclick="removeHatch(\''+r.id+'\')">'+I('trash')+'</button></td></tr>';});
+ const totFert=cumSent?cumFert/cumSent*100:null;const totHos=cumFert?cumHatch/cumFert*100:null;const totHoe=cumSent?cumHatch/cumSent*100:null;
+ const emptyMsg=rows_.length?'':'<div class="empty"><div class="big">'+I('chick')+'</div><p class="hint" style="margin-top:8px">مفيش دفعات تفريخ مُسجَّلة لسه — اضغط «إضافة دفعة» تحت. أدخل تاريخ الإرسال وعدد البيض، وارجع كمّل نتيجة الفرز والفقس لما توصلك من المفرخة.</p></div>';
+ return '<div class="card"><div class="section-eyebrow">التفريخ</div><h2>'+I('chick')+' سجل دفعات التفريخ — '+esc(f.houseName)+'</h2>'
+  +'<p class="hint">مدة تحضين سلالة '+b.name+': <b>'+b.incubDays+' يوم</b> — تاريخ الفقس المتوقع بيتحسب أوتوماتيك من تاريخ الإرسال.</p>'
+  +'<div class="wk-metrics">'
+  +'<div class="wk-metric"><div class="k">إجمالي البيض المُرسَل</div><div class="v">'+fmt(cumSent)+'</div></div>'
+  +'<div class="wk-metric"><div class="k">نسبة الخصوبة الكلية</div><div class="v">'+(totFert!=null?fmt(totFert,1)+'%':'—')+'</div></div>'
+  +'<div class="wk-metric"><div class="k">فقس من المخصب</div><div class="v">'+(totHos!=null?fmt(totHos,1)+'%':'—')+'</div></div>'
+  +'<div class="wk-metric"><div class="k">فقس من المُرسَل</div><div class="v">'+(totHoe!=null?fmt(totHoe,1)+'%':'—')+'</div></div>'
+  +'<div class="wk-metric"><div class="k">إجمالي الكتاكيت</div><div class="v">'+fmt(cumHatch)+'</div></div>'
+  +'</div>'
+  +(rows_.length?'<div class="tbl-scroll" style="margin-top:12px"><table class="log"><thead><tr><th>تاريخ الإرسال</th><th>بيض مُرسَل</th><th>المفرخة</th><th>الفقس المتوقع</th><th>مُخصَّب</th><th>خصوبة%</th><th>فقس (كتكوت)</th><th>فقس/مخصب%</th><th>فقس/مرسل%</th><th>ملاحظات</th><th></th></tr></thead><tbody>'+rows+'</tbody></table></div>':emptyMsg)
+  +'<div class="no-print" style="margin-top:12px"><button class="btn btn-primary" onclick="addHatchBatch()">'+I('plus')+' إضافة دفعة تفريخ</button></div>'
+  +'</div>';
+}
+function addHatchBatch(){const f=activeCycle();if(!f)return;const last=f.hatchBatches.length?f.hatchBatches.slice().sort((a,b)=>a.sentDate<b.sentDate?1:-1)[0].sentDate:null;
+ let nd=new Date().toISOString().slice(0,10);if(last)nd=addDays(last,3);
+ f.hatchBatches.push({id:uid(),sentDate:nd,eggsSent:'',hatchery:'',fertile:'',hatched:'',notes:''});save();render();}
+function removeHatch(id){const f=activeCycle();if(!f)return;confirmModal('حذف بيانات هذه الدفعة؟',()=>{f.hatchBatches=f.hatchBatches.filter(r=>r.id!==id);save();render();});}
+function setHatch(id,k,v){const f=activeCycle();if(!f)return;const r=f.hatchBatches.find(x=>x.id===id);if(!r)return;
+ if(k==='sentDate'||k==='hatchery'){r[k]=v;save();return;}
+ if(['eggsSent','fertile','hatched'].indexOf(k)>=0)v=+v||0;r[k]=v;save();
+ clearTimeout(saveTimer);saveTimer=setTimeout(()=>{if(currentTab==='hatch')renderPreservingFocus();},900);}
+
+/* ===================== تبويب الصحة والاستبدال ===================== */
+function fileToImg(inputEl,cb){const fl=inputEl.files[0];if(!fl)return;const rd=new FileReader();rd.onload=()=>{const img=new Image();img.onload=()=>{const max=500;let w=img.width,h=img.height;if(w>max||h>max){const r=Math.min(max/w,max/h);w=Math.round(w*r);h=Math.round(h*r);}const cv=document.createElement('canvas');cv.width=w;cv.height=h;const x=cv.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,w,h);x.drawImage(img,0,0,w,h);cb(cv.toDataURL('image/jpeg',0.75));};img.src=rd.result;};rd.readAsDataURL(fl);inputEl.value='';}
+function attachHealth(id,el){fileToImg(el,(data)=>{const f=activeCycle();if(!f)return;const r=f.healthRows.find(x=>x.id===id);if(!r)return;r.attach=data;save();render();toast('تم إرفاق الصورة');});}
+function removeAttach(id){const f=activeCycle();if(!f)return;const r=f.healthRows.find(x=>x.id===id);if(!r)return;r.attach='';save();render();}
+function viewHealth(f){
+ const st=computeStock(f);const ratio=st.currentM>0?st.currentF/st.currentM:null;const vr=ratioAlert(ratio);
+ const rr=f.replaceRows.slice().sort((a,b)=>a.date<b.date?-1:1);
+ let repRows='';rr.forEach(r=>{repRows+='<tr><td class="calc" style="white-space:nowrap">'+r.date+'</td>'
+  +'<td><input id="rep-'+r.id+'-removedM" type="number" value="'+(r.removedM||'')+'" oninput="setReplace(\''+r.id+'\',\'removedM\',this.value)"></td>'
+  +'<td><input id="rep-'+r.id+'-addedM" type="number" value="'+(r.addedM||'')+'" oninput="setReplace(\''+r.id+'\',\'addedM\',this.value)"></td>'
+  +'<td><input id="rep-'+r.id+'-reason" value="'+esc(r.reason||'')+'" style="min-width:120px" oninput="setReplace(\''+r.id+'\',\'reason\',this.value)"></td>'
+  +'<td><input id="rep-'+r.id+'-notes" class="notes" value="'+esc(r.notes||'')+'" oninput="setReplace(\''+r.id+'\',\'notes\',this.value)"></td>'
+  +'<td><button class="btn btn-danger" style="padding:6px 8px" onclick="removeReplace(\''+r.id+'\')">'+I('trash')+'</button></td></tr>';});
+ const hr=f.healthRows.slice().sort((a,b)=>a.date<b.date?-1:1);
+ let healthRows='';hr.forEach(r=>{healthRows+='<tr><td class="calc" style="white-space:nowrap">'+r.date+'</td>'
+  +'<td><select id="health-'+r.id+'-type" onchange="setHealth(\''+r.id+'\',\'type\',this.value)"><option value="تحصين" '+(r.type==='تحصين'?'selected':'')+'>تحصين</option><option value="علاج" '+(r.type==='علاج'?'selected':'')+'>علاج</option></select></td>'
+  +'<td><input id="health-'+r.id+'-product" value="'+esc(r.product||'')+'" style="min-width:110px" oninput="setHealth(\''+r.id+'\',\'product\',this.value)"></td>'
+  +'<td><input id="health-'+r.id+'-dose" value="'+esc(r.dose||'')+'" oninput="setHealth(\''+r.id+'\',\'dose\',this.value)"></td>'
+  +'<td><input id="health-'+r.id+'-route" value="'+esc(r.route||'')+'" oninput="setHealth(\''+r.id+'\',\'route\',this.value)"></td>'
+  +'<td><input id="health-'+r.id+'-notes" class="notes" value="'+esc(r.notes||'')+'" oninput="setHealth(\''+r.id+'\',\'notes\',this.value)"></td>'
+  +'<td>'+(r.attach?('<img src="'+r.attach+'" style="width:36px;height:36px;object-fit:cover;border-radius:6px;cursor:pointer" onclick="window.open(this.src)"> <button class="btn btn-danger" style="padding:4px 6px" onclick="removeAttach(\''+r.id+'\')">×</button>'):('<input type="file" accept="image/*" style="width:90px;font-size:11px" onchange="attachHealth(\''+r.id+'\',this)">'))+'</td>'
+  +'<td><button class="btn btn-danger" style="padding:6px 8px" onclick="removeHealth(\''+r.id+'\')">'+I('trash')+'</button></td></tr>';});
+ const sr=f.serologyRows.slice().sort((a,b)=>a.date<b.date?-1:1);
+ let seroRows='';sr.forEach(r=>{seroRows+='<tr><td class="calc" style="white-space:nowrap">'+r.date+'</td>'
+  +'<td><select id="sero-'+r.id+'-test" onchange="setSero(\''+r.id+'\',\'test\',this.value)"><option value="HI" '+(r.test==='HI'?'selected':'')+'>HI</option><option value="ELISA" '+(r.test==='ELISA'?'selected':'')+'>ELISA</option></select></td>'
+  +'<td><input id="sero-'+r.id+'-disease" value="'+esc(r.disease||'')+'" style="min-width:100px" placeholder="مثال: AI, ND" oninput="setSero(\''+r.id+'\',\'disease\',this.value)"></td>'
+  +'<td><input id="sero-'+r.id+'-titer" value="'+esc(r.titer||'')+'" oninput="setSero(\''+r.id+'\',\'titer\',this.value)"></td>'
+  +'<td><input id="sero-'+r.id+'-notes" class="notes" value="'+esc(r.notes||'')+'" oninput="setSero(\''+r.id+'\',\'notes\',this.value)"></td>'
+  +'<td><button class="btn btn-danger" style="padding:6px 8px" onclick="removeSero(\''+r.id+'\')">'+I('trash')+'</button></td></tr>';});
+ return '<div class="card"><div class="section-eyebrow">قطيع الذكور</div><h2>'+I('bulb')+' نسبة ذكور:إناث واستبدال الذكور — '+esc(f.houseName)+'</h2>'
+  +'<div class="wk-metrics">'
+  +'<div class="wk-metric"><div class="k">الموجود حاليًا</div><div class="v">'+fmt(st.currentF)+' إناث / '+fmt(st.currentM)+' ذكور</div></div>'
+  +'<div class="wk-metric"><div class="k">النسبة الحالية</div><div class="v">1 ذكر : '+(ratio!=null?fmt(ratio,1):'—')+' إناث <span class="pill '+vr[0]+'">'+vr[1]+'</span></div></div>'
+  +'</div>'
+  +'<p class="hint" style="margin-top:8px">النسبة المثالية موصى بها 4:1 إلى 5.5:1 (إناث لكل ذكر) لضمان خصوبة جيدة من غير إجهاد على الإناث.</p>'
+  +(rr.length?'<div class="tbl-scroll" style="margin-top:12px"><table class="log"><thead><tr><th>التاريخ</th><th>ذكور مُستبعدة</th><th>ذكور مُضافة</th><th>السبب</th><th>ملاحظات</th><th></th></tr></thead><tbody>'+repRows+'</tbody></table></div>':'<div class="phase-note">لا يوجد عمليات استبدال ذكور مُسجَّلة.</div>')
+  +'<div class="no-print" style="margin-top:12px"><button class="btn btn-primary" onclick="addReplace()">'+I('plus')+' إضافة عملية استبدال</button></div>'
+  +'</div>'
+  +'<div class="card"><div class="section-eyebrow">السجل الصحي</div><h2>'+I('bulb')+' التحصينات والعلاجات — '+esc(f.houseName)+'</h2>'
+  +(hr.length?'<div class="tbl-scroll" style="margin-top:12px"><table class="log"><thead><tr><th>التاريخ</th><th>النوع</th><th>المنتج/اللقاح</th><th>الجرعة</th><th>طريقة الإعطاء</th><th>ملاحظات</th><th>مرفق</th><th></th></tr></thead><tbody>'+healthRows+'</tbody></table></div>':'<div class="phase-note">لا يوجد تحصينات أو علاجات مُسجَّلة.</div>')
+  +'<div class="no-print" style="margin-top:12px"><button class="btn btn-primary" onclick="addHealth()">'+I('plus')+' إضافة تحصين/علاج</button></div>'
+  +'</div>'
+  +'<div class="card"><div class="section-eyebrow">السيرولوجي</div><h2>'+I('bulb')+' نتائج HI / ELISA — '+esc(f.houseName)+'</h2>'
+  +(sr.length?'<div class="tbl-scroll" style="margin-top:12px"><table class="log"><thead><tr><th>التاريخ</th><th>الاختبار</th><th>المرض/المستضد</th><th>التتر (Titer)</th><th>ملاحظات</th><th></th></tr></thead><tbody>'+seroRows+'</tbody></table></div>':'<div class="phase-note">لا يوجد نتائج سيرولوجي مُسجَّلة.</div>')
+  +'<div class="no-print" style="margin-top:12px"><button class="btn btn-primary" onclick="addSero()">'+I('plus')+' إضافة نتيجة</button></div>'
+  +'</div>';
+}
+function addReplace(){const f=activeCycle();if(!f)return;f.replaceRows.push({id:uid(),date:new Date().toISOString().slice(0,10),removedM:'',addedM:'',reason:'',notes:''});save();render();}
+function removeReplace(id){const f=activeCycle();if(!f)return;confirmModal('حذف عملية الاستبدال دي؟',()=>{f.replaceRows=f.replaceRows.filter(r=>r.id!==id);save();render();});}
+function setReplace(id,k,v){const f=activeCycle();if(!f)return;const r=f.replaceRows.find(x=>x.id===id);if(!r)return;
+ if(k==='date'||k==='reason'){r[k]=v;save();return;}
+ if(['removedM','addedM'].indexOf(k)>=0)v=+v||0;r[k]=v;save();
+ clearTimeout(saveTimer);saveTimer=setTimeout(()=>{if(currentTab==='health')renderPreservingFocus();},900);}
+function addHealth(){const f=activeCycle();if(!f)return;f.healthRows.push({id:uid(),date:new Date().toISOString().slice(0,10),type:'تحصين',product:'',dose:'',route:'',notes:'',attach:''});save();render();}
+function removeHealth(id){const f=activeCycle();if(!f)return;confirmModal('حذف هذا السجل؟',()=>{f.healthRows=f.healthRows.filter(r=>r.id!==id);save();render();});}
+function setHealth(id,k,v){const f=activeCycle();if(!f)return;const r=f.healthRows.find(x=>x.id===id);if(!r)return;r[k]=v;save();
+ clearTimeout(saveTimer);saveTimer=setTimeout(()=>{if(currentTab==='health')renderPreservingFocus();},900);}
+function addSero(){const f=activeCycle();if(!f)return;f.serologyRows.push({id:uid(),date:new Date().toISOString().slice(0,10),test:'HI',disease:'',titer:'',notes:''});save();render();}
+function removeSero(id){const f=activeCycle();if(!f)return;confirmModal('حذف نتيجة السيرولوجي دي؟',()=>{f.serologyRows=f.serologyRows.filter(r=>r.id!==id);save();render();});}
+function setSero(id,k,v){const f=activeCycle();if(!f)return;const r=f.serologyRows.find(x=>x.id===id);if(!r)return;r[k]=v;save();
+ clearTimeout(saveTimer);saveTimer=setTimeout(()=>{if(currentTab==='health')renderPreservingFocus();},900);}
+
+/* ===================== تبويب التقرير ===================== */
+function analyzeD(f){const b=BREEDS_D[f.breed];
+ let lastWeight=null,lastTarget=null;
+ f.rearRows.forEach(r=>{if(r.weight){lastWeight=num(r.weight);lastTarget=interp(b.rear,r.week);}});
+ const st=computeStock(f);
+ const totalInit=f.initialF+f.initialM;
+ const rearMortPct=totalInit?((st.rearMortF+st.rearMortM)/totalInit*100):0;
+ const prodMortPct=totalInit?((st.prodMortF+st.prodMortM)/totalInit*100):0;
+ const mortPct=rearMortPct+prodMortPct;
+ const ratio=st.currentM>0?st.currentF/st.currentM:null;
+ let cumEggs=0,cumBroken=0,cumThin=0,cumProdFeed=0;f.prodDays.forEach(d=>{cumEggs+=num(d.eggs);cumBroken+=num(d.broken);cumThin+=num(d.thin);cumProdFeed+=num(d.feed);});
+ const avgHD=(f.initialF&&f.prodDays.length)?(cumEggs/f.prodDays.length/f.initialF*100):null;
+ let cumSent=0,cumFert=0,cumHatch=0;f.hatchBatches.forEach(r=>{cumSent+=num(r.eggsSent);cumFert+=num(r.fertile);cumHatch+=num(r.hatched);});
+ const fertPct=cumSent?cumFert/cumSent*100:null;const hatchPct=cumFert?cumHatch/cumFert*100:null;
+ const replaceCount=f.replaceRows.length;const healthCount=f.healthRows.length;
+ let cumRearFeed=0;f.rearRows.forEach(r=>cumRearFeed+=num(r.feed));
+ const totalFeedKg=cumRearFeed+cumProdFeed;
+ const feedCost=totalFeedKg*num(f.feedPriceKg);
+ const eggsForSale=Math.max(0,cumEggs-cumSent);
+ const revenueEggs=eggsForSale*num(f.eggPrice);
+ const revenueChicks=cumHatch*num(f.chickPrice);
+ const totalRevenue=revenueEggs+revenueChicks;
+ const profit=totalRevenue-feedCost;
+ const hasEcon=(num(f.feedPriceKg)>0||num(f.eggPrice)>0||num(f.chickPrice)>0);
+ return {b,lastWeight,lastTarget,mortPct,rearMortPct,prodMortPct,totalInit,cumEggs,avgHD,cumSent,cumFert,cumHatch,fertPct,hatchPct,replaceCount,healthCount,st,ratio,totalFeedKg,feedCost,eggsForSale,revenueEggs,revenueChicks,totalRevenue,profit,hasEcon};
+}
+function computeProblemFlags(z){
+ const vw=z.lastWeight?weightAlert(z.lastWeight,z.lastTarget):['neu',''];
+ const vhd=henDayAlert(z.avgHD);const vf=fertilityAlert(z.fertPct);const vh=hatchAlert(z.hatchPct);
+ return {highRearMort:z.rearMortPct>10,highProdMort:z.prodMortPct>10,lowWeight:vw[0]==='bad',lowHenDay:vhd[0]==='bad',lowFertility:vf[0]==='bad',lowHatch:vh[0]==='bad'};
+}
+const PROBLEM_LABELS={highRearMort:'نافق مرتفع في مرحلة التربية',highProdMort:'نافق مرتفع في مرحلة الإنتاج',lowWeight:'وزن أقل من المعيار',lowHenDay:'إنتاج بيض منخفض (Hen-Day)',lowFertility:'خصوبة منخفضة',lowHatch:'نسبة فقس منخفضة'};
+function recurringWarnings(f,flags){
+ const siblings=DB.cycles.filter(c=>c.farmId===f.farmId&&c.id!==f.id&&c.closed&&c.closedProblems);
+ const warnings=[];
+ Object.keys(flags).forEach(k=>{if(!flags[k])return;const count=siblings.filter(c=>c.closedProblems[k]).length;
+  if(count>0)warnings.push('🔁 «'+PROBLEM_LABELS[k]+'» تكررت في '+count+' دورة/دورات سابقة مُغلَقة بنفس المزرعة — احتمال يكون سبب هيكلي (تهوية/تغذية/سلالة) مش حادثة عابرة.');});
+ return warnings;
+}
+function closeCycle(){const f=activeCycle();if(!f)return;
+ confirmModal('تقييم وإغلاق الدورة؟ هيتجمّد التقرير الحالي كملخص نهائي (تقدر تفتحها تاني لو احتجت تعدّل).',()=>{
+  const z=analyzeD(f);f.closed=true;f.closedDate=new Date().toISOString().slice(0,10);f.closedProblems=computeProblemFlags(z);save();render();toast('تم إغلاق الدورة وتجميد التقرير النهائي');});}
+function reopenCycle(){const f=activeCycle();if(!f)return;confirmModal('إعادة فتح الدورة للتعديل؟',()=>{f.closed=false;save();render();toast('تم فتح الدورة');});}
+function viewReport(f){
+ const z=analyzeD(f);const b=z.b;const today=new Date().toLocaleDateString('ar-EG',{year:'numeric',month:'long',day:'numeric'});
+ const vw=z.lastWeight?weightAlert(z.lastWeight,z.lastTarget):['neu','—'];
+ const vrm=z.rearMortPct>10?['bad','مرتفع']:(z.rearMortPct>6?['warn','متابعة']:['ok','ضمن الطبيعي']);
+ const vpm=z.prodMortPct>10?['bad','مرتفع']:(z.prodMortPct>6?['warn','متابعة']:['ok','ضمن الطبيعي']);
+ const vhd=henDayAlert(z.avgHD);
+ const vf=fertilityAlert(z.fertPct);const vh=hatchAlert(z.hatchPct);
+ const vr=ratioAlert(z.ratio);
+ const row=(k,v,verd)=>'<tr><td style="font-weight:700">'+k+'</td><td>'+v+'</td><td><span class="pill '+verd[0]+'">'+verd[1]+'</span></td></tr>';
+ let kt=row('آخر وزن مُسجَّل مقابل القياسي',(z.lastWeight?fmt(z.lastWeight,0)+' جم (قياسي '+fmt(z.lastTarget,0)+' جم)':'—'),vw)
+  +row('نافق مرحلة التربية',fmt(z.rearMortPct,2)+'%',vrm)
+  +row('نافق مرحلة الإنتاج',fmt(z.prodMortPct,2)+'%',vpm)
+  +row('نسبة ذكور:إناث الحالية',(z.ratio!=null?('1 : '+fmt(z.ratio,1)):'—'),vr)
+  +row('متوسط Hen-Day%',(z.avgHD!=null?fmt(z.avgHD,1)+'%':'—'),vhd)
+  +row('نسبة الخصوبة الكلية (تفريخ)',(z.fertPct!=null?fmt(z.fertPct,1)+'%':'—'),vf)
+  +row('نسبة الفقس الكلية (من المخصب)',(z.hatchPct!=null?fmt(z.hatchPct,1)+'%':'—'),vh);
+ const flags=computeProblemFlags(z);
+ const alerts=[];
+ if(vrm[0]==='bad')alerts.push('⚠️ نافق مرحلة التربية مرتفع ('+fmt(z.rearMortPct,2)+'%) — يحتاج مراجعة عاجلة.');
+ if(vpm[0]==='bad')alerts.push('⚠️ نافق مرحلة الإنتاج مرتفع ('+fmt(z.prodMortPct,2)+'%) — يحتاج مراجعة عاجلة.');
+ if(vr[0]==='bad')alerts.push('⚠️ نسبة ذكور:إناث خارج النطاق المثالي — '+vr[1]+'.');
+ if(vhd[0]==='bad')alerts.push('⚠️ نسبة الإنتاج (Hen-Day%) منخفضة — راجع الإضاءة والتغذية ونسبة الذكور:الإناث.');
+ if(vf[0]==='bad')alerts.push('⚠️ نسبة الخصوبة منخفضة — يُنصح بمراجعة قطيع الذكور (العمر/النشاط/نسبة الذكور:الإناث).');
+ if(vh[0]==='bad')alerts.push('⚠️ نسبة الفقس منخفضة رغم الخصوبة — راجع ظروف تخزين ونقل البيض قبل التفريخ.');
+ const recWarnings=recurringWarnings(f,flags);
+ const alertsHtml=(alerts.length||recWarnings.length)?('<div style="margin-top:12px">'+alerts.map(a=>'<div class="alert bad">'+a+'</div>').join('')+recWarnings.map(a=>'<div class="alert warn">'+a+'</div>').join('')+'</div>'):'<div class="alert ok">لا توجد تنبيهات حرجة حاليًا — المؤشرات ضمن المتوقع.</div>';
+ const narrative='قطيع «'+esc(f.houseName)+'» من سلالة '+b.name+'، بعدد إناث '+fmt(f.initialF)+' وذكور '+fmt(f.initialM)+' عند التنزيل. '
+  +(z.lastWeight?('آخر وزن مُسجَّل '+fmt(z.lastWeight,0)+' جم مقابل قياسي '+fmt(z.lastTarget,0)+' جم. '):'')
+  +'نافق التربية '+fmt(z.rearMortPct,2)+'% ونافق الإنتاج '+fmt(z.prodMortPct,2)+'%. '
+  +(z.cumEggs?('إجمالي البيض المُجمَّع '+fmt(z.cumEggs)+' بيضة بمتوسط إنتاج '+(z.avgHD!=null?fmt(z.avgHD,1)+'%':'—')+'. '):'')
+  +(z.cumSent?('أُرسل للتفريخ '+fmt(z.cumSent)+' بيضة، بنسبة خصوبة '+(z.fertPct!=null?fmt(z.fertPct,1)+'%':'—')+' ونسبة فقس '+(z.hatchPct!=null?fmt(z.hatchPct,1)+'%':'—')+' من المخصب، وناتج '+fmt(z.cumHatch)+' كتكوت. '):'')
+  +(z.replaceCount?('تم تسجيل '+z.replaceCount+' عملية استبدال ذكور. '):'')+(z.healthCount?('يوجد '+z.healthCount+' سجل تحصين/علاج مُسجَّل.'):'');
+ const econHtml=z.hasEcon?('<h3 class="blk">'+I('doc')+' الجدوى الاقتصادية التقديرية</h3>'
+  +'<div class="wk-metrics">'
+  +'<div class="wk-metric"><div class="k">إجمالي العلف المُستهلَك</div><div class="v">'+fmt(z.totalFeedKg,1)+' كجم</div></div>'
+  +'<div class="wk-metric"><div class="k">تكلفة العلف التقديرية</div><div class="v">'+fmt(z.feedCost,0)+' جنيه</div></div>'
+  +'<div class="wk-metric"><div class="k">إيراد بيض المائدة التقديري</div><div class="v">'+fmt(z.revenueEggs,0)+' جنيه</div></div>'
+  +'<div class="wk-metric"><div class="k">إيراد الكتاكيت التقديري</div><div class="v">'+fmt(z.revenueChicks,0)+' جنيه</div></div>'
+  +'<div class="wk-metric"><div class="k">صافي تقديري (إيراد-علف)</div><div class="v" style="color:'+(z.profit>=0?'var(--moss)':'var(--clay)')+'">'+fmt(z.profit,0)+' جنيه</div></div>'
+  +'</div><p class="hint">تقدير مبسّط (علف فقط) — لا يشمل تكاليف أخرى كالعمالة والأدوية والكهرباء.</p>'):'';
+ const closureHtml=f.closed?('<div class="alert ok" style="margin-top:12px">✅ الدورة مُغلَقة ومُقيَّمة بتاريخ '+f.closedDate+' — هذا ملخص نهائي مُجمَّد.</div>'):'';
+ return '<div class="card"><div class="section-eyebrow">تقرير أداء</div><h2>'+I('chart')+' تقرير قطيع الأمهات — '+esc(f.houseName)+(f.closed?' <span class="pill neu">مُغلَقة</span>':'')+'</h2>'
+  +'<p class="hint">'+today+' • '+activeFarm().name+'</p>'
+  +closureHtml
+  +alertsHtml
+  +'<div class="tbl-scroll" style="margin-top:12px"><table class="log" style="min-width:0"><thead><tr><th>المؤشر</th><th>القيمة</th><th>التقييم</th></tr></thead><tbody>'+kt+'</tbody></table></div>'
+  +'<h3 class="blk">'+I('bulb')+' القراءة الإحصائية</h3><p>'+narrative+'</p>'
+  +econHtml
+  +breedRefCard(f.breed)
+  +'<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px" class="no-print">'
+  +'<button class="btn btn-wa" onclick="waReport()">'+I('wa')+' إرسال تقرير واتساب</button>'
+  +'<button class="btn btn-ghost" onclick="window.print()">'+I('print')+' طباعة هذا التقرير</button>'
+  +(f.closed?'<button class="btn btn-ghost" onclick="reopenCycle()">'+I('gear')+' إعادة فتح الدورة</button>':'<button class="btn btn-primary" onclick="closeCycle()">🏁 تقييم وإغلاق الدورة</button>')
+  +'</div></div>';
+}
+function waCenterNumber(){let p=(DB.center.phone1||'').replace(/\D/g,'');if(p.charAt(0)==='0')p='20'+p.slice(1);else if(p.slice(0,2)!=='20')p='20'+p;return p;}
+function waReport(){const f=activeCycle();if(!f)return;const z=analyzeD(f);const b=z.b;const L=[];
+ L.push('*'+DB.center.name+'*');L.push(DB.center.sub);L.push('— — — — —');
+ L.push('*'+f.houseName+'* | '+b.name+' (أمهات)'+(f.closed?' [مُغلَقة]':''));
+ L.push('إناث: '+fmt(f.initialF)+' | ذكور: '+fmt(f.initialM));
+ L.push('');L.push('*الأرقام:*');
+ L.push('• آخر وزن: '+(z.lastWeight?fmt(z.lastWeight,0)+' جم (هدف '+fmt(z.lastTarget,0)+')':'—'));
+ L.push('• نافق التربية: '+fmt(z.rearMortPct,2)+'% | نافق الإنتاج: '+fmt(z.prodMortPct,2)+'%');
+ L.push('• نسبة ذكور:إناث: '+(z.ratio!=null?('1:'+fmt(z.ratio,1)):'—'));
+ L.push('• متوسط Hen-Day%: '+(z.avgHD!=null?fmt(z.avgHD,1)+'%':'—'));
+ L.push('• إجمالي البيض: '+fmt(z.cumEggs));
+ L.push('• بيض مُرسَل للتفريخ: '+fmt(z.cumSent)+' | خصوبة: '+(z.fertPct!=null?fmt(z.fertPct,1)+'%':'—')+' | فقس: '+(z.hatchPct!=null?fmt(z.hatchPct,1)+'%':'—'));
+ if(z.hasEcon)L.push('• صافي تقديري: '+fmt(z.profit,0)+' جنيه');
+ L.push('');if(DB.center.phone1)L.push('للتواصل: '+DB.center.phone1+(DB.center.phone2?' / '+DB.center.phone2:''));
+ window.open('https://wa.me/'+waCenterNumber()+'?text='+encodeURIComponent(L.join('\n')),'_blank');}
+
+/* ===================== نسخ احتياطية / طباعة / مودال ===================== */
+function exportData(){const blob=new Blob([JSON.stringify(DB,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='نسخة_بط_الأمهات_'+new Date().toISOString().slice(0,10)+'.json';a.click();toast("تم حفظ النسخة");}
+function importData(e){const fl=e.target.files[0];if(!fl)return;const rd=new FileReader();rd.onload=()=>{try{const d=JSON.parse(rd.result);if(!d.cycles)throw 0;confirmModal("استيراد سيستبدل البيانات الحالية. متابعة؟",()=>{DB=migrate(d);save();render();toast("تم الاستيراد");});}catch(err){toast("ملف غير صالح");}};rd.readAsText(fl);e.target.value='';}
+function printAll(){window.print();}
+function modal(html){document.getElementById('modalHost').innerHTML='<div class="modal-bg" onclick="if(event.target===this)closeModal()"><div class="modal">'+html+'</div></div>';}
+function closeModal(){document.getElementById('modalHost').innerHTML='';}
+function confirmModal(msg,onYes){window._cy=onYes;modal('<h3>تأكيد</h3><p>'+esc(msg)+'</p><div class="modal-actions"><button class="btn btn-danger" onclick="(window._cy&&window._cy());closeModal()">نعم، متابعة</button><button class="btn btn-ghost" onclick="closeModal()">إلغاء</button></div>');}
+
+/* ===================== المزامنة السحابية ===================== */
+const API_URL="https://ghamry-farm-api.poultrylabcenter.workers.dev";
+const SHEET_TYPE="duck_breeders";
+let autoSyncTimer=null;
+function farmSyncPayload(){const f=activeFarm();if(!f)return null;const cycles=cyclesOfFarm();return {farm_name:f.name,phone:(f.phone||ghIdPhone()),sheet_type:SHEET_TYPE,data:{farmMeta:{name:f.name,phone:(f.phone||ghIdPhone())},cycles}};}
+function openSyncModal(){const f=activeFarm();if(!f)return;
+ if(!f.phone){modal('<h3>محتاجين رقم موبايل المزرعة الأول</h3><p class="hint">عشان المزامنة تشتغل، لازم تسجّل رقم موبايل المزرعة من زرار «تعديل» بجانب اختيار المزرعة.</p><div class="modal-actions"><button class="btn btn-primary" onclick="closeModal();editFarmContact()">تعديل بيانات المزرعة</button><button class="btn btn-ghost" onclick="closeModal()">إلغاء</button></div>');return;}
+ modal('<h3>'+I('cloud')+' مزامنة سحابية</h3><p class="hint">هترسل نسخة من بيانات كراسة بط الأمهات لمزرعة «'+esc(f.name)+'» إلى د. الغمري لمتابعتها. البيانات هتفضل محفوظة كمان على جهازك زي ما هي.</p>'
+  +(f.lastSync?('<p class="hint">آخر مزامنة: '+new Date(f.lastSync).toLocaleString('ar-EG')+'</p>'):'')
+  +'<div class="modal-actions"><button class="btn btn-primary" id="syncNowBtn" onclick="syncNow(false)">مزامنة الآن</button><button class="btn btn-ghost" onclick="closeModal()">إلغاء</button></div>');}
+async function syncNow(silent){const f=activeFarm();if(!f||!(f.phone||ghIdPhone()))return;
+ const payload=farmSyncPayload();if(!payload)return;
+ const btn=document.getElementById('syncNowBtn');if(btn){btn.disabled=true;btn.textContent='جاري المزامنة...';}
+ try{
+  const res=await fetch(API_URL+'/api/sync',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(payload)});
+  const out=await res.json();
+  if(!res.ok||out.error)throw new Error(out.error||'خطأ غير متوقع');
+  f.syncEnabled=true;f.lastSync=out.updated_at;save();
+  if(!silent){modal('<h3>'+I('check2')+' تمت المزامنة بنجاح</h3><p class="hint">آخر تحديث: '+new Date(out.updated_at).toLocaleString('ar-EG')+'</p><div class="modal-actions"><button class="btn btn-primary" onclick="closeModal()">تمام</button></div>');}
+  else{toast('☁️ تمت المزامنة التلقائية');}
+ }catch(err){
+  if(!silent){modal('<h3>تعذّرت المزامنة</h3><p class="hint">'+esc(err.message||'تأكد من الاتصال بالإنترنت وحاول تاني')+'</p><div class="modal-actions"><button class="btn btn-ghost" onclick="closeModal()">تمام</button></div>');}
+ }
+}
+function maybeAutoSync(){const f=activeFarm();if(!f||!(f.syncEnabled||ghIdValid())||!(f.phone||ghIdPhone()))return;
+ clearTimeout(autoSyncTimer);autoSyncTimer=setTimeout(()=>{syncNow(true);},8000);}
+function updateSyncIndicator(){const el=document.getElementById('syncStatusInd');if(!el)return;const f=activeFarm();
+ if(!f||!f.syncEnabled||!f.lastSync){el.textContent='';return;}
+ el.innerHTML='☁️ آخر مزامنة: '+new Date(f.lastSync).toLocaleString('ar-EG',{hour:'2-digit',minute:'2-digit',day:'2-digit',month:'2-digit'});}
+
+render();
+initHeaderIcons();</script>
+
+<!-- ===== وضع عرض الطبيب (Admin View) ===== -->
+<script>
+(function(){
+  let raw;
+  try{ raw = sessionStorage.getItem('ghamry_admin_view'); }catch(e){ raw = null; }
+  if(!raw) return;
+  let view;
+  try{ view = JSON.parse(raw); }catch(e){ return; }
+  if(!view || view.sheetType !== 'duck_breeders') return;
+
+  save = function(){ /* تعطيل الحفظ المحلي أثناء وضع العرض */ };
+
+  const q = 'farm_name='+encodeURIComponent(view.farm_name)+'&phone='+encodeURIComponent(view.phone)+'&sheet_type='+view.sheetType;
+  fetch(view.api + '/api/farm-data?' + q, { headers: { 'X-Admin-Code': view.adminCode } })
+    .then(r => r.json())
+    .then(res => {
+      if(!res.data){ alert('تعذر تحميل بيانات المزرعة: ' + (res.error || 'غير معروف')); return; }
+      const raw = res.data;
+      const fid = 'admin-view-farm';
+      const cyclesIn = Array.isArray(raw.cycles) ? raw.cycles : [];
+      DB = migrate({
+        farms:[{id:fid, name:(raw.farmMeta&&raw.farmMeta.name)||view.farm_name, owner:'', location:'', phone:(raw.farmMeta&&raw.farmMeta.phone)||view.phone, syncEnabled:false, lastSync:null}],
+        cycles: cyclesIn.map(c=>Object.assign({},c,{farmId:fid})),
+        activeFarm: fid,
+        active: cyclesIn.length ? cyclesIn[0].id : null
+      });
+      currentTab = 'setup';
+      injectViewBanner(view);
+      render();
+    })
+    .catch(err => alert('خطأ في تحميل بيانات المزرعة: ' + err.message));
+
+  function injectViewBanner(view){
+    const bar = document.createElement('div');
+    bar.style.cssText = 'background:var(--pine-deep);color:#f3efe4;padding:10px 16px;font-size:12.5px;display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;position:sticky;top:0;z-index:9997';
+    bar.innerHTML = '<span>👁️ وضع عرض الطبيب — المزرعة: <b>'+esc(view.farm_name)+'</b> — للقراءة فقط، أي تعديل لن يُحفظ</span>'
+      + '<button id="exitViewBtn" style="background:var(--gold);color:var(--pine-deep);border:none;border-radius:8px;padding:7px 14px;font-weight:800;cursor:pointer">إغلاق</button>';
+    document.body.insertBefore(bar, document.body.firstChild);
+    document.getElementById('exitViewBtn').addEventListener('click', function(){
+      try{ sessionStorage.removeItem('ghamry_admin_view'); }catch(e){}
+      window.close();
+      setTimeout(()=>{ location.href = 'dashboard.html'; }, 200);
+    });
+  }
+})();
+</script>
+
+<script>
+(function(){
+  var btn=document.getElementById('ghInstallBtn');
+  var deferredPrompt=null;
+  window.addEventListener('beforeinstallprompt',function(e){
+    e.preventDefault(); deferredPrompt=e; if(btn)btn.classList.add('show');
+  });
+  if(btn){
+    btn.addEventListener('click',async function(){
+      if(!deferredPrompt)return;
+      deferredPrompt.prompt();
+      await deferredPrompt.userChoice;
+      deferredPrompt=null;
+      btn.classList.remove('show');
+    });
+  }
+  window.addEventListener('appinstalled',function(){ if(btn)btn.classList.remove('show'); });
+  var isIOS=/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+  var isStandalone=(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) || window.navigator.standalone;
+  if(isIOS && !isStandalone){
+    var tip=document.getElementById('ghIosTip'); if(tip)tip.classList.add('show');
+  }
+})();
+</script>
+<script>
+window.ghamryApplyIdentity=function(id){var ch=false;DB.farms.forEach(function(f){if(!f.phone){f.phone=id.phone;ch=true}if(f.name==='المزرعة 1'){f.name=id.name;ch=true}if(!f.syncEnabled){f.syncEnabled=true;ch=true}});if(ch){save();try{renderFarmSelect();}catch(e){}}syncNow(true);};
+window.ghamryFlush=function(){syncNow(true);};
+window.ghamryGuessIdentity=function(){var f=DB.farms.find(function(x){return x.phone&&String(x.phone).replace(/\D/g,'').length>=9});return f?{name:f.name,phone:f.phone}:null;};
+</script>
+<script src="./gh-register.js"></script>
+</body>
+</html>

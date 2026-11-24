@@ -1,0 +1,7 @@
+{
+  "appId": "com.ghamry.farmbooks",
+  "appName": "كراسة المزرعة",
+  "webDir": "www",
+  "android": { "allowMixedContent": false },
+  "server": { "androidScheme": "https" }
+}
